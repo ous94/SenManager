@@ -1,0 +1,221 @@
+package com.base.Entities;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.List;
+
+
+/**
+ * The persistent class for the CLIENTS database table.
+ * 
+ */
+@Entity
+@Table(name="CLIENTS")
+public class Client implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	private int idclient;
+
+	@Column(name = "ADRESSE")
+	private String adresse;
+
+	@Column(name = "EMAIL")
+	private String email;
+
+	@Column(name = "IDENTIFICATION")
+	private String identification;
+
+	@Column(name = "NOM")
+	private String nom;
+
+	@Column(name = "OBSERVATION")
+	private String observation;
+
+	@Column(name = "PRENOM")
+	private String prenom;
+	@Column(name = "SEXE")
+	private String sexe;
+
+	@Column(name="TELEPHONE_FIXE")
+	private BigDecimal telephoneFixe;
+
+	@Column(name="TELEPHONE_MOBILE")
+	private BigDecimal telephoneMobile;
+
+	//bi-directional many-to-one association to Pay
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="IDPAYS")
+	private Pays pay;
+
+	//bi-directional many-to-one association to Localite
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="IDLOCALITE")
+	private Localite localite;
+
+	//bi-directional many-to-one association to TypeIdentification
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="IDIDENTIFICATION")
+	private TypeIdentification typeIdentification;
+
+	//bi-directional many-to-one association to Demande
+	@OneToMany(mappedBy="client")
+	private List<Demande> demandes;
+
+	//bi-directional many-to-one association to Document
+	@OneToMany(mappedBy="client")
+	private List<Document> documents;
+
+	public Client() {
+	}
+
+	public int getIdclient() {
+		return this.idclient;
+	}
+
+	public void setIdclient(int idclient) {
+		this.idclient = idclient;
+	}
+
+	public String getAdresse() {
+		return this.adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getIdentification() {
+		return this.identification;
+	}
+
+	public void setIdentification(String identification) {
+		this.identification = identification;
+	}
+
+	public String getNom() {
+		return this.nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getObservation() {
+		return this.observation;
+	}
+
+	public void setObservation(String observation) {
+		this.observation = observation;
+	}
+
+	public String getPrenom() {
+		return this.prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public String getSexe() {
+		return this.sexe;
+	}
+
+	public void setSexe(String sexe) {
+		this.sexe = sexe;
+	}
+
+	public BigDecimal getTelephoneFixe() {
+		return this.telephoneFixe;
+	}
+
+	public void setTelephoneFixe(BigDecimal telephoneFixe) {
+		this.telephoneFixe = telephoneFixe;
+	}
+
+	public BigDecimal getTelephoneMobile() {
+		return this.telephoneMobile;
+	}
+
+	public void setTelephoneMobile(BigDecimal telephoneMobile) {
+		this.telephoneMobile = telephoneMobile;
+	}
+
+	public Pays getPay() {
+		return this.pay;
+	}
+
+	public void setPay(Pays pay) {
+		this.pay = pay;
+	}
+
+	public Localite getLocalite() {
+		return this.localite;
+	}
+
+	public void setLocalite(Localite localite) {
+		this.localite = localite;
+	}
+
+	public TypeIdentification getTypeIdentification() {
+		return this.typeIdentification;
+	}
+
+	public void setTypeIdentification(TypeIdentification typeIdentification) {
+		this.typeIdentification = typeIdentification;
+	}
+
+	public List<Demande> getDemandes() {
+		return this.demandes;
+	}
+
+	public void setDemandes(List<Demande> demandes) {
+		this.demandes = demandes;
+	}
+
+	public Demande addDemande(Demande demande) {
+		getDemandes().add(demande);
+		demande.setClient(this);
+
+		return demande;
+	}
+
+	public Demande removeDemande(Demande demande) {
+		getDemandes().remove(demande);
+		demande.setClient(null);
+
+		return demande;
+	}
+
+	public List<Document> getDocuments() {
+		return this.documents;
+	}
+
+	public void setDocuments(List<Document> documents) {
+		this.documents = documents;
+	}
+
+	public Document addDocument(Document document) {
+		getDocuments().add(document);
+		document.setClient(this);
+
+		return document;
+	}
+
+	public Document removeDocument(Document document) {
+		getDocuments().remove(document);
+		document.setClient(null);
+
+		return document;
+	}
+
+}
