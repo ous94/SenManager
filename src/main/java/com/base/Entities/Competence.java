@@ -2,6 +2,7 @@ package com.base.Entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.persistence.JoinTable;
 import java.util.List;
 
 
