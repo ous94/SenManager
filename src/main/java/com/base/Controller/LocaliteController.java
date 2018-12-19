@@ -1,7 +1,17 @@
 package com.base.Controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,4 +25,44 @@ public class LocaliteController {
 
 	@Autowired
 	LocaliteRepository localiteRepository;
+	@GetMapping("/localites")
+	public List<Localite> getAllClients() {
+		try
+		{
+		   System.out.println("Get all Localites...");
+		   List<Localite> localites = new ArrayList<>();
+		   localiteRepository.findAll().forEach(localites::add);
+		   return localites;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
+	@PostMapping(value = "/localites/create")
+	public Localite postCustomer(@RequestBody Localite localite) {
+		try
+		{
+		    Localite newLocalite=new Localite();
+		    Localite localitert = localiteRepository.save(newLocalite);
+		    return localitert;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
+	@DeleteMapping("/localites/{id}")
+	public ResponseEntity<String> deleteLocalite(@PathVariable("id") int id) {
+		try
+		{
+		   System.out.println("Delete Localite with ID = " + id + "...");
+		   localiteRepository.deleteById(id);
+		   return new ResponseEntity<>("Localite has been deleted!", HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+			return new ResponseEntity<>("", HttpStatus.EXPECTATION_FAILED);
+		}
+	}
 }
