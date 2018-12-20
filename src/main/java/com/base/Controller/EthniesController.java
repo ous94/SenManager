@@ -1,6 +1,7 @@
 package com.base.Controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,29 @@ public class EthniesController {
 		catch(Exception e)
 		{
 			return new ResponseEntity<>("", HttpStatus.EXPECTATION_FAILED);
+		}
+	}
+	
+	@GetMapping("/ethnies/nom")
+	public List<String> getAllnomEthnies() {
+		try
+		{
+		   System.out.println("Get all Ethnies...");
+		   List<Ethnies> listeEthnies = new ArrayList<>();
+		   ethniesRepository.findAll().forEach(listeEthnies::add);
+		   List<String> nomethnies = new ArrayList<>();
+		   Iterator<Ethnies> it= listeEthnies.iterator();
+		   while(it.hasNext())
+		   {
+			   nomethnies.add(it.next().getNom());
+			   
+			   
+		   }
+		   return nomethnies;
+		}
+		catch(Exception e)
+		{
+			return null;
 		}
 	}
 
