@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Repository.TypeIdentificationRepository;
 import com.base.Entities.Langue;
+import com.base.Entities.Pays;
 import com.base.Entities.TypeIdentification;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
@@ -90,30 +91,48 @@ public class TypeIdentificationController {
 			return null;
 		}
 	}
-	
-	
-	@GetMapping("/identification/nom")
-	public List<String> getAllnomidentification() {
+
+	public TypeIdentification getTypeIdentificationByNom(String nom)
+	{
 		try
 		{
-		   System.out.println("Get all Ethnies...");
-		   List<TypeIdentification> listeIdentification = new ArrayList<>();
-		   typeIdentificationRepository.findAll().forEach(listeIdentification::add);
-		   List<String> nomIdentification = new ArrayList<>();
-		   Iterator<TypeIdentification> it= listeIdentification.iterator();
-		   while(it.hasNext())
-		   {
-			   nomIdentification.add(it.next().getNom());
-			   
-			   
-		   }
-		   return nomIdentification;
+			 List<TypeIdentification> listeTypeIdentification = new ArrayList<>();
+			 typeIdentificationRepository.findByNom(nom).forEach(listeTypeIdentification::add);
+			 Iterator<TypeIdentification> it= listeTypeIdentification.iterator();
+			 TypeIdentification typeIdentification=it.next();
+			 return typeIdentification ;
 		}
 		catch(Exception e)
 		{
 			return null;
 		}
 	}
+	
+	
+	 @GetMapping("/identification/nom")
+ 	public List<String> getAllLocalitenom() {
+ 		try
+ 		{
+ 		   System.out.println("Get all Localite.nom...");
+ 		   List<TypeIdentification> listeidentification = new ArrayList<>();
+ 		   typeIdentificationRepository.findAll().forEach(listeidentification::add);
+ 		   List<String> monidentification = new ArrayList<>();
+ 		   Iterator<TypeIdentification> it= listeidentification.iterator();
+ 		   while(it.hasNext())
+ 		   {
+ 			  monidentification.add(it.next().getNom());
+ 			   
+ 			   
+ 		   }
+ 		   return monidentification;
+ 		}
+ 		catch(Exception e)
+ 		{
+ 			return null;
+ 		}
+ 	}
+	
+	
 
 
 }

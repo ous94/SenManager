@@ -1,6 +1,8 @@
 package com.base.Controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Repository.EmployeeRepository;
 import com.base.Entities.Employee;
+import com.base.Entities.Localite;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
 @RestController
@@ -43,8 +46,20 @@ public class EmployeeController {
 	public Employee creatEmploye(@RequestBody Employee employe) {
 		try
 		{
-		    Employee newEmployee=new Employee();
-		    Employee employert = employeeRepository.save(newEmployee);
+			Employee newEmployee =new Employee();
+			String id=""+Math.random()*(0-9)+employe.getTelephoneMobile()+Math.random()*(0-9);
+			Integer idemploye=new Integer(id);
+			newEmployee.setIdemploye(idemploye);
+			newEmployee.setLocalite(new LocaliteController().getLocaliteByNom(employe.getLocalite().getNom()));
+			newEmployee.setTypeIdentification(new TypeIdentificationController().getTypeIdentificationByNom(employe.getTypeIdentification().getNom()));
+			newEmployee.setNiveauetude(new NiveauEtudeController().getNiveauEtudeByNiveau(employe.getNiveauetude().getNiveau()));
+			newEmployee.setEthny(new EthniesController().getEthniesByNom(employe.getEthny().getNom()));
+			newEmployee.setPay(new PaysController().getPaysByNom(employe.getPay().getNom()));
+			newEmployee.setNom(employe.getNom());
+			newEmployee.setPrenom(employe.getPrenom());
+			newEmployee.setDateNaissance(employe.getDateNaissance());
+		    
+		    Employee employert = employeeRepository.save(employe);
 		    return employert;
 		}
 		catch(Exception e)

@@ -111,6 +111,21 @@ public class NiveauEtudeController {
 			return null;
 		}
 	}
+	public Niveauetude getNiveauEtudeByNiveau(String niveau)
+	{
+		try
+		{
+			List<Niveauetude> listeNiveauEtude = new ArrayList<>();
+			niveauEtudeRepository.findByNiveau(niveau).forEach(listeNiveauEtude::add);
+			Iterator<Niveauetude> it= listeNiveauEtude.iterator();
+			Niveauetude niveauEtude=it.next();
+			return niveauEtude;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
 
 
 }

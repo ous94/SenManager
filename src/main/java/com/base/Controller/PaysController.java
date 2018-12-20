@@ -91,28 +91,47 @@ public class PaysController {
 		}
 	}
 	
-	@GetMapping("/pays/nom")
-	public List<String> getAllLocalitenom() {
-		try
-		{
-		   System.out.println("Get all Localite.nom...");
-		   List<Pays> listepays = new ArrayList<>();
-		   paysRepository.findAll().forEach(listepays::add);
-		   List<String> nompays = new ArrayList<>();
-		   Iterator<Pays> it= listepays.iterator();
-		   while(it.hasNext())
-		   {
-			   nompays.add(it.next().getNom());
-			   
-			   
-		   }
-		   return nompays;
-		}
-		catch(Exception e)
-		{
-			return null;
-		}
-	}
+	
+	//recherher nom
 
+        public Pays getPaysByNom(String nom)
+    {
+    	try
+    	{
+    	   System.out.println("Get all Pays.nom...");
+ 		   List<Pays> listePays = new ArrayList<>();
+ 		   paysRepository.findByNom(nom).forEach(listePays::add);
+ 		   Iterator<Pays> it= listePays.iterator();
+ 		   Pays pays=it.next();
+           return pays; 		  
+    	}
+    	catch(Exception e)
+    	{
+    		return null;
+    	}
+    }
+        // list des pays par nom
+        @GetMapping("/pays/nom")
+    	public List<String> getAllLocalitenom() {
+    		try
+    		{
+    		   System.out.println("Get all Localite.nom...");
+    		   List<Pays> listepays = new ArrayList<>();
+    		   paysRepository.findAll().forEach(listepays::add);
+    		   List<String> nompays = new ArrayList<>();
+    		   Iterator<Pays> it= listepays.iterator();
+    		   while(it.hasNext())
+    		   {
+    			   nompays.add(it.next().getNom());
+    			   
+    			   
+    		   }
+    		   return nompays;
+    		}
+    		catch(Exception e)
+    		{
+    			return null;
+    		}
+    	}
 
 }
