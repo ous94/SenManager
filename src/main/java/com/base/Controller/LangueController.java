@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,13 +23,13 @@ public class LangueController {
 	LangueRepository langueRepository;
 	
 	
-	@GetMapping("/langue/nom")
-	public List<String> getAllnomEthnies() {
+	@GetMapping("/langues/nom/{nom}")
+	public List<String> getAllnomLangue(@PathVariable("nom") String nom) {
 		try
 		{
-		   System.out.println("Get all Ethnies...");
+		   System.out.println("Get all Langue.nom...");
 		   List<Langue> listeLangue = new ArrayList<>();
-		   langueRepository.findAll().forEach(listeLangue::add);
+		   langueRepository.findByNom(nom).forEach(listeLangue::add);
 		   List<String> nomlangue = new ArrayList<>();
 		   Iterator<Langue> it= listeLangue.iterator();
 		   while(it.hasNext())

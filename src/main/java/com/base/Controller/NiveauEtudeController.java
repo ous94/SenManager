@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Repository.NiveauEtudeRepository;
-import com.base.Entities.Ethnies;
 import com.base.Entities.Niveauetude;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
@@ -90,5 +89,28 @@ public class NiveauEtudeController {
 			return null;
 		}
 	}
+	@GetMapping("/niveauEtudes/niveau/{niveau}")
+	public List<String> getAllnomNiveauEtude(@PathVariable("niveau") String niveau) {
+		try
+		{
+		   System.out.println("Get all NiveauEtude.nom...");
+		   List<Niveauetude> listeNiveauEtude = new ArrayList<>();
+		   niveauEtudeRepository.findByNiveau(niveau).forEach(listeNiveauEtude::add);
+		   List<String> nomNiveauEtude = new ArrayList<>();
+		   Iterator<Niveauetude> it= listeNiveauEtude.iterator();
+		   while(it.hasNext())
+		   {
+			   nomNiveauEtude.add(it.next().getNiveau());
+			   
+			   
+		   }
+		   return nomNiveauEtude;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
+
 
 }
