@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Repository.TypeIdentificationRepository;
-import com.base.Entities.Langue;
-import com.base.Entities.Pays;
 import com.base.Entities.TypeIdentification;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")

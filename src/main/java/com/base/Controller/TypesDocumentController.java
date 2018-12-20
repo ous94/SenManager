@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.base.Entities.Ethnies;
 import com.base.Entities.TypesDocument;
 import com.base.Repository.TypesDocumentRepository;
 
@@ -39,6 +38,28 @@ public class TypesDocumentController {
 			   
 		   }
 		   return nomtypeDocumemts;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
+	@GetMapping("/typesdocuments/nom")
+	public List<String> getAllnomLangue() {
+		try
+		{
+		   System.out.println("...");
+		   List<TypesDocument> listetypesDocument = new ArrayList<>();
+		   typesDocumentRepository.findAll().forEach(listetypesDocument::add);
+		   List<String> nomTypesDocument = new ArrayList<>();
+		   Iterator<TypesDocument> it= listetypesDocument.iterator();
+		   while(it.hasNext())
+		   {
+			   nomTypesDocument.add(it.next().getNom());
+			   
+			   
+		   }
+		   return nomTypesDocument;
 		}
 		catch(Exception e)
 		{

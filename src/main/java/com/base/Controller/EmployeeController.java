@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Repository.EmployeeRepository;
 import com.base.Entities.Employee;
-import com.base.Entities.Localite;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
 @RestController

@@ -26,7 +26,7 @@ public class CompetenceController {
 	public List<String> getAllnomLangue() {
 		try
 		{
-		   System.out.println("Get all Ethnies...");
+		   System.out.println("...");
 		   List<Competence> listeCompetence = new ArrayList<>();
 		   competenceRepository.findAll().forEach(listeCompetence::add);
 		   List<String> nomCompetence = new ArrayList<>();
