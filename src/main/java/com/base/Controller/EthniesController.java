@@ -71,7 +71,7 @@ public class EthniesController {
 	public List<String> getAllnomEthnies() {
 		try
 		{
-		   System.out.println("Get all Ethnies...");
+		   System.out.println("Get all Ethnies.nom...");
 		   List<Ethnies> listeEthnies = new ArrayList<>();
 		   ethniesRepository.findAll().forEach(listeEthnies::add);
 		   List<String> nomethnies = new ArrayList<>();
