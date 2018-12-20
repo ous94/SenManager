@@ -56,7 +56,16 @@ public class EmployeeController {
 			newEmployee.setPay(new PaysController().getPaysByNom(employe.getPay().getNom()));
 			newEmployee.setNom(employe.getNom());
 			newEmployee.setPrenom(employe.getPrenom());
-			newEmployee.setDateNaissance(new Date(employe.getDateNaissance()));
+			newEmployee.setDateNaissance(employe.getDateNaissance());
+			newEmployee.setAdresse(employe.getAdresse());
+			newEmployee.setTelephoneMobile(employe.getTelephoneMobile());
+			newEmployee.setTelephoneFixe(employe.getTelephoneFixe());
+			newEmployee.setEmail(employe.getEmail());
+			newEmployee.setSituationMatrimoniale(employe.getSituationMatrimoniale());
+			newEmployee.setReligion(employe.getReligion());
+			newEmployee.setIdentification(employe.getIdentification());
+			newEmployee.setObservation(employe.getObservation());
+			newEmployee.setPhoto(employe.getPhoto());
 		    
 		    Employee employert = employeeRepository.save(employe);
 		    return employert;
