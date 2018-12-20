@@ -58,7 +58,6 @@ public class EmployeeController {
 			newEmployee.setNom(employe.getNom());
 			newEmployee.setPrenom(employe.getPrenom());
 			newEmployee.setDateNaissance(employe.getDateNaissance());
-<<<<<<< HEAD
 			newEmployee.setAdresse(employe.getAdresse());
 			newEmployee.setTelephoneMobile(employe.getTelephoneMobile());
 			newEmployee.setTelephoneFixe(employe.getTelephoneFixe());
@@ -68,9 +67,7 @@ public class EmployeeController {
 			newEmployee.setIdentification(employe.getIdentification());
 			newEmployee.setObservation(employe.getObservation());
 			newEmployee.setPhoto(employe.getPhoto());
-=======
->>>>>>> 437737b6abc062831d3fda3bccb25dc5263ad87d
-		    
+		   
 		    Employee employert = employeeRepository.save(employe);
 		    return employert;
 		}
