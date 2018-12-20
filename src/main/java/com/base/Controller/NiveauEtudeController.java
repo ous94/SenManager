@@ -1,6 +1,7 @@
 package com.base.Controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Repository.NiveauEtudeRepository;
+import com.base.Entities.Ethnies;
 import com.base.Entities.Niveauetude;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
@@ -63,6 +65,29 @@ public class NiveauEtudeController {
 		catch(Exception e)
 		{
 			return new ResponseEntity<>("", HttpStatus.EXPECTATION_FAILED);
+		}
+	}
+	
+	@GetMapping("/niveauetude/niveau")
+	public List<String> getAllnomEthnies() {
+		try
+		{
+		   System.out.println("Get all Ethnies...");
+		   List<Niveauetude> listeEthnies = new ArrayList<>();
+		   niveauEtudeRepository.findAll().forEach(listeEthnies::add);
+		   List<String> nomethnies = new ArrayList<>();
+		   Iterator<Niveauetude> it= listeEthnies.iterator();
+		   while(it.hasNext())
+		   {
+			   nomethnies.add(it.next().getNiveau());
+			   
+			   
+		   }
+		   return nomethnies;
+		}
+		catch(Exception e)
+		{
+			return null;
 		}
 	}
 
