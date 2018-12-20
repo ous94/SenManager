@@ -23,7 +23,7 @@ public class LangueController {
 	
 	
 	@GetMapping("/langue/nom")
-	public List<String> getAllnomEthnies() {
+	public List<String> getAllnomLangue() {
 		try
 		{
 		   System.out.println("Get all Ethnies...");
