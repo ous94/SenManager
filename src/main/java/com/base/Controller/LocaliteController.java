@@ -110,6 +110,22 @@ public class LocaliteController {
 			return null;
 		}
 	}
+	public Localite getLocaliteByNom(String nom)
+	{
+		try
+		{
+			List<Localite> listeLocalite = new ArrayList<>();
+			localiteRepository.findAll().forEach(listeLocalite::add);
+			Iterator<Localite> it= listeLocalite.iterator();
+			Localite localite=it.next();
+			return localite;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
+	
 
 
 }

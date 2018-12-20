@@ -111,5 +111,20 @@ public class EthniesController {
 			return null;
 		}
 	}
+	public Ethnies getEthniesByNom(String nom)
+	{
+		try
+		{
+			List<Ethnies> listeEthnies = new ArrayList<>();
+			 ethniesRepository.findByNom(nom).forEach(listeEthnies::add);
+			 Iterator<Ethnies> it= listeEthnies.iterator();
+			 Ethnies ethnies=it.next();
+			 return ethnies;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
 
 }

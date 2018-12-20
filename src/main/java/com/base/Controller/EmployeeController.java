@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Repository.EmployeeRepository;
 import com.base.Entities.Employee;
+import com.base.Entities.Localite;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
 @RestController
@@ -43,8 +44,14 @@ public class EmployeeController {
 	public Employee creatEmploye(@RequestBody Employee employe) {
 		try
 		{
-		    Employee newEmployee=new Employee();
-		    Employee employert = employeeRepository.save(newEmployee);
+		    employe.setLocalite(new LocaliteController().getLocaliteByNom(employe.getLocalite().getNom()));
+		    employe.setTypeIdentification(new TypeIdentificationController().getTypeIdentificationByNom(employe.getTypeIdentification().getNom()));
+		    employe.setNiveauetude(new NiveauEtudeController().getNiveauEtudeByNiveau(employe.getNiveauetude().getNiveau()));
+		    employe.setEthny(new EthniesController().getEthniesByNom(employe.getEthny().getNom()));
+		    employe.setPay(new PaysController().getPaysByNom(employe.getPay().getNom()));
+		    
+		    //Employee newEmployee=new Employee();
+		    Employee employert = employeeRepository.save(employe);
 		    return employert;
 		}
 		catch(Exception e)

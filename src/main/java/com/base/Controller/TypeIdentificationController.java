@@ -88,6 +88,21 @@ public class TypeIdentificationController {
 			return null;
 		}
 	}
+	public TypeIdentification getTypeIdentificationByNom(String nom)
+	{
+		try
+		{
+			 List<TypeIdentification> listeTypeIdentification = new ArrayList<>();
+			 typeIdentificationRepository.findByNom(nom).forEach(listeTypeIdentification::add);
+			 Iterator<TypeIdentification> it= listeTypeIdentification.iterator();
+			 TypeIdentification typeIdentification=it.next();
+			 return typeIdentification ;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
 
 
 }

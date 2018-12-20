@@ -88,6 +88,21 @@ public class PaysController {
 			return null;
 		}
 	}
-
+    public Pays getPaysByNom(String nom)
+    {
+    	try
+    	{
+    	   System.out.println("Get all Pays.nom...");
+ 		   List<Pays> listePays = new ArrayList<>();
+ 		   paysRepository.findByNom(nom).forEach(listePays::add);
+ 		   Iterator<Pays> it= listePays.iterator();
+ 		   Pays pays=it.next();
+           return pays; 		  
+    	}
+    	catch(Exception e)
+    	{
+    		return null;
+    	}
+    }
 
 }
