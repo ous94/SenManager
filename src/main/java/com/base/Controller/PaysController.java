@@ -16,9 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.base.Repository.PaysRepository;
-import com.base.Entities.Localite;
 import com.base.Entities.Pays;
+import com.base.Repository.PaysRepository;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
 @RestController
