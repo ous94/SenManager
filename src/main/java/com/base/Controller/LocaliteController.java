@@ -1,6 +1,7 @@
 package com.base.Controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,4 +66,50 @@ public class LocaliteController {
 			return new ResponseEntity<>("", HttpStatus.EXPECTATION_FAILED);
 		}
 	}
+	@GetMapping("/localites/nom/{nom}")
+	public List<String> getAllnomLocalite(@PathVariable("nom") String nom) {
+		try
+		{
+		   System.out.println("Get all Localite.nom...");
+		   List<Localite> listeLocalite = new ArrayList<>();
+		   localiteRepository.findByNom(nom).forEach(listeLocalite::add);
+		   List<String> nomlocalite = new ArrayList<>();
+		   Iterator<Localite> it= listeLocalite.iterator();
+		   while(it.hasNext())
+		   {
+			   nomlocalite.add(it.next().getNom());
+			   
+			   
+		   }
+		   return nomlocalite;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
+	@GetMapping("/localites/nom")
+	public List<String> getAllLocalitenom() {
+		try
+		{
+		   System.out.println("Get all Localite.nom...");
+		   List<Localite> listeLocalite = new ArrayList<>();
+		   localiteRepository.findAll().forEach(listeLocalite::add);
+		   List<String> nomlocalite = new ArrayList<>();
+		   Iterator<Localite> it= listeLocalite.iterator();
+		   while(it.hasNext())
+		   {
+			   nomlocalite.add(it.next().getNom());
+			   
+			   
+		   }
+		   return nomlocalite;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
+
+
 }

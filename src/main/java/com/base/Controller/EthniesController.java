@@ -89,5 +89,27 @@ public class EthniesController {
 			return null;
 		}
 	}
+	@GetMapping("/ethnies/nom/{nom}")
+	public List<String> getAllnomEthnies(@PathVariable("nom") String nom) {
+		try
+		{
+		   System.out.println("Get all Ethnies.nom...");
+		   List<Ethnies> listeEthnies = new ArrayList<>();
+		   ethniesRepository.findByNom(nom).forEach(listeEthnies::add);
+		   List<String> nomethnies = new ArrayList<>();
+		   Iterator<Ethnies> it= listeEthnies.iterator();
+		   while(it.hasNext())
+		   {
+			   nomethnies.add(it.next().getNom());
+			   
+			   
+		   }
+		   return nomethnies;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
 
 }

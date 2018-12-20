@@ -1,6 +1,7 @@
 package com.base.Controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,5 +66,28 @@ public class TypeIdentificationController {
 			return new ResponseEntity<>("", HttpStatus.EXPECTATION_FAILED);
 		}
 	}
+	@GetMapping("/typeIdentification/nom/{nom}")
+	public List<String> getAllnomTypeIdentification(@PathVariable("nom") String nom) {
+		try
+		{
+		   System.out.println("Get all TypeIdentification.nom...");
+		   List<TypeIdentification> listeTypeIdentification = new ArrayList<>();
+		   typeIdentificationRepository.findByNom(nom).forEach(listeTypeIdentification::add);
+		   List<String> nomtypeIdentification = new ArrayList<>();
+		   Iterator<TypeIdentification> it= listeTypeIdentification.iterator();
+		   while(it.hasNext())
+		   {
+			   nomtypeIdentification.add(it.next().getNom());
+			   
+			   
+		   }
+		   return nomtypeIdentification;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
+
 
 }
