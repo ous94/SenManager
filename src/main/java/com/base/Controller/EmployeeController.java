@@ -1,5 +1,6 @@
 package com.base.Controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,13 +45,19 @@ public class EmployeeController {
 	public Employee creatEmploye(@RequestBody Employee employe) {
 		try
 		{
-		    employe.setLocalite(new LocaliteController().getLocaliteByNom(employe.getLocalite().getNom()));
-		    employe.setTypeIdentification(new TypeIdentificationController().getTypeIdentificationByNom(employe.getTypeIdentification().getNom()));
-		    employe.setNiveauetude(new NiveauEtudeController().getNiveauEtudeByNiveau(employe.getNiveauetude().getNiveau()));
-		    employe.setEthny(new EthniesController().getEthniesByNom(employe.getEthny().getNom()));
-		    employe.setPay(new PaysController().getPaysByNom(employe.getPay().getNom()));
+			Employee newEmployee =new Employee();
+			String id=""+Math.random()*(0-9)+employe.getTelephoneMobile()+Math.random()*(0-9);
+			Integer idemploye=new Integer(id);
+			newEmployee.setIdemploye(idemploye);
+			newEmployee.setLocalite(new LocaliteController().getLocaliteByNom(employe.getLocalite().getNom()));
+			newEmployee.setTypeIdentification(new TypeIdentificationController().getTypeIdentificationByNom(employe.getTypeIdentification().getNom()));
+			newEmployee.setNiveauetude(new NiveauEtudeController().getNiveauEtudeByNiveau(employe.getNiveauetude().getNiveau()));
+			newEmployee.setEthny(new EthniesController().getEthniesByNom(employe.getEthny().getNom()));
+			newEmployee.setPay(new PaysController().getPaysByNom(employe.getPay().getNom()));
+			newEmployee.setNom(employe.getNom());
+			newEmployee.setPrenom(employe.getPrenom());
+			newEmployee.setDateNaissance(new Date(employe.getDateNaissance()));
 		    
-		    //Employee newEmployee=new Employee();
 		    Employee employert = employeeRepository.save(employe);
 		    return employert;
 		}
