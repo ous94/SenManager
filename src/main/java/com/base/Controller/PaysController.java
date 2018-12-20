@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.base.Repository.PaysRepository;
 import com.base.Entities.Pays;
+import com.base.Repository.PaysRepository;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
 @RestController
@@ -66,6 +66,7 @@ public class PaysController {
 			return new ResponseEntity<>("", HttpStatus.EXPECTATION_FAILED);
 		}
 	}
+	
 	@GetMapping("/pays/nom/{nom}")
 	public List<String> getAllnomPays(@PathVariable("nom") String nom) {
 		try
@@ -88,7 +89,11 @@ public class PaysController {
 			return null;
 		}
 	}
-    public Pays getPaysByNom(String nom)
+	
+	
+	//recherher nom
+
+        public Pays getPaysByNom(String nom)
     {
     	try
     	{
@@ -104,5 +109,28 @@ public class PaysController {
     		return null;
     	}
     }
+        // list des pays par nom
+        @GetMapping("/pays/nom")
+    	public List<String> getAllLocalitenom() {
+    		try
+    		{
+    		   System.out.println("Get all Localite.nom...");
+    		   List<Pays> listepays = new ArrayList<>();
+    		   paysRepository.findAll().forEach(listepays::add);
+    		   List<String> nompays = new ArrayList<>();
+    		   Iterator<Pays> it= listepays.iterator();
+    		   while(it.hasNext())
+    		   {
+    			   nompays.add(it.next().getNom());
+    			   
+    			   
+    		   }
+    		   return nompays;
+    		}
+    		catch(Exception e)
+    		{
+    			return null;
+    		}
+    	}
 
 }

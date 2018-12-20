@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Repository.TypeIdentificationRepository;
+import com.base.Entities.Langue;
+import com.base.Entities.Pays;
 import com.base.Entities.TypeIdentification;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
@@ -66,6 +68,7 @@ public class TypeIdentificationController {
 			return new ResponseEntity<>("", HttpStatus.EXPECTATION_FAILED);
 		}
 	}
+	// recherche
 	@GetMapping("/typeIdentification/nom/{nom}")
 	public List<String> getAllnomTypeIdentification(@PathVariable("nom") String nom) {
 		try
@@ -88,6 +91,7 @@ public class TypeIdentificationController {
 			return null;
 		}
 	}
+
 	public TypeIdentification getTypeIdentificationByNom(String nom)
 	{
 		try
@@ -103,6 +107,32 @@ public class TypeIdentificationController {
 			return null;
 		}
 	}
+	
+	
+	 @GetMapping("/identification/nom")
+ 	public List<String> getAllLocalitenom() {
+ 		try
+ 		{
+ 		   System.out.println("Get all Localite.nom...");
+ 		   List<TypeIdentification> listeidentification = new ArrayList<>();
+ 		   typeIdentificationRepository.findAll().forEach(listeidentification::add);
+ 		   List<String> monidentification = new ArrayList<>();
+ 		   Iterator<TypeIdentification> it= listeidentification.iterator();
+ 		   while(it.hasNext())
+ 		   {
+ 			  monidentification.add(it.next().getNom());
+ 			   
+ 			   
+ 		   }
+ 		   return monidentification;
+ 		}
+ 		catch(Exception e)
+ 		{
+ 			return null;
+ 		}
+ 	}
+	
+	
 
 
 }
