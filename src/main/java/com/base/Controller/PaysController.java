@@ -32,6 +32,7 @@ public class PaysController {
 		try
 		{
 		   System.out.println("Get all Pays...");
+		   System.out.println("Get all Pays...");
 		   List<Pays> listepays = new ArrayList<>();
 		   paysRepository.findAll().forEach(listepays::add);
 		   return listepays;
