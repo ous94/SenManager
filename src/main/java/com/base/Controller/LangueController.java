@@ -24,13 +24,13 @@ public class LangueController {
 	
 	
 	@GetMapping("/langue/nom")
-	public List<String> getAllnomLangue() {
+	public String[] getAllnomLangue() {
 		try
 		{
 		   System.out.println("Get all Ethnies...");
 		   List<Langue> listeLangue = new ArrayList<>();
 		   langueRepository.findAll().forEach(listeLangue::add);
-		   List<String> nomlangue = new ArrayList<>();
+/*         List<String> nomlangue = new ArrayList<>();
 		   Iterator<Langue> it= listeLangue.iterator();
 		   while(it.hasNext())
 		   {
@@ -38,7 +38,14 @@ public class LangueController {
 			   
 			   
 		   }
-		   return nomlangue;
+		   return nomlangue; */		   	   
+		   //nouvelle demande ,retourne maintenant  un tableau  
+           String [] nomlangue= new String[listeLangue.size()];
+           for(int i=0;i<listeLangue.size();i++)
+           {
+	          nomlangue[i]=listeLangue.get(i).getNom();
+           }
+          return nomlangue;
 		}
 		catch(Exception e)
 		{
@@ -48,6 +55,7 @@ public class LangueController {
 	
 	// recherche par nom langue
 	@GetMapping("/langues/nom/{nom}")
+	
 	public List<String> getAllnomLanguebynom(@PathVariable("nom") String nom) {
 		try
 		{
