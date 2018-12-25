@@ -31,7 +31,6 @@ public class UploadController {
  
 	@Autowired
 	StorageService storageService;
- 
 	List<String> files = new ArrayList<String>();
  
 	@PostMapping("/post")
@@ -49,6 +48,7 @@ public class UploadController {
 			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(message);
 		}
 	}
+	/*
 	public String uploadPhoto(MultipartFile file) {
 		try {
 			String nomFichier=(Math.random()*5000000)+file.getOriginalFilename();
@@ -61,6 +61,22 @@ public class UploadController {
 			//return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(message);
 			System.out.println("Hum Echec sur l'enregistrement  du fichier passeer");
 			return null;
+		}
+	}
+	*/
+	@PostMapping("/post/uploadPhoto")
+	public ResponseEntity<String> uploadPhoto(@RequestParam("file") MultipartFile file) {
+		//String message = "";
+		try {
+			String nomFichier=(Math.random()*5000000)+file.getOriginalFilename();
+			storageService.store(file,nomFichier);
+			files.add(file.getOriginalFilename());
+			//message = "You successfully uploaded " + file.getOriginalFilename() + "!";
+			return ResponseEntity.status(HttpStatus.OK).body(nomFichier);
+		} 
+		catch (Exception e) {
+			//message = "FAIL to upload " + file.getOriginalFilename() + "!";
+			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null);
 		}
 	}
  

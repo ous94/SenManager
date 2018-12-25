@@ -27,7 +27,7 @@ public class LangueController {
 	public String[] getAllnomLangue() {
 		try
 		{
-		   System.out.println("Get all Ethnies...");
+		   System.out.println("Get all Langue...");
 		   List<Langue> listeLangue = new ArrayList<>();
 		   langueRepository.findAll().forEach(listeLangue::add);
 /*         List<String> nomlangue = new ArrayList<>();
