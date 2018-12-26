@@ -110,7 +110,7 @@ public class TypeIdentificationController {
 	
 	
 	 @GetMapping("/identification/nom")
- 	public List<String> getAllLocalitenom() {
+ 	public List<String> getAllIdentificationnom() {
  		try
  		{
  		   System.out.println("Get all Localite.nom...");
