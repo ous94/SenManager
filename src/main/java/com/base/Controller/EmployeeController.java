@@ -90,15 +90,17 @@ public class EmployeeController {
 			newEmployee.setObservation(employe.getObservation());
 			newEmployee.setPhoto(employe.getPhoto());
 			newEmployee.setCompetences(null);
-			List<Competence> listeCmpetences=new ArrayList();
+			newEmployee.setLangues(null);
+			/*List<Competence> listeCmpetences=new ArrayList();
 			CompetenceController compController=new CompetenceController();
 			Iterator<Competence> itcomp=employe.getCompetences().iterator();
 			while(itcomp.hasNext())
 			{
 				Competence comp=compController.getComptenceByDescription(itcomp.next().getDescription());
+				System.out.println(comp.getDescription());
 				listeCmpetences.add(comp);
 			}
-			newEmployee.setCompetences(listeCmpetences);
+			newEmployee.setCompetences(listeCmpetences);*/
 			
 		   
 		    Employee employert = employeeRepository.save(employe);
