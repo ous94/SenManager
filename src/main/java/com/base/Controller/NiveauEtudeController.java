@@ -111,7 +111,9 @@ public class NiveauEtudeController {
 			return null;
 		}
 	}
-	public Niveauetude getNiveauEtudeByNiveau(String niveau)
+	
+	@GetMapping("/nniveauEtudes/niveau/{niveau}")
+	public Niveauetude getNiveauEtudeByNiveau(@PathVariable("niveau")String niveau)
 	{
 		try
 		{

@@ -110,7 +110,9 @@ public class LocaliteController {
 			return null;
 		}
 	}
-	public Localite getLocaliteByNom(String nom)
+	
+	@GetMapping("/llocalite/nom/{nom}")
+	public Localite getLocaliteByNom(@PathVariable("nom") String nom)
 	{
 		try
 		{

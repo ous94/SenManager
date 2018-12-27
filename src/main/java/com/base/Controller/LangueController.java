@@ -90,23 +90,45 @@ public class LangueController {
 		try
 		{
 		   System.out.println("Get all Langues...");
-		   List<Langue> listeEthnies = new ArrayList<>();
-		   langueRepository.findAll().forEach(listeEthnies::add);
-		   List<String> nomethnies = new ArrayList<>();
-		   Iterator<Langue> it= listeEthnies.iterator();
+		   List<Langue> listeLangue = new ArrayList<>();
+		   langueRepository.findAll().forEach(listeLangue::add);
+		   List<String> nomLangue = new ArrayList<>();
+		   Iterator<Langue> it= listeLangue.iterator();
 		   while(it.hasNext())
 		   {
-			   nomethnies.add(it.next().getNom());
+			   nomLangue.add(it.next().getNom());
 			   
 			   
 		   }
-		   return nomethnies;
+		   return nomLangue;
 		}
 		catch(Exception e)
 		{
 			return null;
 		}
 	}
+	
+	@GetMapping("/langue/nom/{nom}")
+	public List<Langue> getByNomLangue(@PathVariable("tabnom")String[] tabnom) {
+		try
+		{
+		   System.out.println("++++++####");
+		   List<Langue> listeLangue = new ArrayList<>();
+		  for(int i=0;i<tabnom.length;i++)
+		  {
+			  langueRepository.findByNom(tabnom[i]).forEach(listeLangue::add);
+			  
+		  }
+		  return listeLangue;
+		   
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	
 
 

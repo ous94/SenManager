@@ -92,7 +92,7 @@ public class PaysController {
 	
 	
 	//recherher nom
-	@GetMapping("/pays/nompays/{nom}")
+	@GetMapping("/ppays/nompays/{nom}")
 
         public Pays getPaysByNom(@PathVariable("nom") String nom)
     {

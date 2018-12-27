@@ -90,7 +90,8 @@ public class TypeIdentificationController {
 		}
 	}
 
-	public TypeIdentification getTypeIdentificationByNom(String nom)
+	@GetMapping("/ttypeIdentification/nom/{nom}")
+	public TypeIdentification getTypeIdentificationByNom(@PathVariable("nom")String nom)
 	{
 		try
 		{

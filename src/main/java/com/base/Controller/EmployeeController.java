@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Entities.Competence;
 import com.base.Entities.Employee;
+import com.base.Entities.Langue;
 import com.base.Repository.EmployeeRepository;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
@@ -67,7 +68,7 @@ public class EmployeeController {
 			Employee newEmployee =new Employee();
 			//String id=""+Math.random()*(0-9)+employe.getTelephoneMobile()+Math.random()*(0-9);
 			
-			Integer idemploye=new Integer("1");
+			Integer idemploye=new Integer("3");
 			
 			newEmployee.setIdemploye(idemploye);
 			
@@ -88,10 +89,22 @@ public class EmployeeController {
 			newEmployee.setIdentification(employe.getIdentification());
 			newEmployee.setObservation(employe.getObservation());
 			newEmployee.setPhoto(employe.getPhoto());
-			newEmployee.setCompetences(null);
-			newEmployee.setLangues(null);
+			/*
+			Competence c=new Competence();
+			c.setIdcompetence(1);
+			c.setDescription("Linge");
+			System.out.println("Id :"+c.getIdcompetence()+"  desc :"+c.getDescription());
+			//newEmployee.getCompetences().add(c);
 			List<Competence> listeCmpetences=new ArrayList();
-			CompetenceController compController=new CompetenceController();
+			listeCmpetences.add(c);
+			newEmployee.setCompetences(listeCmpetences);
+			Langue l=new Langue();
+			l.setIdlangue(1);
+			l.setNom("Francais");
+			List<Langue> listeLangue=new ArrayList();
+			listeLangue.add(l);
+			newEmployee.setLangues(listeLangue);*/
+			/*CompetenceController compController=new CompetenceController();
 			Iterator<Competence> itcomp=employe.getCompetences().iterator();
 			while(itcomp.hasNext())
 			{
@@ -101,8 +114,7 @@ public class EmployeeController {
 				newEmployee.getCompetences().add(comp);
 			}
 			//newEmployee.setCompetences(listeCmpetences);
-			
-		   
+*/			
 		    Employee employert = employeeRepository.save(employe);
 		    return employert;
 		}
