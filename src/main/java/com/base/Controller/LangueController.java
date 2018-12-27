@@ -1,6 +1,5 @@
 package com.base.Controller;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.base.Entities.Ethnies;
 import com.base.Entities.Langue;
 import com.base.Repository.LangueRepository;
 
@@ -24,7 +22,7 @@ public class LangueController {
 	@Autowired
 	LangueRepository langueRepository;
 	
-	
+
 
 	
 	// recherche par nom langue
@@ -54,12 +52,16 @@ public class LangueController {
 	
 	/*@GetMapping("/langue/nom")
 	public List<String> getAllnomLangue() {
+=======
+	@GetMapping("/langue/nom")
+	public String[] getAllnomLangue() {
+>>>>>>> 0bd04fe64237b363dbd8e92617de5f076500f917
 		try
 		{
-		   System.out.println("Get all Ethnies...");
+		   System.out.println("Get all Langue...");
 		   List<Langue> listeLangue = new ArrayList<>();
 		   langueRepository.findAll().forEach(listeLangue::add);
-		   List<String> nomlangue = new ArrayList<>();
+/*         List<String> nomlangue = new ArrayList<>();
 		   Iterator<Langue> it= listeLangue.iterator();
 		   while(it.hasNext())
 		   {
@@ -67,14 +69,21 @@ public class LangueController {
 			   
 			   
 		   }
-		   return nomlangue;
+		   return nomlangue; */		   	   
+		   //nouvelle demande ,retourne maintenant  un tableau  
+      /*     String [] nomlangue= new String[listeLangue.size()];
+           for(int i=0;i<listeLangue.size();i++)
+           {
+	          nomlangue[i]=listeLangue.get(i).getNom();
+           }
+          return nomlangue;
 		}
 		catch(Exception e)
 		{
 			return null;
 		}
-	}*/
-	
+	}
+	*/
 
 	@GetMapping("/langues")
 	public List<String> getAllnomLangu() {
@@ -99,28 +108,6 @@ public class LangueController {
 		}
 	}
 	
-	// retourner array liste
-	@GetMapping("/languearray")
-	public ArrayList<String> getAllnomLangueArray() {
-		try
-		{
-		   System.out.println("Get all Langue...");
-		   ArrayList<Langue> listeLangue = new ArrayList<>();
-		   langueRepository.findAll().forEach(listeLangue::add);
-		   ArrayList<String> nomlangue = new ArrayList<>();
-		   Iterator<Langue> it= listeLangue.iterator();
-		   while(it.hasNext())
-		   {
-			   nomlangue.add(it.next().getNom());
-			   
-			   
-		   }
-		   return nomlangue;
-		}
-		catch(Exception e)
-		{
-			return null;
-		}
-	}
+
 
 }

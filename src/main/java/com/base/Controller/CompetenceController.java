@@ -25,12 +25,13 @@ public class CompetenceController {
 	ComptenceRepository competenceRepository;
 	
 	@GetMapping("/competence/description")
-	public List<String> getAllnomLangue() {
+	public String[] getAlldescriptionCompetence() {
 		try
 		{
-		   System.out.println("Get all Ethnies...");
+		   System.out.println("...");
 		   List<Competence> listeCompetence = new ArrayList<>();
 		   competenceRepository.findAll().forEach(listeCompetence::add);
+		  /*
 		   List<String> nomCompetence = new ArrayList<>();
 		   Iterator<Competence> it= listeCompetence.iterator();
 		   while(it.hasNext())
@@ -38,6 +39,13 @@ public class CompetenceController {
 			   nomCompetence.add(it.next().getDescription());
 			   
 			   
+		   }
+		   return nomCompetence;
+		  */
+		   String[] nomCompetence=new String[listeCompetence.size()];
+		   for(int  i=0;i< listeCompetence.size();i++)
+		   {
+			   nomCompetence[i]=listeCompetence.get(i).getDescription();
 		   }
 		   return nomCompetence;
 		}

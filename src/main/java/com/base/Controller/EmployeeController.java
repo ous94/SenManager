@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Entities.Competence;
 import com.base.Entities.Employee;
-import com.base.Entities.Langue;
 import com.base.Repository.EmployeeRepository;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
@@ -91,7 +90,7 @@ public class EmployeeController {
 			newEmployee.setPhoto(employe.getPhoto());
 			newEmployee.setCompetences(null);
 			newEmployee.setLangues(null);
-			/*List<Competence> listeCmpetences=new ArrayList();
+			List<Competence> listeCmpetences=new ArrayList();
 			CompetenceController compController=new CompetenceController();
 			Iterator<Competence> itcomp=employe.getCompetences().iterator();
 			while(itcomp.hasNext())
@@ -99,8 +98,9 @@ public class EmployeeController {
 				Competence comp=compController.getComptenceByDescription(itcomp.next().getDescription());
 				System.out.println(comp.getDescription());
 				listeCmpetences.add(comp);
+				newEmployee.getCompetences().add(comp);
 			}
-			newEmployee.setCompetences(listeCmpetences);*/
+			//newEmployee.setCompetences(listeCmpetences);
 			
 		   
 		    Employee employert = employeeRepository.save(employe);
