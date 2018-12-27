@@ -71,6 +71,8 @@ public class CompetenceController {
 	    	}
 	    	catch(Exception e)
 	    	{
+	    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+	    		e.printStackTrace();
 	    		return null;
 	    	}
 	    }
