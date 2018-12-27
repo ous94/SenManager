@@ -49,15 +49,15 @@ public class CompetenceController {
 	
 	//recherher nom
 		//@GetMapping("/pays/nompays/{description}")
-
+	
 	        public Competence getComptenceByDescription(String description)
 	    {
 	    	try
 	    	{
 	    	   System.out.println("Get all Comptence.description...");
-	 		   List<Competence> listePays = new ArrayList<>();
-	 		   competenceRepository.findByDescription(description).forEach(listePays::add);
-	 		   Iterator<Competence> it= listePays.iterator();
+	 		   List<Competence> listeCompetence = new ArrayList<>();
+	 		   competenceRepository.findByDescription(description).forEach(listeCompetence::add);
+	 		   Iterator<Competence> it= listeCompetence.iterator();
 	 		   Competence competence=it.next();
 	           return competence; 		  
 	    	}
