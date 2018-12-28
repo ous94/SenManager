@@ -109,17 +109,14 @@ public class LangueController {
 	}
 	
 	@GetMapping("/langue/nom/{nom}")
-	public List<Langue> getByNomLangue(@PathVariable("tabnom")String[] tabnom) {
+	public Langue getLangueByNom(@PathVariable("nom")String nom) {
 		try
 		{
-		   System.out.println("++++++####");
+		   System.out.println("Get  Langue.nom...");
 		   List<Langue> listeLangue = new ArrayList<>();
-		  for(int i=0;i<tabnom.length;i++)
-		  {
-			  langueRepository.findByNom(tabnom[i]).forEach(listeLangue::add);
-			  
-		  }
-		  return listeLangue;
+		   langueRepository.findByNom(nom).forEach(listeLangue::add);
+		   Iterator<Langue> itlangue=listeLangue.iterator();
+		   return itlangue.next();
 		   
 		}
 		catch(Exception e)

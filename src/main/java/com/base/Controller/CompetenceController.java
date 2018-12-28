@@ -92,9 +92,7 @@ public class CompetenceController {
 	    	
 	    	catch(Exception e)
 	    	{
-	    		System.out.println("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
 	    		e.printStackTrace();
-	    		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 	    		return null;
 	    	}
 	    }

@@ -68,10 +68,13 @@ public class EmployeeController {
 			Employee newEmployee =new Employee();
 			//String id=""+Math.random()*(0-9)+employe.getTelephoneMobile()+Math.random()*(0-9);
 			
+<<<<<<< HEAD
 			Integer idemploye=new Integer("3");
+=======
+			Integer idemploye=new Integer("10");
+>>>>>>> e7f45381615ddd21255e573a157e9513659fa37a
 			
 			newEmployee.setIdemploye(idemploye);
-			
 			newEmployee.setLocalite(new LocaliteController().getLocaliteByNom(employe.getLocalite().getNom()));
 			newEmployee.setTypeIdentification(new TypeIdentificationController().getTypeIdentificationByNom(employe.getTypeIdentification().getNom()));
 			newEmployee.setNiveauetude(new NiveauEtudeController().getNiveauEtudeByNiveau(employe.getNiveauetude().getNiveau()));
@@ -89,12 +92,19 @@ public class EmployeeController {
 			newEmployee.setIdentification(employe.getIdentification());
 			newEmployee.setObservation(employe.getObservation());
 			newEmployee.setPhoto(employe.getPhoto());
+<<<<<<< HEAD
 			/*
 			Competence c=new Competence();
 			c.setIdcompetence(1);
 			c.setDescription("Linge");
 			System.out.println("Id :"+c.getIdcompetence()+"  desc :"+c.getDescription());
 			//newEmployee.getCompetences().add(c);
+=======
+			//newEmployee.getLangues().add(null);
+			System.out.println(employe.getCompetences());
+			//newEmployee.setCompetences(employe.getCompetences());
+			System.out.println(newEmployee.getCompetences());
+>>>>>>> e7f45381615ddd21255e573a157e9513659fa37a
 			List<Competence> listeCmpetences=new ArrayList();
 			listeCmpetences.add(c);
 			newEmployee.setCompetences(listeCmpetences);
@@ -106,10 +116,11 @@ public class EmployeeController {
 			newEmployee.setLangues(listeLangue);*/
 			/*CompetenceController compController=new CompetenceController();
 			Iterator<Competence> itcomp=employe.getCompetences().iterator();
+			System.out.println(itcomp);
 			while(itcomp.hasNext())
 			{
 				Competence comp=compController.getComptenceByDescription(itcomp.next().getDescription());
-				System.out.println(comp.getDescription());
+				System.out.println(comp);
 				listeCmpetences.add(comp);
 				newEmployee.getCompetences().add(comp);
 			}
