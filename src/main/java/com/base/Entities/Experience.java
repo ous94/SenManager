@@ -3,6 +3,9 @@ package com.base.Entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * The persistent class for the EXPERIENCE database table.
@@ -24,6 +27,15 @@ public class Experience implements Serializable {
 	private Employee employee;
 
 	public Experience() {
+	}
+	
+	//Definition du constructeur Json qui permet de construire un Objet Client a partir de Donnees de type JSon
+	@JsonCreator
+	public Experience(@JsonProperty("idexperiance") int idexperiance ,@JsonProperty("commentaire") String commentaire ,@JsonProperty("employee") Employee employee )
+	{
+		this.idexperiance = idexperiance;
+		this.commentaire = commentaire;
+		this.employee = employee;
 	}
 
 	public int getIdexperiance() {

@@ -44,90 +44,19 @@ public class EmployeeController {
 	}
 	@PostMapping(value = "/employes/create")
 	public Employee creatEmploye(@RequestBody Employee employe) {
-		/*System.out.println(employe.getNom());
-		System.out.println(employe.getAdresse());
-		System.out.println(employe.getPrenom());
-		System.out.println(employe.getDateNaissance());
-		System.out.println(employe.getEmail());
-		System.out.println(employe.getPay());
-
-		Iterator<Langue> i=employe.getLangues().iterator();
-		while( i.hasNext())
-		{
-			System.out.println(i.next().getNom());
-		}
-		Iterator<Competence> c=employe.getCompetences().iterator();
-		while( i.hasNext())
-		{
-			System.out.println(c.next().getDescription());
-		}*/
+		
 		try
 		{
-		 System.out.println("Get all Client..."+employe.getEmail());
-
-			Employee newEmployee =new Employee();
-			//String id=""+Math.random()*(0-9)+employe.getTelephoneMobile()+Math.random()*(0-9);
-			
-<<<<<<< HEAD
-			Integer idemploye=new Integer("3");
-=======
-			Integer idemploye=new Integer("10");
->>>>>>> e7f45381615ddd21255e573a157e9513659fa37a
-			
-			newEmployee.setIdemploye(idemploye);
-			newEmployee.setLocalite(new LocaliteController().getLocaliteByNom(employe.getLocalite().getNom()));
-			newEmployee.setTypeIdentification(new TypeIdentificationController().getTypeIdentificationByNom(employe.getTypeIdentification().getNom()));
-			newEmployee.setNiveauetude(new NiveauEtudeController().getNiveauEtudeByNiveau(employe.getNiveauetude().getNiveau()));
-			newEmployee.setEthny(new EthniesController().getEthniesByNom(employe.getEthny().getNom()));
-			newEmployee.setPay(new PaysController().getPaysByNom(employe.getPay().getNom()));
-			newEmployee.setNom(employe.getNom());
-			newEmployee.setPrenom(employe.getPrenom());
-			newEmployee.setDateNaissance(employe.getDateNaissance());
-			newEmployee.setAdresse(employe.getAdresse());
-			newEmployee.setTelephoneMobile(employe.getTelephoneMobile());
-			newEmployee.setTelephoneFixe(employe.getTelephoneFixe());
-			newEmployee.setEmail(employe.getEmail());
-			newEmployee.setSituationMatrimoniale(employe.getSituationMatrimoniale());
-			newEmployee.setReligion(employe.getReligion());
-			newEmployee.setIdentification(employe.getIdentification());
-			newEmployee.setObservation(employe.getObservation());
-			newEmployee.setPhoto(employe.getPhoto());
-<<<<<<< HEAD
-			/*
-			Competence c=new Competence();
-			c.setIdcompetence(1);
-			c.setDescription("Linge");
-			System.out.println("Id :"+c.getIdcompetence()+"  desc :"+c.getDescription());
-			//newEmployee.getCompetences().add(c);
-=======
-			//newEmployee.getLangues().add(null);
-			System.out.println(employe.getCompetences());
-			//newEmployee.setCompetences(employe.getCompetences());
-			System.out.println(newEmployee.getCompetences());
->>>>>>> e7f45381615ddd21255e573a157e9513659fa37a
-			List<Competence> listeCmpetences=new ArrayList();
-			listeCmpetences.add(c);
-			newEmployee.setCompetences(listeCmpetences);
-			Langue l=new Langue();
-			l.setIdlangue(1);
-			l.setNom("Francais");
-			List<Langue> listeLangue=new ArrayList();
-			listeLangue.add(l);
-			newEmployee.setLangues(listeLangue);*/
-			/*CompetenceController compController=new CompetenceController();
-			Iterator<Competence> itcomp=employe.getCompetences().iterator();
-			System.out.println(itcomp);
-			while(itcomp.hasNext())
-			{
-				Competence comp=compController.getComptenceByDescription(itcomp.next().getDescription());
-				System.out.println(comp);
-				listeCmpetences.add(comp);
-				newEmployee.getCompetences().add(comp);
-			}
-			//newEmployee.setCompetences(listeCmpetences);
-*/			
-		    Employee employert = employeeRepository.save(employe);
-		    return employert;
+		   // Employee employert = employeeRepository.save(employe);
+		    System.out.println("Prenom :"+employe.getPrenom());
+		    System.out.println("Nom :"+employe.getNom());
+		    System.out.println("Adresse :"+employe.getAdresse());
+		    System.out.println("Date de Naisssance :"+employe.getDateNaissance());
+		    System.out.println("Localite : Idlocalite :"+employe.getLocalite().getIdlocalite()+"  Nom :"+employe.getLocalite().getNom());
+		    System.out.println("Pays : IdPays :"+employe.getPay().getIdpays()+"  Nom :"+employe.getPay().getNom());
+		    System.out.println("Ethnies : IdEthies :"+employe.getEthny().getIdethnies()+" Nom :"+employe.getEthny().getNom());
+		    //return employert;
+		    return employe;
 		}
 		catch(Exception e)
 		{

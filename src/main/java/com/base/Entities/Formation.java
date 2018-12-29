@@ -2,6 +2,10 @@ package com.base.Entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 
@@ -35,6 +39,20 @@ public class Formation implements Serializable {
 	private Employee employee;
 
 	public Formation() {
+	}
+	
+	//Definition du constructeur Json qui permet de construire un Objet Client a partir de Donnees de type JSon
+	@JsonCreator
+	public Formation(@JsonProperty("idformation") int idformation ,@JsonProperty("annee") Date annee,@JsonProperty("diplome") String diplome,
+			@JsonProperty("duree") String duree,@JsonProperty("nom") String nom,@JsonProperty("employee") Employee employee)
+	{
+		
+		this.idformation = idformation;
+		this.annee = annee;
+		this.diplome = diplome;
+		this.duree = duree;
+		this.nom = nom;
+		this.employee = employee;
 	}
 
 	public int getIdformation() {

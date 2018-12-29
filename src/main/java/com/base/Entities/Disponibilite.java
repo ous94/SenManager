@@ -3,6 +3,9 @@ package com.base.Entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * The persistent class for the DISPONIBILITE database table.
@@ -26,6 +29,16 @@ public class Disponibilite implements Serializable {
 	public Disponibilite() {
 	}
 
+	//Definition du constructeur Json qui permet de construire un Objet Client a partir de Donnees de type JSon
+	@JsonCreator
+	public Disponibilite(@JsonProperty("iddisponibilite") int iddisponibilite,@JsonProperty("observation") String observation,
+			             @JsonProperty("employee") Employee employee)
+	{
+		this.iddisponibilite=iddisponibilite;
+		this.observation=observation;
+		this.employee=employee;
+	}
+	
 	public int getIddisponibilite() {
 		return this.iddisponibilite;
 	}

@@ -3,6 +3,10 @@ package com.base.Entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.persistence.JoinTable;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 
@@ -48,7 +52,17 @@ public class Competence implements Serializable {
 
 	public Competence() {
 	}
-
+	
+	//Definition du constructeur Json qui permet de construire un Objet Client a partir de Donnees de type JSon
+    @JsonCreator
+    public Competence(@JsonProperty("idcomptence") int idcompetence,@JsonProperty("description") String description,
+    		@JsonProperty("demandes") List<Demande> demandes,@JsonProperty("emplotyees") List<Employee> employees)
+    {
+    	this.idcompetence=idcompetence;
+    	this.description=description;
+    	this.demandes=demandes;
+    	this.employees=employees;
+    }
 	public int getIdcompetence() {
 		return this.idcompetence;
 	}

@@ -2,6 +2,10 @@ package com.base.Entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 import java.util.List;
 
@@ -58,6 +62,23 @@ public class Demande implements Serializable {
 	public Demande() {
 	}
 
+	//Definition du constructeur Json qui permet de construire un Objet Client a partir de Donnees de type JSon
+	@JsonCreator
+	public Demande(@JsonProperty("iddemande") int iddemande,@JsonProperty("date")Date date,@JsonProperty("salairePropose") int salairePropose,
+			@JsonProperty("salaireRetenue") int salaireRetenue,@JsonProperty("services") String services,@JsonProperty("competences") List<Competence> competences,
+			@JsonProperty("client") Client client,@JsonProperty("employees") List<Employee> employees,
+			@JsonProperty("documents") List<Document> documents )
+	{
+		this.iddemande=iddemande;
+		this.date=date;
+		this.salairePropose=salairePropose;
+		this.salaireRetenue=salaireRetenue;
+		this.services=services;
+		this.competences=competences;
+		this.client=client;
+		this.employees=employees;
+		this.documents=documents;
+	}
 	public int getIddemande() {
 		return this.iddemande;
 	}

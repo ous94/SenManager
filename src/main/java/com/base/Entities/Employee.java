@@ -2,6 +2,10 @@ package com.base.Entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -111,6 +115,45 @@ public class Employee implements Serializable {
 	private List<Langue> langues;
 
 	public Employee() {
+	}
+	
+	//Definition du constructeur Json qui permet de construire un Objet Client a partir de Donnees de type JSon
+	@JsonCreator
+	public Employee(@JsonProperty("idemploye") int idemploye,@JsonProperty("adresse") String adresse,@JsonProperty("dateNaissaqnce") Date dateNaissance,
+			@JsonProperty("email") String email,@JsonProperty("identification") String identification,@JsonProperty("nom") String nom,
+			@JsonProperty("observation") String observation,@JsonProperty("photo") byte[] photo,@JsonProperty("prenom") String prenom,
+			@JsonProperty("religion") String religion,@JsonProperty("situationMatrimoniale") String situationMatrimoniale,
+			@JsonProperty("telephoneFixe") BigDecimal telephoneFixe,@JsonProperty("telephoneMobile") BigDecimal telephoneMobile,
+			@JsonProperty("competences") List<Competence> competences,@JsonProperty("demandes") List<Demande> demandes,@JsonProperty("disponibilites") List<Disponibilite> disponibilites,
+			@JsonProperty("documents") List<Document> documents,@JsonProperty("pay") Pays pay,@JsonProperty("localite") Localite localite,
+			@JsonProperty("typeIdentification") TypeIdentification typeIdentification,@JsonProperty("niveauetude") Niveauetude niveauetude,@JsonProperty("ethnies") Ethnies ethnies,
+			@JsonProperty("experiences") List<Experience> experiences,@JsonProperty("formations") List<Formation> formations,@JsonProperty("langues") List<Langue> langues)
+	{
+		this.idemploye = idemploye;
+		this.adresse = adresse;
+		this.dateNaissance = dateNaissance;
+		this.email = email;
+		this.identification = identification;
+		this.nom = nom;
+		this.observation = observation;
+		this.photo = photo;
+		this.prenom = prenom;
+		this.religion = religion;
+		this.situationMatrimoniale = situationMatrimoniale;
+		this.telephoneFixe = telephoneFixe;
+		this.telephoneMobile = telephoneMobile;
+		this.competences = competences;
+		this.demandes = demandes;
+		this.disponibilites = disponibilites;
+		this.documents = documents;
+		this.pay = pay;
+		this.localite = localite;
+		this.typeIdentification = typeIdentification;
+		this.niveauetude = niveauetude;
+		this.ethnies = ethnies;
+		this.experiences = experiences;
+		this.formations = formations;
+		this.langues = langues;
 	}
 
 	public int getIdemploye() {
