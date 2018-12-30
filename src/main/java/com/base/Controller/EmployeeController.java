@@ -1,7 +1,6 @@
 package com.base.Controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.base.Entities.Competence;
 import com.base.Entities.Employee;
+import com.base.Entities.Pays;
 import com.base.Repository.EmployeeRepository;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
@@ -41,16 +40,17 @@ public class EmployeeController {
 			return null;
 		}
 	}
-	@PostMapping(value = "/employes/create")
+	@PostMapping(value ="/employes/create")
 	public Employee creatEmploye(@RequestBody Employee employe) {
-		/*System.out.println(employe.getNom());
+		System.out.println(employe.getNom());
 		System.out.println(employe.getAdresse());
 		System.out.println(employe.getPrenom());
 		System.out.println(employe.getDateNaissance());
 		System.out.println(employe.getEmail());
 		System.out.println(employe.getPay());
+		
 
-		Iterator<Langue> i=employe.getLangues().iterator();
+		/*Iterator<Langue> i=employe.getLangues().iterator();
 		while( i.hasNext())
 		{
 			System.out.println(i.next().getNom());
@@ -74,7 +74,11 @@ public class EmployeeController {
 			newEmployee.setTypeIdentification(new TypeIdentificationController().getTypeIdentificationByNom(employe.getTypeIdentification().getNom()));
 			newEmployee.setNiveauetude(new NiveauEtudeController().getNiveauEtudeByNiveau(employe.getNiveauetude().getNiveau()));
 			newEmployee.setEthny(new EthniesController().getEthniesByNom(employe.getEthny().getNom()));
-			newEmployee.setPay(new PaysController().getPaysByNom(employe.getPay().getNom()));
+			
+			PaysController pycon= new PaysController();
+			Pays monpays = pycon.findByPaysLocale(employe.getPay().getNom());
+			
+			newEmployee.setPay(monpays);
 			newEmployee.setNom(employe.getNom());
 			newEmployee.setPrenom(employe.getPrenom());
 			newEmployee.setDateNaissance(employe.getDateNaissance());
@@ -88,23 +92,24 @@ public class EmployeeController {
 			newEmployee.setObservation(employe.getObservation());
 			newEmployee.setPhoto(employe.getPhoto());
 			//newEmployee.getLangues().add(null);
-			System.out.println(employe.getCompetences());
-			//newEmployee.setCompetences(employe.getCompetences());
-			System.out.println(newEmployee.getCompetences());
-			List<Competence> listeCmpetences=new ArrayList();
-			CompetenceController compController=new CompetenceController();
+			/*System.out.println(employe.getCompetences());
+			
 			Iterator<Competence> itcomp=employe.getCompetences().iterator();
-			System.out.println(itcomp);
+			CompetenceController comp = new CompetenceController();
+			List<Competence> listeCmpetences=new ArrayList();
+
+
+			
 			while(itcomp.hasNext())
 			{
-				Competence comp=compController.getComptenceByDescription(itcomp.next().getDescription());
-				System.out.println(comp);
-				listeCmpetences.add(comp);
-				newEmployee.getCompetences().add(comp);
+		
+				Competence first = comp.findByCompetenceLocale(itcomp.next().getDescription());
+				System.out.println(first);
+				listeCmpetences.add(first);
+				
 			}
-			//newEmployee.setCompetences(listeCmpetences);
-			
-		   
+			newEmployee.setCompetences(listeCmpetences);
+			*/
 		    Employee employert = employeeRepository.save(employe);
 		    return employert;
 		}
@@ -115,23 +120,7 @@ public class EmployeeController {
 		}
 	}
 	
-	
-	@PostMapping(value = "/customers/create")
-	public Employee postCustomer(@RequestBody Employee employe) {
-		 System.out.println("Get all Client..."+employe.getEmail());
 
-			Employee newEmployee =new Employee();
-			String id=""+Math.random()*(0-9)+employe.getTelephoneMobile()+Math.random()*(0-9);
-			
-			Integer idemploye=new Integer(id);
-			
-			newEmployee.setIdemploye(idemploye);
- 
-		Employee _customer = 
-				employeeRepository.save(new Employee());
-		return _customer;
-	}
-	
 	
 	
 	@DeleteMapping("/employes/{id}")
@@ -147,5 +136,47 @@ public class EmployeeController {
 			return new ResponseEntity<>("", HttpStatus.EXPECTATION_FAILED);
 		}
 	}
+	
+	
+	
+/*	
+	@GetMapping(value = "employee/situation/{genre}")
+	public List<Employee> findBySituation(@PathVariable String genre) {
+		try
+		{
+		System.out.println("recherche Employee par situation "+genre);
+
+ 
+		List<Employee> customers = employeeRepository.
+		return customers;
+		}
+		catch(Exception e)
+		{
+			e.fillInStackTrace();
+		}
+		return null;
+	}
+	*/
+	@GetMapping(value = "employee/situation/{genre}")
+	public  List<Employee>  findByNameEndsWith(@PathVariable("genre") String genre) {
+		try
+		{
+		 System.out.println("Get all mesEmploye...");
+		   List<Employee> listeEmployes = new ArrayList<>();
+
+		 //List<Employee>  cities =  (List<Employee>)
+				 employeeRepository.findByNameEndsWith(genre).forEach(listeEmployes::add);
+				 return listeEmployes;
+       // return cities;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+    }
+	
+	
+	   
+	
 
 }

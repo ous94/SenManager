@@ -2,6 +2,7 @@ package com.base.Controller;
 
 import java.util.ArrayList;
 
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,9 +58,9 @@ public class CompetenceController {
 	}
 	
 	//recherher nom
-		//@GetMapping("/pays/nompays/{description}")
+	//	@GetMapping("/competence/{description}")
 	
-	        public Competence getComptenceByDescription(String description)
+	    /*    public Competence getComptenceByDescription(String description)
 	    {
 	    	try
 	    	{
@@ -75,5 +77,43 @@ public class CompetenceController {
 	    		e.printStackTrace();
 	    		return null;
 	    	}
-	    }
+	    }*/
+		
+
+		@GetMapping(value = "competence/{description}")
+		public Competence findByCompetence(@PathVariable String description) {
+			try {
+			System.out.println("recherche Customer de l'age"+description);
+
+	 
+			Competence customers = (Competence) competenceRepository.findByDescription(description);
+			return customers;
+			}
+	    	catch(Exception e)
+	    	{
+	    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+	    		e.printStackTrace();
+	    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+
+	    		return null;
+	    	}
+		}
+		
+		public Competence findByCompetenceLocale( String description) {
+			try {
+			System.out.println("recherche Customer de l'age"+description);
+
+	 
+			Competence customers = (Competence) competenceRepository.findByDescription(description);
+			return customers;
+			}
+	    	catch(Exception e)
+	    	{
+	    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+	    		e.printStackTrace();
+	    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+
+	    		return null;
+	    	}
+		}
 }

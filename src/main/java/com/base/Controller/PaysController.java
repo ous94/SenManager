@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.base.Entities.Competence;
 import com.base.Entities.Pays;
 import com.base.Repository.PaysRepository;
 
@@ -67,8 +68,8 @@ public class PaysController {
 		}
 	}
 	
-	@GetMapping("/pays/nom/{nom}")
-	public List<String> getAllnomPays(@PathVariable("nom") String nom) {
+	//@GetMapping("/pays/nom/{nom}")
+	/*public List<String> getAllnomPays(@PathVariable("nom") String nom) {
 		try
 		{
 		   System.out.println("Get all Pays.nom...");
@@ -89,10 +90,10 @@ public class PaysController {
 			return null;
 		}
 	}
-	
+	*/
 	
 	//recherher nom
-	@GetMapping("/pays/nompays/{nom}")
+	/*@GetMapping("/pays/nompays/{nom}")
 
         public Pays getPaysByNom(@PathVariable("nom") String nom)
     {
@@ -109,7 +110,7 @@ public class PaysController {
     	{
     		return null;
     	}
-    }
+    }*/
         // list des pays par nom
         @GetMapping("/pays/nom")
     	public List<String> getAllLocalitenom() {
@@ -133,5 +134,43 @@ public class PaysController {
     			return null;
     		}
     	}
+        
+        
+        public Pays getmonPaysBy(String nom)
+        {
+        	try
+        	{
+        	   System.out.println("Get all Pays.nom...");
+     		  // List<Pays> listePays = new ArrayList<>();
+        		Pays customers = (Pays) paysRepository.findByNom(nom);
+     		   //forEach(listePays::add);
+     		   //Iterator<Pays> it= listePays.iterator();
+     		   //Pays pays=it.next();
+               return customers; 		  
+        	}
+        	catch(Exception e)
+        	{
+        		return null;
+        	}
+        }
+        
+        
+        public Pays findByPaysLocale( String description) {
+			try {
+			System.out.println("recherche Customer de l'age"+description);
+
+	 
+			Pays customers = (Pays) paysRepository.findByNom(description);
+			return customers;
+			}
+	    	catch(Exception e)
+	    	{
+	    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+	    		e.printStackTrace();
+	    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+
+	    		return null;
+	    	}
+		}
 
 }
