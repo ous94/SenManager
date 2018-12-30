@@ -24,7 +24,6 @@ public class Langue implements Serializable {
 	@Column(name = "NOM")
 	private String nom;
 
-	//bi-directional many-to-many association to Employee
 	@ManyToMany
 	@JoinTable(
 		name="LANGUE_EMPLOYEE"
