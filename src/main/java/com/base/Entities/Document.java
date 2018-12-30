@@ -3,6 +3,9 @@ package com.base.Entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * The persistent class for the DOCUMENTS database table.
@@ -42,6 +45,18 @@ public class Document implements Serializable {
 	public Document() {
 	}
 
+	//Definition du constructeur Json qui permet de construire un Objet Client a partir de Donnees de type JSon
+	@JsonCreator
+	public Document(@JsonProperty("iddocument") int iddocument,@JsonProperty("chemin")String chemin,@JsonProperty("client") Client client,
+			@JsonProperty("employee") Employee employee,@JsonProperty("demande") Demande demande,@JsonProperty("typesDocument") TypesDocument typesDocument)
+	{
+		this.iddocument=iddocument;
+		this.chemin=chemin;
+		this.employee=employee;
+		this.demande=demande;
+		this.typesDocument=typesDocument;
+	}
+	
 	public int getIddocument() {
 		return this.iddocument;
 	}

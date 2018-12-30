@@ -2,6 +2,10 @@ package com.base.Entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 
@@ -24,6 +28,15 @@ public class Ethnies implements Serializable {
 	private List<Employee> employees;
 
 	public Ethnies() {
+	}
+
+	//Definition du constructeur Json qui permet de construire un Objet Client a partir de Donnees de type JSon
+	@JsonCreator
+	public Ethnies(@JsonProperty("idethnies") int idethnies ,@JsonProperty("nom") String nom,@JsonProperty("employees") List<Employee> employees)
+	{
+		this.idethnies = idethnies;
+		this.nom = nom;
+		this.employees = employees;
 	}
 
 	public int getIdethnies() {

@@ -2,6 +2,10 @@ package com.base.Entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -69,7 +73,35 @@ public class Client implements Serializable {
 
 	public Client() {
 	}
-
+	
+	//Definition du constructeur Json qui permet de construire un Objet Client a partir de Donnees de type JSon
+    @JsonCreator
+    public Client(@JsonProperty("idclient") int idclient,@JsonProperty("adresse") String adresse,
+    		@JsonProperty("email") String email,@JsonProperty("identification") String identification,
+    		@JsonProperty("nom") String nom,@JsonProperty("observation")String observation,
+    		@JsonProperty("prenom") String prenom,@JsonProperty("sexe") String sexe,
+    		@JsonProperty("telephoneFixe") BigDecimal telephoneFixe,@JsonProperty("telephoneMobile")BigDecimal telephoneMobile,
+    		@JsonProperty("pay") Pays pay,@JsonProperty("localite") Localite localite,
+    		@JsonProperty("typeIdentification") TypeIdentification typeIdentification,@JsonProperty("demandes") List<Demande> demandes,
+    		@JsonProperty("document") List<Document> documents)
+    {
+    	this.idclient=idclient;
+    	this.adresse=adresse;
+    	this.email=email;
+    	this.identification=identification;
+    	this.nom=nom;
+    	this.observation=observation;
+    	this.prenom=prenom;
+    	this.sexe=sexe;
+    	this.telephoneFixe=telephoneFixe;
+    	this.telephoneMobile=telephoneMobile;
+    	this.pay=pay;
+    	this.localite=localite;
+    	this.typeIdentification=typeIdentification;
+    	this.demandes=demandes;
+    	this.documents=documents;
+    }
+    
 	public int getIdclient() {
 		return this.idclient;
 	}

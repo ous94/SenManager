@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Entities.Employee;
+<<<<<<< HEAD
 import com.base.Entities.Pays;
+=======
+import com.base.Entities.Langue;
+>>>>>>> c7e933b182bcb4f7874145520cd96b10d6cb0fd5
 import com.base.Repository.EmployeeRepository;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
@@ -42,6 +46,7 @@ public class EmployeeController {
 	}
 	@PostMapping(value ="/employes/create")
 	public Employee creatEmploye(@RequestBody Employee employe) {
+<<<<<<< HEAD
 		System.out.println(employe.getNom());
 		System.out.println(employe.getAdresse());
 		System.out.println(employe.getPrenom());
@@ -103,6 +108,21 @@ public class EmployeeController {
 			*/
 		    Employee employert = employeeRepository.save(employe);
 		    return employert;
+=======
+		
+		try
+		{
+		   // Employee employert = employeeRepository.save(employe);
+		    System.out.println("Prenom :"+employe.getPrenom());
+		    System.out.println("Nom :"+employe.getNom());
+		    System.out.println("Adresse :"+employe.getAdresse());
+		    System.out.println("Date de Naisssance :"+employe.getDateNaissance());
+		    System.out.println("Localite : Idlocalite :"+employe.getLocalite().getIdlocalite()+"  Nom :"+employe.getLocalite().getNom());
+		    System.out.println("Pays : IdPays :"+employe.getPay().getIdpays()+"  Nom :"+employe.getPay().getNom());
+		    System.out.println("Ethnies : IdEthies :"+employe.getEthny().getIdethnies()+" Nom :"+employe.getEthny().getNom());
+		    //return employert;
+		    return employe;
+>>>>>>> c7e933b182bcb4f7874145520cd96b10d6cb0fd5
 		}
 		catch(Exception e)
 		{
