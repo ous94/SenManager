@@ -50,16 +50,7 @@ public class EmployeeController {
 		System.out.println(employe.getPay());
 		
 
-		/*Iterator<Langue> i=employe.getLangues().iterator();
-		while( i.hasNext())
-		{
-			System.out.println(i.next().getNom());
-		}
-		Iterator<Competence> c=employe.getCompetences().iterator();
-		while( i.hasNext())
-		{
-			System.out.println(c.next().getDescription());
-		}*/
+	
 		try
 		{
 		 System.out.println("Get all Client..."+employe.getEmail());
