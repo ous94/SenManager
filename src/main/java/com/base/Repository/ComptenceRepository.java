@@ -8,6 +8,8 @@ import com.base.Entities.Competence;
 
 public interface ComptenceRepository extends CrudRepository<Competence ,Integer> {
 
-	public List<Competence> findByDescription(String description);
+	public Competence findByDescription(String description);
+
+	//public List<Competence> findByAge(String description);
 
 }

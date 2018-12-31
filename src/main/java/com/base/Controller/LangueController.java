@@ -124,7 +124,28 @@ public class LangueController {
 			e.printStackTrace();
 			return null;
 		}
+		
+	
 	}
+	//getmy langues
+	/*
+	public Langue findByCompetenceLocale( String description) {
+		try {
+		System.out.println("recherche Customer de l'age"+description);
+
+ Langue customers = (Langue) langueRepository.findByDescription(description);
+		return customers;
+		}
+    	catch(Exception e)
+    	{
+    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+    		e.printStackTrace();
+    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+
+    		return null;
+    	}
+	}
+	*/
 	
 	
 
