@@ -46,8 +46,8 @@ public class PaysController {
 		try
 		{
 		    Pays newPays=new Pays();
-		    Pays clientrt = paysRepository.save(newPays);
-		    return clientrt;
+		    Pays paysrt = paysRepository.save(newPays);
+		    return paysrt;
 		}
 		catch(Exception e)
 		{
@@ -60,121 +60,74 @@ public class PaysController {
 		{
 		   System.out.println("Delete Pays with ID = " + id + "...");
 		   paysRepository.deleteById(id);
-		   return new ResponseEntity<>("Pqys has been deleted!", HttpStatus.OK);
+		   return new ResponseEntity<>("Pays has been deleted!", HttpStatus.OK);
 		}
 		catch(Exception e)
 		{
 			return new ResponseEntity<>("", HttpStatus.EXPECTATION_FAILED);
 		}
 	}
-	
-	//@GetMapping("/pays/nom/{nom}")
-	/*public List<String> getAllnomPays(@PathVariable("nom") String nom) {
-		try
-		{
-		   System.out.println("Get all Pays.nom...");
-		   List<Pays> listePays = new ArrayList<>();
-		   paysRepository.findByNom(nom).forEach(listePays::add);
-		   List<String> nompays = new ArrayList<>();
-		   Iterator<Pays> it= listePays.iterator();
-		   while(it.hasNext())
-		   {
-			   nompays.add(it.next().getNom());
-			   
-			   
-		   }
-		   return nompays;
-		}
-		catch(Exception e)
-		{
-			return null;
-		}
-	}
-	*/
-	
-	//recherher nom
-<<<<<<< HEAD
-	/*@GetMapping("/pays/nompays/{nom}")
-=======
-	@GetMapping("/ppays/nompays/{nom}")
->>>>>>> c7e933b182bcb4f7874145520cd96b10d6cb0fd5
-
-        public Pays getPaysByNom(@PathVariable("nom") String nom)
+    // list des noms des pays
+    @GetMapping("/pays/nom")
+    public List<String> getAllPaysnom() 
     {
-    	try
-    	{
-    	   System.out.println("Get all Pays.nom...");
- 		   List<Pays> listePays = new ArrayList<>();
- 		   paysRepository.findByNom(nom).forEach(listePays::add);
- 		   Iterator<Pays> it= listePays.iterator();
- 		   Pays pays=it.next();
-           return pays; 		  
-    	}
-    	catch(Exception e)
-    	{
-    		return null;
-    	}
-    }*/
-        // list des pays par nom
-        @GetMapping("/pays/nom")
-    	public List<String> getAllLocalitenom() {
-    		try
-    		{
-    		   System.out.println("Get all Localite.nom...");
-    		   List<Pays> listepays = new ArrayList<>();
-    		   paysRepository.findAll().forEach(listepays::add);
-    		   List<String> nompays = new ArrayList<>();
-    		   Iterator<Pays> it= listepays.iterator();
-    		   while(it.hasNext())
-    		   {
-    			   nompays.add(it.next().getNom());
-    			   
-    			   
-    		   }
-    		   return nompays;
-    		}
-    		catch(Exception e)
-    		{
-    			return null;
-    		}
-    	}
-        
-        
-        public Pays getmonPaysBy(String nom)
+     try
+     {
+       System.out.println("Get all Pays.nom...");
+       List<Pays> listepays = new ArrayList<>();
+       paysRepository.findAll().forEach(listepays::add);
+       List<String> nompays = new ArrayList<>();
+       Iterator<Pays> it= listepays.iterator();
+       while(it.hasNext())
         {
-        	try
-        	{
-        	   System.out.println("Get all Pays.nom...");
-     		  // List<Pays> listePays = new ArrayList<>();
-        		Pays customers = (Pays) paysRepository.findByNom(nom);
-     		   //forEach(listePays::add);
-     		   //Iterator<Pays> it= listePays.iterator();
-     		   //Pays pays=it.next();
-               return customers; 		  
-        	}
-        	catch(Exception e)
-        	{
-        		return null;
-        	}
+    		nompays.add(it.next().getNom());	     
+    	}
+    		   return nompays;
+     }
+     catch(Exception e)
+     {
+    	return null;
+     }
+   }
+        	
+   @GetMapping("/pays/nom/{nom}")
+    public List<String> getAllnomPays(@PathVariable("nom") String nom) 
+   {
+      try
+      {
+    	 System.out.println("Get all Pays.nom...");
+    	 List<Pays> listePays = new ArrayList<>();
+    	 paysRepository.findByNom(nom).forEach(listePays::add);
+    	 List<String> nompays = new ArrayList<>();
+    	 Iterator<Pays> it= listePays.iterator();
+    	 while(it.hasNext())
+    	 {
+    		 nompays.add(it.next().getNom());  
+    	 }
+    	 return nompays;
+       }
+       catch(Exception e)
+       {
+    		return null;
+       }
+    }
+    	
+    //recherher nom
+    @GetMapping("/ppays/nompays/{nom}")
+    public Pays getPaysByNom(@PathVariable("nom") String nom)
+    {
+       try
+       {
+           System.out.println("Get all Pays.nom...");
+     	   List<Pays> listePays = new ArrayList<>();
+     	   paysRepository.findByNom(nom).forEach(listePays::add);
+     	   Iterator<Pays> it= listePays.iterator();
+     	   Pays pays=it.next();
+           return pays; 		  
         }
-        
-        
-        public Pays findByPaysLocale( String description) {
-			try {
-			System.out.println("recherche Customer de l'age"+description);
-
-	 
-			Pays customers = (Pays) paysRepository.findByNom(description);
-			return customers;
-			}
-	    	catch(Exception e)
-	    	{
-	    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
-	    		e.printStackTrace();
-	    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
-
-	    		return null;
-	    	}
-		}
-
-}
+        catch(Exception e)
+        {
+        	return null;
+        }
+     }
+ }

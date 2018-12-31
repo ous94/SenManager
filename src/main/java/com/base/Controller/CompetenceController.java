@@ -25,7 +25,7 @@ public class CompetenceController {
 
 	@Autowired
 	ComptenceRepository competenceRepository;
-	
+	/*
 	@GetMapping("/competence/description/{tabdescription}")
 	public List<Competence> getBydescriptionCompetence(@PathVariable("tabdescription")String[] tabdescription) {
 		try
@@ -47,6 +47,7 @@ public class CompetenceController {
 		}
 	}
 	
+	*/
 	@GetMapping("/competence/description")
 	public String[] getAlldescriptionCompetence() {
 		try
@@ -54,17 +55,6 @@ public class CompetenceController {
 		   System.out.println("...");
 		   List<Competence> listeCompetence = new ArrayList<>();
 		   competenceRepository.findAll().forEach(listeCompetence::add);
-		  /*
-		   List<String> nomCompetence = new ArrayList<>();
-		   Iterator<Competence> it= listeCompetence.iterator();
-		   while(it.hasNext())
-		   {
-			   nomCompetence.add(it.next().getDescription());
-			   
-			   
-		   }
-		   return nomCompetence;
-		  */
 		   String[] nomCompetence=new String[listeCompetence.size()];
 		   for(int  i=0;i< listeCompetence.size();i++)
 		   {
@@ -79,14 +69,11 @@ public class CompetenceController {
 	}
 	
 	//recherher nom
-<<<<<<< HEAD
 	//	@GetMapping("/competence/{description}")
 	
 	    /*    public Competence getComptenceByDescription(String description)
-=======
 		@GetMapping("/competence/description/{description}")
 	        public Competence getComptenceByDescription(@PathVariable("description") String description)
->>>>>>> c7e933b182bcb4f7874145520cd96b10d6cb0fd5
 	    {
 	    	try
 	    	{
@@ -105,7 +92,6 @@ public class CompetenceController {
 	    	}
 	    }*/
 		
-
 		@GetMapping(value = "competence/{description}")
 		public Competence findByCompetence(@PathVariable String description) {
 			try {
@@ -141,5 +127,28 @@ public class CompetenceController {
 
 	    		return null;
 	    	}
+		}
+		
+		//recherher nom
+		@GetMapping("/competence/description/{description}")
+		 public Competence getComptenceByDescription(@PathVariable("description") String description)
+		 {
+		    try
+		    {
+		       System.out.println("Get Comptence.description...");
+		 	   List<Competence> listeCompetence = new ArrayList<>();
+		 	   competenceRepository.findByDescription(description).forEach(listeCompetence::add);
+		 	   Iterator<Competence> it= listeCompetence.iterator();
+		 	   Competence competence=it.next();
+		          return competence; 		  
+		    }
+		    	
+		    catch(Exception e)
+		    {
+		       System.out.println("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+		    	e.printStackTrace();
+		    	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		    	return null;
+		    }
 		}
 }
