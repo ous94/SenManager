@@ -119,7 +119,7 @@ public class Employee implements Serializable {
 	
 	//Definition du constructeur Json qui permet de construire un Objet Client a partir de Donnees de type JSon
 	@JsonCreator
-	public Employee(@JsonProperty("idemploye") int idemploye,@JsonProperty("adresse") String adresse,@JsonProperty("dateNaissaqnce") Date dateNaissance,
+	public Employee(@JsonProperty("idemploye") int idemploye,@JsonProperty("adresse") String adresse,@JsonProperty("dateNaissance") Date dateNaissance,
 			@JsonProperty("email") String email,@JsonProperty("identification") String identification,@JsonProperty("nom") String nom,
 			@JsonProperty("observation") String observation,@JsonProperty("photo") byte[] photo,@JsonProperty("prenom") String prenom,
 			@JsonProperty("religion") String religion,@JsonProperty("situationMatrimoniale") String situationMatrimoniale,
