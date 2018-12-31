@@ -10,7 +10,7 @@ import com.base.Entities.Pays;
 
 public interface PaysRepository extends CrudRepository<Pays,Integer> {
 	
-	Pays findByNom(String nom);
+	List<Pays> findByNom(String nom);
 
 
 

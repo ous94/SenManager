@@ -16,11 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Entities.Employee;
-<<<<<<< HEAD
-import com.base.Entities.Pays;
-=======
-import com.base.Entities.Langue;
->>>>>>> c7e933b182bcb4f7874145520cd96b10d6cb0fd5
+
 import com.base.Repository.EmployeeRepository;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
@@ -44,96 +40,26 @@ public class EmployeeController {
 			return null;
 		}
 	}
-	@PostMapping(value ="/employes/create")
+	@PostMapping(value = "/employes/create")
 	public Employee creatEmploye(@RequestBody Employee employe) {
-<<<<<<< HEAD
-		System.out.println(employe.getNom());
-		System.out.println(employe.getAdresse());
-		System.out.println(employe.getPrenom());
-		System.out.println(employe.getDateNaissance());
-		System.out.println(employe.getEmail());
-		System.out.println(employe.getPay());
-		
-
-	
-		try
-		{
-		 System.out.println("Get all Client..."+employe.getEmail());
-
-			Employee newEmployee =new Employee();
-			//String id=""+Math.random()*(0-9)+employe.getTelephoneMobile()+Math.random()*(0-9);
-			
-			Integer idemploye=new Integer("10");
-			
-			newEmployee.setIdemploye(idemploye);
-			newEmployee.setLocalite(new LocaliteController().getLocaliteByNom(employe.getLocalite().getNom()));
-			newEmployee.setTypeIdentification(new TypeIdentificationController().getTypeIdentificationByNom(employe.getTypeIdentification().getNom()));
-			newEmployee.setNiveauetude(new NiveauEtudeController().getNiveauEtudeByNiveau(employe.getNiveauetude().getNiveau()));
-			newEmployee.setEthny(new EthniesController().getEthniesByNom(employe.getEthny().getNom()));
-			
-			PaysController pycon= new PaysController();
-			Pays monpays = pycon.findByPaysLocale(employe.getPay().getNom());
-			
-			newEmployee.setPay(monpays);
-			newEmployee.setNom(employe.getNom());
-			newEmployee.setPrenom(employe.getPrenom());
-			newEmployee.setDateNaissance(employe.getDateNaissance());
-			newEmployee.setAdresse(employe.getAdresse());
-			newEmployee.setTelephoneMobile(employe.getTelephoneMobile());
-			newEmployee.setTelephoneFixe(employe.getTelephoneFixe());
-			newEmployee.setEmail(employe.getEmail());
-			newEmployee.setSituationMatrimoniale(employe.getSituationMatrimoniale());
-			newEmployee.setReligion(employe.getReligion());
-			newEmployee.setIdentification(employe.getIdentification());
-			newEmployee.setObservation(employe.getObservation());
-			newEmployee.setPhoto(employe.getPhoto());
-			//newEmployee.getLangues().add(null);
-			/*System.out.println(employe.getCompetences());
-			
-			Iterator<Competence> itcomp=employe.getCompetences().iterator();
-			CompetenceController comp = new CompetenceController();
-			List<Competence> listeCmpetences=new ArrayList();
-
-
-			
-			while(itcomp.hasNext())
-			{
-		
-				Competence first = comp.findByCompetenceLocale(itcomp.next().getDescription());
-				System.out.println(first);
-				listeCmpetences.add(first);
-				
-			}
-			newEmployee.setCompetences(listeCmpetences);
-			*/
-		    Employee employert = employeeRepository.save(employe);
-		    return employert;
-=======
 		
 		try
 		{
-		   // Employee employert = employeeRepository.save(employe);
+		   //
 		    System.out.println("Prenom :"+employe.getPrenom());
 		    System.out.println("Nom :"+employe.getNom());
 		    System.out.println("Adresse :"+employe.getAdresse());
-		    System.out.println("Date de Naisssance :"+employe.getDateNaissance());
-		    System.out.println("Localite : Idlocalite :"+employe.getLocalite().getIdlocalite()+"  Nom :"+employe.getLocalite().getNom());
-		    System.out.println("Pays : IdPays :"+employe.getPay().getIdpays()+"  Nom :"+employe.getPay().getNom());
-		    System.out.println("Ethnies : IdEthies :"+employe.getEthny().getIdethnies()+" Nom :"+employe.getEthny().getNom());
-		    //return employert;
-		    return employe;
->>>>>>> c7e933b182bcb4f7874145520cd96b10d6cb0fd5
+		    System.out.println("Date de Naisssance :"+employe.getCompetences());
+		  //
+		    Employee employee=employeeRepository.save(employe);
+		    return employee;
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 			return null;
 		}
-	}
-	
-
-	
-	
+	}	
 	@DeleteMapping("/employes/{id}")
 	public ResponseEntity<String> deleteEmploye(@PathVariable("id") int id) {
 		try
@@ -148,26 +74,6 @@ public class EmployeeController {
 		}
 	}
 	
-	
-	
-/*	
-	@GetMapping(value = "employee/situation/{genre}")
-	public List<Employee> findBySituation(@PathVariable String genre) {
-		try
-		{
-		System.out.println("recherche Employee par situation "+genre);
-
- 
-		List<Employee> customers = employeeRepository.
-		return customers;
-		}
-		catch(Exception e)
-		{
-			e.fillInStackTrace();
-		}
-		return null;
-	}
-	*/
 	@GetMapping(value = "employee/situation/{genre}")
 	public  List<Employee>  findByNameEndsWith(@PathVariable("genre") String genre) {
 		try
@@ -186,8 +92,4 @@ public class EmployeeController {
 		}
     }
 	
-	
-	   
-	
-
 }

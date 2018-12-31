@@ -43,7 +43,7 @@ public class Employee implements Serializable {
 	private String observation;
 
 	@Column(name = "PHOTO")
-	private byte[] photo;
+	private String photo;
 
 	@Column(name = "PRENOM")
 	private String prenom;
@@ -121,7 +121,7 @@ public class Employee implements Serializable {
 	@JsonCreator
 	public Employee(@JsonProperty("idemploye") int idemploye,@JsonProperty("adresse") String adresse,@JsonProperty("dateNaissance") Date dateNaissance,
 			@JsonProperty("email") String email,@JsonProperty("identification") String identification,@JsonProperty("nom") String nom,
-			@JsonProperty("observation") String observation,@JsonProperty("photo") byte[] photo,@JsonProperty("prenom") String prenom,
+			@JsonProperty("observation") String observation,@JsonProperty("photo")String photo,@JsonProperty("prenom") String prenom,
 			@JsonProperty("religion") String religion,@JsonProperty("situationMatrimoniale") String situationMatrimoniale,
 			@JsonProperty("telephoneFixe") BigDecimal telephoneFixe,@JsonProperty("telephoneMobile") BigDecimal telephoneMobile,
 			@JsonProperty("competences") List<Competence> competences,@JsonProperty("demandes") List<Demande> demandes,@JsonProperty("disponibilites") List<Disponibilite> disponibilites,
@@ -212,11 +212,11 @@ public class Employee implements Serializable {
 		this.observation = observation;
 	}
 
-	public byte[] getPhoto() {
+	public String getPhoto() {
 		return this.photo;
 	}
 
-	public void setPhoto(byte[] photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 
@@ -259,7 +259,6 @@ public class Employee implements Serializable {
 	public void setTelephoneMobile(BigDecimal telephoneMobile) {
 		this.telephoneMobile = telephoneMobile;
 	}
-
 	public List<Competence> getCompetences() {
 		return this.competences;
 	}

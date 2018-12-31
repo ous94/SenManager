@@ -21,6 +21,7 @@ public class Pays implements Serializable {
 	@Id
 	private int idpays;
 
+	@Column(name = "NOM")
 	private String nom;
 
 	//bi-directional many-to-one association to Client

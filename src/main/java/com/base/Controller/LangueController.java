@@ -22,9 +22,6 @@ public class LangueController {
 	@Autowired
 	LangueRepository langueRepository;
 	
-
-
-	
 	// recherche par nom langue
 	@GetMapping("/langues/nom/{nom}")
 	public List<String> getAllnomLanguebynom(@PathVariable("nom") String nom) {
@@ -38,9 +35,7 @@ public class LangueController {
 		   Iterator<Langue> it= listeLangue.iterator();
 		   while(it.hasNext())
 		   {
-			   nomlangue.add(it.next().getNom());
-			   
-			   
+			   nomlangue.add(it.next().getNom()); 
 		   }
 		   return nomlangue;
 		}
@@ -50,43 +45,8 @@ public class LangueController {
 		}
 	}
 	
-	/*@GetMapping("/langue/nom")
-	public List<String> getAllnomLangue() {
-=======
-	@GetMapping("/langue/nom")
-	public String[] getAllnomLangue() {
->>>>>>> 0bd04fe64237b363dbd8e92617de5f076500f917
-		try
-		{
-		   System.out.println("Get all Langue...");
-		   List<Langue> listeLangue = new ArrayList<>();
-		   langueRepository.findAll().forEach(listeLangue::add);
-/*         List<String> nomlangue = new ArrayList<>();
-		   Iterator<Langue> it= listeLangue.iterator();
-		   while(it.hasNext())
-		   {
-			   nomlangue.add(it.next().getNom());
-			   
-			   
-		   }
-		   return nomlangue; */		   	   
-		   //nouvelle demande ,retourne maintenant  un tableau  
-      /*     String [] nomlangue= new String[listeLangue.size()];
-           for(int i=0;i<listeLangue.size();i++)
-           {
-	          nomlangue[i]=listeLangue.get(i).getNom();
-           }
-          return nomlangue;
-		}
-		catch(Exception e)
-		{
-			return null;
-		}
-	}
-	*/
-
 	@GetMapping("/langues")
-	public List<String> getAllnomLangu() {
+	public List<String> getAllnomLangues() {
 		try
 		{
 		   System.out.println("Get all Langues...");
@@ -97,8 +57,6 @@ public class LangueController {
 		   while(it.hasNext())
 		   {
 			   nomLangue.add(it.next().getNom());
-			   
-			   
 		   }
 		   return nomLangue;
 		}
@@ -117,37 +75,11 @@ public class LangueController {
 		   langueRepository.findByNom(nom).forEach(listeLangue::add);
 		   Iterator<Langue> itlangue=listeLangue.iterator();
 		   return itlangue.next();
-		   
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 			return null;
 		}
-		
-	
 	}
-	//getmy langues
-	/*
-	public Langue findByCompetenceLocale( String description) {
-		try {
-		System.out.println("recherche Customer de l'age"+description);
-
- Langue customers = (Langue) langueRepository.findByDescription(description);
-		return customers;
-		}
-    	catch(Exception e)
-    	{
-    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
-    		e.printStackTrace();
-    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
-
-    		return null;
-    	}
-	}
-	*/
-	
-	
-
-
 }

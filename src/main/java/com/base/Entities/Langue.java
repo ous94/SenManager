@@ -24,6 +24,7 @@ public class Langue implements Serializable {
 	@Column(name = "NOM")
 	private String nom;
 
+	//bi-directional many-to-many association to Employee
 	@ManyToMany
 	@JoinTable(
 		name="LANGUE_EMPLOYEE"
@@ -39,10 +40,7 @@ public class Langue implements Serializable {
 	public Langue() {
 	}
 	
-<<<<<<< HEAD
-=======
 	//Definition du constructeur Json qui permet de construire un Objet Client a partir de Donnees de type JSon
->>>>>>> c7e933b182bcb4f7874145520cd96b10d6cb0fd5
 	@JsonCreator
 	public Langue(@JsonProperty("idlangue") int idlangue,@JsonProperty("nom") String nom,@JsonProperty("employees") List<Employee> employees)
 	{

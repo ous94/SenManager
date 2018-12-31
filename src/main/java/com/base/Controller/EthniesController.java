@@ -111,7 +111,7 @@ public class EthniesController {
 			return null;
 		}
 	}
-	@GetMapping("/ethnies/nom/{nom}")
+	@GetMapping("/eethnies/nom/{nom}")
 	public Ethnies getEthniesByNom(@PathVariable("nom")String nom)
 	{
 		try

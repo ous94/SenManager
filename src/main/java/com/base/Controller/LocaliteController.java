@@ -117,7 +117,7 @@ public class LocaliteController {
 		try
 		{
 			List<Localite> listeLocalite = new ArrayList<>();
-			localiteRepository.findAll().forEach(listeLocalite::add);
+			localiteRepository.findByNom(nom).forEach(listeLocalite::add);
 			Iterator<Localite> it= listeLocalite.iterator();
 			Localite localite=it.next();
 			return localite;
