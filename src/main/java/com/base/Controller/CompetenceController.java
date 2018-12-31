@@ -1,8 +1,6 @@
 package com.base.Controller;
 
 import java.util.ArrayList;
-
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,13 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.base.Repository.ComptenceRepository;
 import com.base.Entities.Competence;
-import com.base.Entities.Pays;
+import com.base.Repository.ComptenceRepository;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
 @RestController
@@ -72,6 +68,10 @@ public class CompetenceController {
 	//	@GetMapping("/competence/{description}")
 	
 	    /*    public Competence getComptenceByDescription(String description)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 773baa67c38de05648af4a710c61aea847a59470
 		@GetMapping("/competence/description/{description}")
 	        public Competence getComptenceByDescription(@PathVariable("description") String description)
 	    {

@@ -37,7 +37,7 @@ public class Localite implements Serializable {
 	
 	//Definition du constructeur Json qui permet de construire un Objet Client a partir de Donnees de type JSon
 	@JsonCreator
-	public Localite(@JsonProperty("idlocalite") int idlocalite,@JsonProperty("nom") String nom,
+	public Localite(@JsonProperty("idlocalite") int idlocalite,@JsonProperty("nom") String nom ,
 			@JsonProperty("clients") List<Client> clients,@JsonProperty("employees") List<Employee> employees)
 	{
 		this.idlocalite = idlocalite;

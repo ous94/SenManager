@@ -2,7 +2,6 @@ package com.base.Entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.persistence.JoinTable;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -38,7 +37,7 @@ public class Competence implements Serializable {
 	private List<Demande> demandes;
 
 	//bi-directional many-to-many association to Employee
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
 		name="COMPETENCE_EMPLOYEE"
 		, joinColumns={

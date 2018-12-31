@@ -10,9 +10,5 @@ import com.base.Entities.Langue;
 
 public interface LangueRepository extends CrudRepository<Langue ,Integer>{
 
-	
 	List<Langue> findByNom(String nom);
-
-
-
 }
