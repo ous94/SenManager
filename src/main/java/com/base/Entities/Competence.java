@@ -47,6 +47,7 @@ public class Competence implements Serializable {
 			@JoinColumn(name="IDEMPLOYE")
 			}
 		)
+	
 	private List<Employee> employees;
 
 	public Competence() {
