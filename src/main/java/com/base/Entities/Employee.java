@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -62,20 +62,40 @@ public class Employee implements Serializable {
 	private BigDecimal telephoneMobile;
 
 	//bi-directional many-to-many association to Competence
-	@ManyToMany(mappedBy="employees")
-	private List<Competence> competences;
+	//@ManyToMany(mappedBy="employees")
+	@ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                CascadeType.MERGE
+            })
+    @JoinTable(name = "COMPETENCE_EMPLOYEE",
+            joinColumns = { @JoinColumn(name = "IDEMPLOYE") },
+            inverseJoinColumns = { @JoinColumn(name = "IDCOMPETENCE") })
+	private Set<Competence> competences;
 
 	//bi-directional many-to-many association to Demande
-	@ManyToMany(mappedBy="employees")
-	private List<Demande> demandes;
+	//@ManyToMany(mappedBy="employees")
+	@ManyToMany(fetch = FetchType.LAZY,
+		    cascade = {
+		        CascadeType.MERGE
+		    })
+	@JoinTable(
+			name="DEMANDE_EMPLOYEE"
+			, joinColumns={
+				@JoinColumn(name="IDEMPLOYE")
+				}
+			, inverseJoinColumns={
+				@JoinColumn(name="IDDEMANDE")
+				}
+	)
+	private Set<Demande> demandes;
 
 	//bi-directional many-to-one association to Disponibilite
 	@OneToMany(mappedBy="employee")
-	private List<Disponibilite> disponibilites;
+	private Set<Disponibilite> disponibilites;
 
 	//bi-directional many-to-one association to Document
 	@OneToMany(mappedBy="employee")
-	private List<Document> documents;
+	private Set<Document> documents;
 
 	//bi-directional many-to-one association to Pay
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -104,15 +124,22 @@ public class Employee implements Serializable {
 
 	//bi-directional many-to-one association to Experience
 	@OneToMany(mappedBy="employee")
-	private List<Experience> experiences;
+	private Set<Experience> experiences;
 
 	//bi-directional many-to-one association to Formation
 	@OneToMany(mappedBy="employee")
-	private List<Formation> formations;
+	private Set<Formation> formations;
 
 	//bi-directional many-to-many association to Langue
-	@ManyToMany(mappedBy="employees")
-	private List<Langue> langues;
+	//@ManyToMany(mappedBy="employees")
+	@ManyToMany(fetch = FetchType.LAZY,
+    cascade = {
+        CascadeType.MERGE
+    })
+    @JoinTable(name = "LANGUE_EMPLOYEE",
+    joinColumns = { @JoinColumn(name = "IDEMPLOYE") },
+    inverseJoinColumns = { @JoinColumn(name = "IDLANGUE") })
+	private Set<Langue> langues;
 
 	public Employee() {
 	}
@@ -124,10 +151,10 @@ public class Employee implements Serializable {
 			@JsonProperty("observation") String observation,@JsonProperty("photo")String photo,@JsonProperty("prenom") String prenom,
 			@JsonProperty("religion") String religion,@JsonProperty("situationMatrimoniale") String situationMatrimoniale,
 			@JsonProperty("telephoneFixe") BigDecimal telephoneFixe,@JsonProperty("telephoneMobile") BigDecimal telephoneMobile,
-			@JsonProperty("competences") List<Competence> competences,@JsonProperty("demandes") List<Demande> demandes,@JsonProperty("disponibilites") List<Disponibilite> disponibilites,
-			@JsonProperty("documents") List<Document> documents,@JsonProperty("pay") Pays pay,@JsonProperty("localite") Localite localite,
+			@JsonProperty("competences") Set<Competence> competences,@JsonProperty("demandes") Set<Demande> demandes,@JsonProperty("disponibilites") Set<Disponibilite> disponibilites,
+			@JsonProperty("documents") Set<Document> documents,@JsonProperty("pay") Pays pay,@JsonProperty("localite") Localite localite,
 			@JsonProperty("typeIdentification") TypeIdentification typeIdentification,@JsonProperty("niveauetude") Niveauetude niveauetude,@JsonProperty("ethnies") Ethnies ethnies,
-			@JsonProperty("experiences") List<Experience> experiences,@JsonProperty("formations") List<Formation> formations,@JsonProperty("langues") List<Langue> langues)
+			@JsonProperty("experiences") Set<Experience> experiences,@JsonProperty("formations") Set<Formation> formations,@JsonProperty("langues") Set<Langue> langues)
 	{
 		this.idemploye = idemploye;
 		this.adresse = adresse;
@@ -259,27 +286,27 @@ public class Employee implements Serializable {
 	public void setTelephoneMobile(BigDecimal telephoneMobile) {
 		this.telephoneMobile = telephoneMobile;
 	}
-	public List<Competence> getCompetences() {
+	public Set<Competence> getCompetences() {
 		return this.competences;
 	}
 
-	public void setCompetences(List<Competence> competences) {
+	public void setCompetences(Set<Competence> competences) {
 		this.competences = competences;
 	}
 
-	public List<Demande> getDemandes() {
+	public Set<Demande> getDemandes() {
 		return this.demandes;
 	}
 
-	public void setDemandes(List<Demande> demandes) {
+	public void setDemandes(Set<Demande> demandes) {
 		this.demandes = demandes;
 	}
 
-	public List<Disponibilite> getDisponibilites() {
+	public Set<Disponibilite> getDisponibilites() {
 		return this.disponibilites;
 	}
 
-	public void setDisponibilites(List<Disponibilite> disponibilites) {
+	public void setDisponibilites(Set<Disponibilite> disponibilites) {
 		this.disponibilites = disponibilites;
 	}
 
@@ -297,11 +324,11 @@ public class Employee implements Serializable {
 		return disponibilite;
 	}
 
-	public List<Document> getDocuments() {
+	public Set<Document> getDocuments() {
 		return this.documents;
 	}
 
-	public void setDocuments(List<Document> documents) {
+	public void setDocuments(Set<Document> documents) {
 		this.documents = documents;
 	}
 
@@ -359,11 +386,11 @@ public class Employee implements Serializable {
 		this.ethnies = ethny;
 	}
 
-	public List<Experience> getExperiences() {
+	public Set<Experience> getExperiences() {
 		return this.experiences;
 	}
 
-	public void setExperiences(List<Experience> experiences) {
+	public void setExperiences(Set<Experience> experiences) {
 		this.experiences = experiences;
 	}
 
@@ -381,11 +408,11 @@ public class Employee implements Serializable {
 		return experience;
 	}
 
-	public List<Formation> getFormations() {
+	public Set<Formation> getFormations() {
 		return this.formations;
 	}
 
-	public void setFormations(List<Formation> formations) {
+	public void setFormations(Set<Formation> formations) {
 		this.formations = formations;
 	}
 
@@ -403,11 +430,11 @@ public class Employee implements Serializable {
 		return formation;
 	}
 
-	public List<Langue> getLangues() {
+	public Set<Langue> getLangues() {
 		return this.langues;
 	}
 
-	public void setLangues(List<Langue> langues) {
+	public void setLangues(Set<Langue> langues) {
 		this.langues = langues;
 	}
 	

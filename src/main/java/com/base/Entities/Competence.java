@@ -6,7 +6,7 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -24,7 +24,7 @@ public class Competence implements Serializable {
 	private String description;
 
 	//bi-directional many-to-many association to Demande
-	@ManyToMany
+	/*@ManyToMany
 	@JoinTable(
 		name="COMPETENCE_DEMANDE"
 		, joinColumns={
@@ -34,10 +34,24 @@ public class Competence implements Serializable {
 			@JoinColumn(name="IDDEMANDE")
 			}
 		)
-	private List<Demande> demandes;
+	*/
+	@ManyToMany(fetch = FetchType.LAZY,
+			cascade = {
+	                CascadeType.MERGE
+	            })
+	@JoinTable(
+			name="COMPETENCE_DEMANDE"
+			, joinColumns={
+				@JoinColumn(name="IDCOMPETENCE")
+				}
+			, inverseJoinColumns={
+				@JoinColumn(name="IDDEMANDE")
+				}
+			)
+	private Set<Demande> demandes;
 
 	//bi-directional many-to-many association to Employee
-	@ManyToMany(cascade = CascadeType.MERGE)
+	/*@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
 		name="COMPETENCE_EMPLOYEE"
 		, joinColumns={
@@ -47,16 +61,23 @@ public class Competence implements Serializable {
 			@JoinColumn(name="IDEMPLOYE")
 			}
 		)
-	
-	private List<Employee> employees;
+	*/
+	@ManyToMany(fetch = FetchType.LAZY,
+			cascade = {
+	                CascadeType.MERGE
+	            })
+	@JoinTable(name = "COMPETENCE_EMPLOYEE",
+    joinColumns = { @JoinColumn(name = "IDCOMPETENCE") },
+    inverseJoinColumns = { @JoinColumn(name = "IDEMPLOYE") })
+	private Set<Employee> employees;
 
 	public Competence() {
 	}
 	
 	//Definition du constructeur Json qui permet de construire un Objet Client a partir de Donnees de type JSon
     @JsonCreator
-    public Competence(@JsonProperty("idcomptence") int idcompetence,@JsonProperty("description") String description,
-    		@JsonProperty("demandes") List<Demande> demandes,@JsonProperty("emplotyees") List<Employee> employees)
+    public Competence(@JsonProperty("idcompetence") int idcompetence,@JsonProperty("description") String description,
+    		@JsonProperty("demandes") Set<Demande> demandes,@JsonProperty("employees") Set<Employee> employees)
     {
     	this.idcompetence=idcompetence;
     	this.description=description;
@@ -79,19 +100,19 @@ public class Competence implements Serializable {
 		this.description = description;
 	}
 
-	public List<Demande> getDemandes() {
+	public Set<Demande> getDemandes() {
 		return this.demandes;
 	}
 
-	public void setDemandes(List<Demande> demandes) {
+	public void setDemandes(Set<Demande> demandes) {
 		this.demandes = demandes;
 	}
 
-	public List<Employee> getEmployees() {
+	public Set<Employee> getEmployees() {
 		return this.employees;
 	}
 
-	public void setEmployees(List<Employee> employees) {
+	public void setEmployees(Set<Employee> employees) {
 		this.employees = employees;
 	}
 

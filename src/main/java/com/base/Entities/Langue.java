@@ -6,7 +6,7 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -25,7 +25,7 @@ public class Langue implements Serializable {
 	private String nom;
 
 	//bi-directional many-to-many association to Employee
-	@ManyToMany(cascade = CascadeType.MERGE)
+	/*@ManyToMany
 	@JoinTable(
 		name="LANGUE_EMPLOYEE"
 		, joinColumns={
@@ -35,16 +35,22 @@ public class Langue implements Serializable {
 			@JoinColumn(name="IDEMPLOYE")
 			}
 		)
-	private List<Employee> employees;
+	*/
+	@ManyToMany(fetch = FetchType.LAZY,
+			cascade = {
+	                CascadeType.MERGE
+	            })
+	@JoinTable(name = "LANGUE_EMPLOYEE",
+    joinColumns = { @JoinColumn(name = "IDLANGUE") },
+    inverseJoinColumns = { @JoinColumn(name = "IDEMPLOYE") })
+	private Set<Employee> employees;
 
 	public Langue() {
 	}
 	
-
 	//Definition du constructeur Json qui permet de construire un Objet Client a partir de Donnees de type JSon
-
 	@JsonCreator
-	public Langue(@JsonProperty("idlangue") int idlangue,@JsonProperty("nom") String nom,@JsonProperty("employees") List<Employee> employees)
+	public Langue(@JsonProperty("idlangue") int idlangue,@JsonProperty("nom") String nom,@JsonProperty("employees") Set<Employee> employees)
 	{
 		this.idlangue = idlangue;
 		this.nom = nom;
@@ -67,11 +73,11 @@ public class Langue implements Serializable {
 		this.nom = nom;
 	}
 
-	public List<Employee> getEmployees() {
+	public Set<Employee> getEmployees() {
 		return this.employees;
 	}
 
-	public void setEmployees(List<Employee> employees) {
+	public void setEmployees(Set<Employee> employees) {
 		this.employees = employees;
 	}
 

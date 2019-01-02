@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -34,8 +34,21 @@ public class Demande implements Serializable {
 	private String services;
 
 	//bi-directional many-to-many association to Competence
-	@ManyToMany(mappedBy="demandes")
-	private List<Competence> competences;
+	//@ManyToMany(mappedBy="demandes")
+	@ManyToMany(fetch = FetchType.LAZY,
+		    cascade = {
+		        CascadeType.MERGE
+		    })
+	@JoinTable(
+			name="COMPETENCE_DEMANDE"
+			, joinColumns={
+				@JoinColumn(name="IDDEMANDE")
+				}
+			, inverseJoinColumns={
+				@JoinColumn(name="IDCOMPETENCE")
+				}
+	)
+	private Set<Competence> competences;
 
 	//bi-directional many-to-one association to Client
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -43,7 +56,7 @@ public class Demande implements Serializable {
 	private Client client;
 
 	//bi-directional many-to-many association to Employee
-	@ManyToMany
+	/*@ManyToMany
 	@JoinTable(
 		name="DEMANDE_EMPLOYEE"
 		, joinColumns={
@@ -53,11 +66,25 @@ public class Demande implements Serializable {
 			@JoinColumn(name="IDEMPLOYE")
 			}
 		)
-	private List<Employee> employees;
+	*/
+	@ManyToMany(fetch = FetchType.LAZY,
+		    cascade = {
+		        CascadeType.MERGE
+		    })
+	@JoinTable(
+			name="DEMANDE_EMPLOYEE"
+			, joinColumns={
+				@JoinColumn(name="IDDEMANDE")
+				}
+			, inverseJoinColumns={
+				@JoinColumn(name="IDEMPLOYE")
+				}
+	)
+	private Set<Employee> employees;
 
 	//bi-directional many-to-one association to Document
 	@OneToMany(mappedBy="demande")
-	private List<Document> documents;
+	private Set<Document> documents;
 
 	public Demande() {
 	}
@@ -65,9 +92,9 @@ public class Demande implements Serializable {
 	//Definition du constructeur Json qui permet de construire un Objet Client a partir de Donnees de type JSon
 	@JsonCreator
 	public Demande(@JsonProperty("iddemande") int iddemande,@JsonProperty("date")Date date,@JsonProperty("salairePropose") int salairePropose,
-			@JsonProperty("salaireRetenue") int salaireRetenue,@JsonProperty("services") String services,@JsonProperty("competences") List<Competence> competences,
-			@JsonProperty("client") Client client,@JsonProperty("employees") List<Employee> employees,
-			@JsonProperty("documents") List<Document> documents )
+			@JsonProperty("salaireRetenue") int salaireRetenue,@JsonProperty("services") String services,@JsonProperty("competences") Set<Competence> competences,
+			@JsonProperty("client") Client client,@JsonProperty("employees") Set<Employee> employees,
+			@JsonProperty("documents") Set<Document> documents )
 	{
 		this.iddemande=iddemande;
 		this.date=date;
@@ -119,11 +146,11 @@ public class Demande implements Serializable {
 		this.services = services;
 	}
 
-	public List<Competence> getCompetences() {
+	public Set<Competence> getCompetences() {
 		return this.competences;
 	}
 
-	public void setCompetences(List<Competence> competences) {
+	public void setCompetences(Set<Competence> competences) {
 		this.competences = competences;
 	}
 
@@ -135,19 +162,19 @@ public class Demande implements Serializable {
 		this.client = client;
 	}
 
-	public List<Employee> getEmployees() {
+	public Set<Employee> getEmployees() {
 		return this.employees;
 	}
 
-	public void setEmployees(List<Employee> employees) {
+	public void setEmployees(Set<Employee> employees) {
 		this.employees = employees;
 	}
 
-	public List<Document> getDocuments() {
+	public Set<Document> getDocuments() {
 		return this.documents;
 	}
 
-	public void setDocuments(List<Document> documents) {
+	public void setDocuments(Set<Document> documents) {
 		this.documents = documents;
 	}
 
