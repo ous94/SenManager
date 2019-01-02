@@ -2,6 +2,7 @@ package com.base.Controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -34,12 +35,30 @@ public class EmployeeController {
 		try
 		{
 		   System.out.println("Get all Client...");
-		   Collection<Employee> employeelist = new ArrayList<Employee>();
-
-		   employeeRepository.findAll().forEach(employeelist::add);
-	 
-			return employeelist;
-		   
+		   List<Employee> listeEmployes = new ArrayList<>();
+		   List<Employee> listeEmp=new ArrayList<>();
+		   employeeRepository.findAll().forEach(listeEmployes::add);
+		   Employee employee=new Employee();
+		   Iterator<Employee> it=listeEmployes.iterator();
+		   while(it.hasNext())
+		   {
+			   Employee emp=it.next();
+			   employee.setIdemploye(emp.getIdemploye());
+			   employee.setAdresse(emp.getAdresse());
+			   employee.setDateNaissance(emp.getDateNaissance());
+			   employee.setEmail(emp.getEmail());
+			   employee.setIdentification(emp.getIdentification());
+			   employee.setNom(emp.getNom());
+			   employee.setObservation(emp.getObservation());
+			   employee.setPhoto(emp.getPhoto());
+			   employee.setPrenom(emp.getPrenom());
+			   employee.setTelephoneFixe(emp.getTelephoneFixe());
+			   employee.setTelephoneMobile(emp.getTelephoneMobile());
+			   employee.setReligion(emp.getReligion());
+			   employee.setSituationMatrimoniale(emp.getSituationMatrimoniale());
+			   listeEmp.add(employee);
+		   }
+		   return listeEmp;
 		}
 		catch(Exception e)
 		{
