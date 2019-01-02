@@ -37,7 +37,7 @@ public class Competence implements Serializable {
 	private List<Demande> demandes;
 
 	//bi-directional many-to-many association to Employee
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(
 		name="COMPETENCE_EMPLOYEE"
 		, joinColumns={

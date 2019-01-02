@@ -25,7 +25,7 @@ public class Langue implements Serializable {
 	private String nom;
 
 	//bi-directional many-to-many association to Employee
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(
 		name="LANGUE_EMPLOYEE"
 		, joinColumns={
