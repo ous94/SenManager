@@ -22,6 +22,7 @@ public class LangueController {
 	@Autowired
 	LangueRepository langueRepository;
 	
+	
 	// recherche par nom langue
 	@GetMapping("/langues/nom/{nom}")
 	public List<String> getAllnomLanguebynom(@PathVariable("nom") String nom) {

@@ -1,6 +1,7 @@
 package com.base.Controller;
 
 import java.util.ArrayList;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -111,7 +112,7 @@ public class PaysController {
     		return null;
        }
     }
-    	
+    
     //recherher nom
     @GetMapping("/ppays/nompays/{nom}")
     public Pays getPaysByNom(@PathVariable("nom") String nom)

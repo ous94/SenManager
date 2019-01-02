@@ -128,7 +128,6 @@ public class CompetenceController {
 	    		return null;
 	    	}
 		}
-		
 		//recherher nom
 		@GetMapping("/competence/description/{description}")
 		 public Competence getComptenceByDescription(@PathVariable("description") String description)

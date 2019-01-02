@@ -1,7 +1,10 @@
 package com.base.Controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,13 +30,16 @@ public class EmployeeController {
 	@Autowired
 	EmployeeRepository employeeRepository;
 	@GetMapping("/employes")
-	public List<Employee> getAllClients() {
+	public Collection<Employee> getAllClients() {
 		try
 		{
 		   System.out.println("Get all Client...");
-		   List<Employee> listeEmployes = new ArrayList<>();
-		   employeeRepository.findAll().forEach(listeEmployes::add);
-		   return listeEmployes;
+		   Collection<Employee> employeelist = new ArrayList<Employee>();
+
+		   employeeRepository.findAll().forEach(employeelist::add);
+	 
+			return employeelist;
+		   
 		}
 		catch(Exception e)
 		{
@@ -90,6 +96,26 @@ public class EmployeeController {
 		{
 			return null;
 		}
+	}
+		
+		
+		@SuppressWarnings("unchecked")
+		@GetMapping(value = "employee/prenom/{genre}")
+		public String[]  findByAdresse(@PathVariable("genre") String genre) {
+			try
+			{
+			 System.out.println("Get all prenom mesEmploye...");
+			   
+
+			 //List<Employee>  cities =  (List<Employee>)
+			 String[]  listeEmployes =  employeeRepository.findByAdresse(genre);
+					 return listeEmployes;
+	       // return cities;
+			}
+			catch(Exception e)
+			{
+				return null;
+			}
     }
 	
 
