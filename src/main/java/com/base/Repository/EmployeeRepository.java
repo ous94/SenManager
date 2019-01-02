@@ -30,8 +30,13 @@ public interface EmployeeRepository extends CrudRepository<Employee,Integer>{
 	//@Query("select u from Employee u where u.prenom = :prenom or u.nom = :nom") 
 	//Employee findByLastnameOrFirstname(@Param("prenom") String prenom, @Param("nom") String nom);
 	
-	@Query("select nom,prenom from Employee u where u.adresse = :adresse") 
-	String[]  findByAdresse(@Param("adresse") String adresse);
+	//@Query("select nom,prenom from Employee u where u.adresse = :adresse") 
+	//String[]  findByAdresse(@Param("adresse") String adresse);
+	
+	
+	//@Query("select nom,prenom,situation_matrimoniale from Employee u where u.adresse = :adresse") 
+	 //String[] findByAdresse(@Param("adresse") String adresse);
+	
 	
 	
 	

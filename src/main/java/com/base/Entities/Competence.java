@@ -35,7 +35,7 @@ public class Competence implements Serializable {
 			}
 		)
 	*/
-	@ManyToMany(fetch = FetchType.LAZY,
+	@ManyToMany(fetch = FetchType.EAGER,
 			cascade = {
 	                CascadeType.MERGE
 	            })
@@ -62,7 +62,7 @@ public class Competence implements Serializable {
 			}
 		)
 	*/
-	@ManyToMany(fetch = FetchType.LAZY,
+	@ManyToMany(fetch = FetchType.EAGER,
 			cascade = {
 	                CascadeType.MERGE
 	            })

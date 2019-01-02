@@ -98,25 +98,26 @@ public class EmployeeController {
 		}
 	}
 		
-		
-		@SuppressWarnings("unchecked")
-		@GetMapping(value = "employee/prenom/{genre}")
-		public String[]  findByAdresse(@PathVariable("genre") String genre) {
-			try
-			{
-			 System.out.println("Get all prenom mesEmploye...");
-			   
-
-			 //List<Employee>  cities =  (List<Employee>)
-			 String[]  listeEmployes =  employeeRepository.findByAdresse(genre);
-					 return listeEmployes;
-	       // return cities;
-			}
-			catch(Exception e)
-			{
-				return null;
-			}
-    }
+		// retourner par 
+/*//		@GetMapping(value = "employee/prenom/{genre}")
+//		public String[]  findByAdresse(@PathVariable("genre") String genre) {
+//			try
+//			{
+//			 System.out.println("Get all prenom mesEmploye...");
+//			   
+//
+//			 //List<Employee>  cities =  (List<Employee>)
+//			 String[]  listeEmployes =   employeeRepository.findByAdresse(genre);
+//					 return listeEmployes;
+//	       // return cities;
+//			}
+//			catch(Exception e)
+//			{
+//				return null;
+//			}
+//    }
+//		
+*/		
 	
 
 
