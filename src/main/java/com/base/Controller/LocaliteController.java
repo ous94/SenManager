@@ -120,7 +120,10 @@ public class LocaliteController {
 			localiteRepository.findByNom(nom).forEach(listeLocalite::add);
 			Iterator<Localite> it= listeLocalite.iterator();
 			Localite localite=it.next();
-			return localite;
+			Localite malocalite=new Localite();
+			malocalite.setIdlocalite(localite.getIdlocalite());
+			malocalite.setNom(localite.getNom());
+			return malocalite;
 		}
 		catch(Exception e)
 		{

@@ -22,7 +22,6 @@ public class LangueController {
 	@Autowired
 	LangueRepository langueRepository;
 	
-	
 	// recherche par nom langue
 	@GetMapping("/langues/nom/{nom}")
 	public List<String> getAllnomLanguebynom(@PathVariable("nom") String nom) {
@@ -75,7 +74,11 @@ public class LangueController {
 		   List<Langue> listeLangue = new ArrayList<>();
 		   langueRepository.findByNom(nom).forEach(listeLangue::add);
 		   Iterator<Langue> itlangue=listeLangue.iterator();
-		   return itlangue.next();
+		   Langue langue=itlangue.next();
+		   Langue maLangue=new Langue();
+		   maLangue.setIdlangue(langue.getIdlangue());
+		   maLangue.setNom(langue.getNom());
+		   return maLangue;
 		}
 		catch(Exception e)
 		{
