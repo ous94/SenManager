@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,10 +36,11 @@ public class EmployeeController {
 		   List<Employee> listeEmployes = new ArrayList<>();
 		   List<Employee> listeEmp=new ArrayList<>();
 		   employeeRepository.findAll().forEach(listeEmployes::add);
-		   Employee employee=new Employee();
 		   Iterator<Employee> it=listeEmployes.iterator();
 		   while(it.hasNext())
 		   {
+			   Employee employee=new Employee();
+
 			   Employee emp=it.next();
 			   employee.setIdemploye(emp.getIdemploye());
 			   employee.setAdresse(emp.getAdresse());

@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.base.Repository.TypeIdentificationRepository;
 import com.base.Entities.TypeIdentification;
+import com.base.Repository.TypeIdentificationRepository;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
 @RestController
@@ -98,8 +98,12 @@ public class TypeIdentificationController {
 			 List<TypeIdentification> listeTypeIdentification = new ArrayList<>();
 			 typeIdentificationRepository.findByNom(nom).forEach(listeTypeIdentification::add);
 			 Iterator<TypeIdentification> it= listeTypeIdentification.iterator();
-			 TypeIdentification typeIdentification=it.next();
-			 return typeIdentification ;
+			 TypeIdentification typeIdentification= new TypeIdentification();
+			 TypeIdentification montypeIdentification=  it.next();
+			 typeIdentification.setIdidentification(montypeIdentification.getIdidentification());
+			 typeIdentification.setNom(montypeIdentification.getNom());
+			   return typeIdentification;
+			 
 		}
 		catch(Exception e)
 		{

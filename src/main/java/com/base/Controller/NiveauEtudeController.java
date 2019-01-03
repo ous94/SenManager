@@ -1,6 +1,7 @@
 package com.base.Controller;
 
 import java.util.ArrayList;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -120,8 +121,14 @@ public class NiveauEtudeController {
 			List<Niveauetude> listeNiveauEtude = new ArrayList<>();
 			niveauEtudeRepository.findByNiveau(niveau).forEach(listeNiveauEtude::add);
 			Iterator<Niveauetude> it= listeNiveauEtude.iterator();
+			
+			Niveauetude niveauetude= new Niveauetude();
 			Niveauetude niveauEtude=it.next();
-			return niveauEtude;
+			niveauetude.setIdniveau(niveauEtude.getIdniveau());
+			niveauetude.setNiveau(niveauEtude.getNiveau());
+			return niveauetude;
+			
+			
 		}
 		catch(Exception e)
 		{

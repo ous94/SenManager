@@ -33,6 +33,7 @@ public class LangueController {
 		   langueRepository.findByNom(nom).forEach(listeLangue::add);
 		   List<String> nomlangue = new ArrayList<>();
 		   
+		   
 		   Iterator<Langue> it= listeLangue.iterator();
 		   while(it.hasNext())
 		   {
@@ -66,6 +67,7 @@ public class LangueController {
 			return null;
 		}
 	}
+	//bon
 	
 	@GetMapping("/langue/nom/{nom}")
 	public Langue getLangueByNom(@PathVariable("nom")String nom) {
@@ -75,7 +77,11 @@ public class LangueController {
 		   List<Langue> listeLangue = new ArrayList<>();
 		   langueRepository.findByNom(nom).forEach(listeLangue::add);
 		   Iterator<Langue> itlangue=listeLangue.iterator();
-		   return itlangue.next();
+		   Langue langue= new Langue();
+		   Langue malangue=  itlangue.next();
+		   langue.setIdlangue(malangue.getIdlangue());
+		   langue.setNom(malangue.getNom());
+		   return langue;
 		}
 		catch(Exception e)
 		{
