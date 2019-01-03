@@ -1,6 +1,7 @@
 package com.base.Controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,25 @@ public class ClientController {
 		   System.out.println("Get all Client...");
 		   List<Client> listeclients = new ArrayList<>();
 		   clientRepository.findAll().forEach(listeclients::add);
-		   return listeclients;
+		   Iterator<Client> itClient=listeclients.iterator();
+		   List<Client> maListe=new ArrayList<>();
+		   Client newClient= new Client();
+		   while(itClient.hasNext())
+		   {
+			   Client client=itClient.next();
+			   newClient.setIdclient(client.getIdclient());
+			   newClient.setAdresse(client.getAdresse());
+			   newClient.setEmail(client.getEmail());
+			   newClient.setIdentification(client.getIdentification());
+			   newClient.setNom(client.getNom());
+			   newClient.setObservation(client.getObservation());
+			   newClient.setPrenom(client.getPrenom());
+			   newClient.setSexe(client.getSexe());
+			   newClient.setTelephoneFixe(client.getTelephoneFixe());
+			   newClient.setTelephoneMobile(client.getTelephoneMobile());
+		       maListe.add(newClient);
+		   }
+		   return maListe;
 		}
 		catch(Exception e)
 		{
@@ -44,8 +63,18 @@ public class ClientController {
 		try
 		{
 		    Client newClient=new Client();
-		    Client clientrt = clientRepository.save(newClient);
-		    return clientrt;
+		    Client clientrt = clientRepository.save(client);
+		    newClient.setIdclient(clientrt.getIdclient());
+		    newClient.setAdresse(clientrt.getAdresse());
+		    newClient.setEmail(clientrt.getEmail());
+		    newClient.setIdentification(clientrt.getIdentification());
+		    newClient.setNom(clientrt.getNom());
+		    newClient.setObservation(clientrt.getObservation());
+		    newClient.setPrenom(clientrt.getPrenom());
+		    newClient.setSexe(clientrt.getSexe());
+		    newClient.setTelephoneFixe(clientrt.getTelephoneFixe());
+		    newClient.setTelephoneMobile(clientrt.getTelephoneMobile());
+		    return newClient;
 		}
 		catch(Exception e)
 		{

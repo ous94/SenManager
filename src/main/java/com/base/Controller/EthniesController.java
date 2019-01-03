@@ -120,7 +120,10 @@ public class EthniesController {
 			 ethniesRepository.findByNom(nom).forEach(listeEthnies::add);
 			 Iterator<Ethnies> it= listeEthnies.iterator();
 			 Ethnies ethnies=it.next();
-			 return ethnies;
+			 Ethnies monEthnies=new Ethnies();
+			 monEthnies.setIdethnies(ethnies.getIdethnies());
+			 monEthnies.setNom(ethnies.getNom());
+			 return monEthnies;
 		}
 		catch(Exception e)
 		{

@@ -1,9 +1,13 @@
 package com.base.Controller;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+<<<<<<< HEAD
+import java.util.Set;
+=======
+>>>>>>> 3fb07ccdeb040aa1f3caff8fff1580a3162d95a7
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +33,7 @@ public class EmployeeController {
 	@Autowired
 	EmployeeRepository employeeRepository;
 	@GetMapping("/employes")
-	public Collection<Employee> getAllClients() {
+	public List<Employee> getAllClients() {
 		try
 		{
 		   System.out.println("Get all Client...");
@@ -54,6 +58,7 @@ public class EmployeeController {
 			   employee.setTelephoneFixe(emp.getTelephoneFixe());
 			   employee.setTelephoneMobile(emp.getTelephoneMobile());
 			   employee.setReligion(emp.getReligion());
+			   employee.setLangues(emp.getLangues());
 			   employee.setSituationMatrimoniale(emp.getSituationMatrimoniale());
 			   listeEmp.add(employee);
 		   }
@@ -69,14 +74,28 @@ public class EmployeeController {
 		
 		try
 		{
-		   //
-		    System.out.println("Prenom :"+employe.getPrenom());
-		    System.out.println("Nom :"+employe.getNom());
-		    System.out.println("Adresse :"+employe.getAdresse());
-		    System.out.println("Date de Naisssance :"+employe.getCompetences());
-		  //
-		    Employee employee=employeeRepository.save(employe);
-		    return employee;
+			String idString=""+Math.random()*(9-0)+Math.random()*(9-0)+Math.random()*(9-0)+Math.random()*(9-0)+Math.random()*(9-0)+
+                               Math.random()*(9-0)+Math.random()*(9-0)+Math.random()*(9-0)+Math.random()*(9-0)+Math.random()*(9-0);
+            Integer id=new Integer(idString);
+            employe.setIdemploye(id);
+			Employee emp=employeeRepository.save(employe);
+			Employee employee=new Employee();
+			employee.setIdemploye(emp.getIdemploye());
+			employee.setAdresse(emp.getAdresse());
+			employee.setDateNaissance(emp.getDateNaissance());
+			employee.setEmail(emp.getEmail());
+			employee.setIdentification(emp.getIdentification());
+			employee.setNom(emp.getNom());
+			employee.setObservation(emp.getObservation());
+			employee.setPhoto(emp.getPhoto());
+			employee.setPrenom(emp.getPrenom());
+			employee.setTelephoneFixe(emp.getTelephoneFixe());
+			employee.setTelephoneMobile(emp.getTelephoneMobile());
+			employee.setReligion(emp.getReligion());
+			employee.setLangues(emp.getLangues());
+			employee.setSituationMatrimoniale(emp.getSituationMatrimoniale());
+			
+			return employee;
 		}
 		catch(Exception e)
 		{
@@ -114,6 +133,9 @@ public class EmployeeController {
 		{
 			return null;
 		}
+<<<<<<< HEAD
+    }
+=======
 	}
 		
 		// retourner par 
@@ -136,8 +158,6 @@ public class EmployeeController {
 //    }
 //		
 */		
+>>>>>>> 3fb07ccdeb040aa1f3caff8fff1580a3162d95a7
 	
-
-
 }
-

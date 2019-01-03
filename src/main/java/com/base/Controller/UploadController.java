@@ -48,8 +48,8 @@ public class UploadController {
 			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(message);
 		}
 	}
- */
- /*
+ 
+
 	@PostMapping("/post")
 	public String uploadPhoto(MultipartFile file) {
 		try {
