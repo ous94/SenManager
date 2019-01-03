@@ -63,7 +63,7 @@ public class Employee implements Serializable {
 
 	//bi-directional many-to-many association to Competence
 	//@ManyToMany(mappedBy="employees")
-	@ManyToMany(fetch = FetchType.LAZY,
+	@ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                 CascadeType.MERGE
             })
@@ -74,7 +74,7 @@ public class Employee implements Serializable {
 
 	//bi-directional many-to-many association to Demande
 	//@ManyToMany(mappedBy="employees")
-	@ManyToMany(fetch = FetchType.LAZY,
+	@ManyToMany(fetch = FetchType.EAGER,
 		    cascade = {
 		        CascadeType.MERGE
 		    })
@@ -98,27 +98,27 @@ public class Employee implements Serializable {
 	private Set<Document> documents;
 
 	//bi-directional many-to-one association to Pay
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="IDPAYS")
 	private Pays pay;
 
 	//bi-directional many-to-one association to Localite
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="IDLOCALITE")
 	private Localite localite;
 
 	//bi-directional many-to-one association to TypeIdentification
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="IDIDENTIFICATION")
 	private TypeIdentification typeIdentification;
 
 	//bi-directional many-to-one association to Niveauetude
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="IDNIVEAU")
 	private Niveauetude niveauetude;
 
 	//bi-directional many-to-one association to Ethny
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="IDETHNIES")
 	private Ethnies ethnies;
 
@@ -132,7 +132,7 @@ public class Employee implements Serializable {
 
 	//bi-directional many-to-many association to Langue
 	//@ManyToMany(mappedBy="employees")
-	@ManyToMany(fetch = FetchType.LAZY,
+	@ManyToMany(fetch = FetchType.EAGER,
     cascade = {
         CascadeType.MERGE
     })

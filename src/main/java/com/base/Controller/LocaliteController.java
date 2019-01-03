@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Repository.LocaliteRepository;
+import com.base.Entities.Langue;
 import com.base.Entities.Localite;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
@@ -119,11 +120,19 @@ public class LocaliteController {
 			List<Localite> listeLocalite = new ArrayList<>();
 			localiteRepository.findByNom(nom).forEach(listeLocalite::add);
 			Iterator<Localite> it= listeLocalite.iterator();
+<<<<<<< HEAD
 			Localite localite=it.next();
 			Localite malocalite=new Localite();
 			malocalite.setIdlocalite(localite.getIdlocalite());
 			malocalite.setNom(localite.getNom());
 			return malocalite;
+=======
+			Localite localite= new Localite();
+			Localite malocalite=  it.next();
+			localite.setIdlocalite(malocalite.getIdlocalite());
+		    localite.setNom(malocalite.getNom());
+			return localite;
+>>>>>>> 3fb07ccdeb040aa1f3caff8fff1580a3162d95a7
 		}
 		catch(Exception e)
 		{

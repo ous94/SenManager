@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Set;
+=======
+>>>>>>> 3fb07ccdeb040aa1f3caff8fff1580a3162d95a7
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,10 +40,11 @@ public class EmployeeController {
 		   List<Employee> listeEmployes = new ArrayList<>();
 		   List<Employee> listeEmp=new ArrayList<>();
 		   employeeRepository.findAll().forEach(listeEmployes::add);
-		   Employee employee=new Employee();
 		   Iterator<Employee> it=listeEmployes.iterator();
 		   while(it.hasNext())
 		   {
+			   Employee employee=new Employee();
+
 			   Employee emp=it.next();
 			   employee.setIdemploye(emp.getIdemploye());
 			   employee.setAdresse(emp.getAdresse());
@@ -129,6 +133,31 @@ public class EmployeeController {
 		{
 			return null;
 		}
+<<<<<<< HEAD
     }
+=======
+	}
+		
+		// retourner par 
+/*//		@GetMapping(value = "employee/prenom/{genre}")
+//		public String[]  findByAdresse(@PathVariable("genre") String genre) {
+//			try
+//			{
+//			 System.out.println("Get all prenom mesEmploye...");
+//			   
+//
+//			 //List<Employee>  cities =  (List<Employee>)
+//			 String[]  listeEmployes =   employeeRepository.findByAdresse(genre);
+//					 return listeEmployes;
+//	       // return cities;
+//			}
+//			catch(Exception e)
+//			{
+//				return null;
+//			}
+//    }
+//		
+*/		
+>>>>>>> 3fb07ccdeb040aa1f3caff8fff1580a3162d95a7
 	
 }

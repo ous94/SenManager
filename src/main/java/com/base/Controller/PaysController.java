@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Entities.Competence;
 import com.base.Entities.Pays;
+import com.base.Entities.TypeIdentification;
 import com.base.Repository.PaysRepository;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
@@ -122,8 +123,13 @@ public class PaysController {
      	   List<Pays> listePays = new ArrayList<>();
      	   paysRepository.findByNom(nom).forEach(listePays::add);
      	   Iterator<Pays> it= listePays.iterator();
-     	   Pays pays=it.next();
-           return pays; 		  
+     	   Pays pays= new Pays();
+     	   Pays monPays=  it.next();
+	       pays.setIdpays(monPays.getIdpays());
+		   pays.setNom(monPays.getNom());
+		   return pays;
+			   
+     	  		  
         }
         catch(Exception e)
         {
