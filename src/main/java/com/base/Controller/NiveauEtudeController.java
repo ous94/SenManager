@@ -122,20 +122,14 @@ public class NiveauEtudeController {
 			niveauEtudeRepository.findByNiveau(niveau).forEach(listeNiveauEtude::add);
 			Iterator<Niveauetude> it= listeNiveauEtude.iterator();
 			
-			Niveauetude niveauetude= new Niveauetude();
 			Niveauetude niveauEtude=it.next();
-<<<<<<< HEAD
+
 			Niveauetude monNiveau=new Niveauetude();
 			monNiveau.setIdniveau(niveauEtude.getIdniveau());
 			monNiveau.setNiveau(niveauEtude.getNiveau());
 			return monNiveau;
-=======
-			niveauetude.setIdniveau(niveauEtude.getIdniveau());
-			niveauetude.setNiveau(niveauEtude.getNiveau());
-			return niveauetude;
 			
 			
->>>>>>> 3fb07ccdeb040aa1f3caff8fff1580a3162d95a7
 		}
 		catch(Exception e)
 		{

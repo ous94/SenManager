@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-<<<<<<< HEAD
 import java.util.Set;
-=======
->>>>>>> 3fb07ccdeb040aa1f3caff8fff1580a3162d95a7
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,7 +57,6 @@ public class EmployeeController {
 			   employee.setTelephoneFixe(emp.getTelephoneFixe());
 			   employee.setTelephoneMobile(emp.getTelephoneMobile());
 			   employee.setReligion(emp.getReligion());
-			   employee.setLangues(emp.getLangues());
 			   employee.setSituationMatrimoniale(emp.getSituationMatrimoniale());
 			   listeEmp.add(employee);
 		   }
@@ -74,9 +72,8 @@ public class EmployeeController {
 		
 		try
 		{
-			String idString=""+Math.random()*(9-0)+Math.random()*(9-0)+Math.random()*(9-0)+Math.random()*(9-0)+Math.random()*(9-0)+
-                               Math.random()*(9-0)+Math.random()*(9-0)+Math.random()*(9-0)+Math.random()*(9-0)+Math.random()*(9-0);
-            Integer id=new Integer(idString);
+			String idString=""+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)));
+            Integer id=java.lang.Integer.valueOf(idString);
             employe.setIdemploye(id);
 			Employee emp=employeeRepository.save(employe);
 			Employee employee=new Employee();
@@ -133,9 +130,9 @@ public class EmployeeController {
 		{
 			return null;
 		}
-<<<<<<< HEAD
-    }
-=======
+
+    
+
 	}
 		
 		// retourner par 
@@ -158,6 +155,5 @@ public class EmployeeController {
 //    }
 //		
 */		
->>>>>>> 3fb07ccdeb040aa1f3caff8fff1580a3162d95a7
 	
 }

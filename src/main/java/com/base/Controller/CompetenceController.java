@@ -145,19 +145,13 @@ public class CompetenceController {
 		 	   List<Competence> listeCompetence = new ArrayList<>();
 		 	   competenceRepository.findByDescription(description).forEach(listeCompetence::add);
 		 	   Iterator<Competence> it= listeCompetence.iterator();
-<<<<<<< HEAD
+
 		 	   Competence competence=it.next();
 		       Competence maCompetence=new Competence();
 		       maCompetence.setIdcompetence(competence.getIdcompetence());
 		       maCompetence.setDescription(competence.getDescription());
 		 	   return maCompetence; 		  
-=======
-		 	   Competence competence= new Competence();
-	     	   Competence maCompetence=  it.next();
-		       competence.setIdcompetence(maCompetence.getIdcompetence());
-		       competence.setDescription(maCompetence.getDescription());
-		       return competence; 		  
->>>>>>> 3fb07ccdeb040aa1f3caff8fff1580a3162d95a7
+
 		    }
 		    	
 		    catch(Exception e)

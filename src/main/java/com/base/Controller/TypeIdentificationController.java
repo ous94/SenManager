@@ -98,20 +98,12 @@ public class TypeIdentificationController {
 			 List<TypeIdentification> listeTypeIdentification = new ArrayList<>();
 			 typeIdentificationRepository.findByNom(nom).forEach(listeTypeIdentification::add);
 			 Iterator<TypeIdentification> it= listeTypeIdentification.iterator();
-<<<<<<< HEAD
 			 TypeIdentification typeIdentification=it.next();
 			 TypeIdentification monTypeIdentification=new TypeIdentification();
 			 monTypeIdentification.setIdidentification(typeIdentification.getIdidentification());
 			 monTypeIdentification.setNom(typeIdentification.getNom());
 			 return monTypeIdentification ;
-=======
-			 TypeIdentification typeIdentification= new TypeIdentification();
-			 TypeIdentification montypeIdentification=  it.next();
-			 typeIdentification.setIdidentification(montypeIdentification.getIdidentification());
-			 typeIdentification.setNom(montypeIdentification.getNom());
-			   return typeIdentification;
-			 
->>>>>>> 3fb07ccdeb040aa1f3caff8fff1580a3162d95a7
+
 		}
 		catch(Exception e)
 		{
