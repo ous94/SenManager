@@ -63,7 +63,7 @@ public class Employee implements Serializable {
 
 	//bi-directional many-to-many association to Competence
 	//@ManyToMany(mappedBy="employees")
-	@ManyToMany(fetch = FetchType.EAGER,
+	@ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                 CascadeType.MERGE
             })
@@ -74,7 +74,7 @@ public class Employee implements Serializable {
 
 	//bi-directional many-to-many association to Demande
 	//@ManyToMany(mappedBy="employees")
-	@ManyToMany(fetch = FetchType.EAGER,
+	@ManyToMany(fetch = FetchType.LAZY,
 		    cascade = {
 		        CascadeType.MERGE
 		    })
@@ -90,7 +90,7 @@ public class Employee implements Serializable {
 	private Set<Demande> demandes;
 
 	//bi-directional many-to-one association to Disponibilite
-	@OneToMany(mappedBy="employee")
+	@OneToMany(mappedBy="employee",cascade = {CascadeType.PERSIST})
 	private Set<Disponibilite> disponibilites;
 
 	//bi-directional many-to-one association to Document
@@ -98,27 +98,27 @@ public class Employee implements Serializable {
 	private Set<Document> documents;
 
 	//bi-directional many-to-one association to Pay
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="IDPAYS")
 	private Pays pay;
 
 	//bi-directional many-to-one association to Localite
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="IDLOCALITE")
 	private Localite localite;
 
 	//bi-directional many-to-one association to TypeIdentification
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="IDIDENTIFICATION")
 	private TypeIdentification typeIdentification;
 
 	//bi-directional many-to-one association to Niveauetude
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="IDNIVEAU")
 	private Niveauetude niveauetude;
 
 	//bi-directional many-to-one association to Ethny
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="IDETHNIES")
 	private Ethnies ethnies;
 
@@ -132,7 +132,7 @@ public class Employee implements Serializable {
 
 	//bi-directional many-to-many association to Langue
 	//@ManyToMany(mappedBy="employees")
-	@ManyToMany(fetch = FetchType.EAGER,
+	@ManyToMany(fetch = FetchType.LAZY,
     cascade = {
         CascadeType.MERGE
     })

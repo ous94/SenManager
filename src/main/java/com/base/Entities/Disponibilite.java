@@ -20,25 +20,46 @@ public class Disponibilite implements Serializable {
 
 	@Column(name = "OBSERVATION")
 	private String observation;
+	@Column(name = "horaire")
+	private String horaire;
+	@Column(name = "moment")
+	private String moment;
 
 	//bi-directional many-to-one association to Employee
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="IDEMPLOYE")
 	private Employee employee;
-
 	public Disponibilite() {
 	}
 
 	//Definition du constructeur Json qui permet de construire un Objet Client a partir de Donnees de type JSon
 	@JsonCreator
 	public Disponibilite(@JsonProperty("iddisponibilite") int iddisponibilite,@JsonProperty("observation") String observation,
-			             @JsonProperty("employee") Employee employee)
+			             @JsonProperty("employee") Employee employee,@JsonProperty("horaire") String horaire,@JsonProperty("moment") String moment)
 	{
 		this.iddisponibilite=iddisponibilite;
 		this.observation=observation;
 		this.employee=employee;
+		this.moment=moment;
+		this.horaire=horaire;
 	}
 	
+	public String getHoraire() {
+		return this.horaire;
+	}
+
+	public void setHoraire(String horaire) {
+		this.horaire = horaire;
+	}
+
+	public String getMoment() {
+		return this.moment;
+	}
+
+	public void setMoment(String moment) {
+		this.moment = moment;
+	}
+
 	public int getIddisponibilite() {
 		return this.iddisponibilite;
 	}
