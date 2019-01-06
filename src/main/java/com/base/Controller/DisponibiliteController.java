@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.base.Repository.DisponibiliteRepository;
 import com.base.Entities.Disponibilite;
 import com.base.Entities.Employee;
-import com.base.Entities.Pays;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
 @RestController
@@ -32,12 +31,16 @@ public class DisponibiliteController {
 	public Disponibilite creatPays(@RequestBody Disponibilite disponibilite) {
 		try
 		{
+			String idString=""+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)));
+            Integer id=java.lang.Integer.valueOf(idString);
 		    Disponibilite newDisponibilite=new Disponibilite();
+		    System.out.println("Debut Insertion Disponibilite");
 		    Disponibilite  disponibilitert= disponibiliteRepository.save(disponibilite);
-		    newDisponibilite.setIddisponibilite(disponibilite.getIddisponibilite());
+		    newDisponibilite.setIddisponibilite(id);
 		    newDisponibilite.setObservation(disponibilitert.getObservation());
 		    newDisponibilite.setHoraire(disponibilite.getHoraire());
 		    newDisponibilite.setMoment(disponibilite.getMoment());
+		    System.out.println("Fin insertion Disponibilite");
 		    return newDisponibilite;
 		}
 		catch(Exception e)
