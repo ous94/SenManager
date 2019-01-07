@@ -31,12 +31,12 @@ public class DisponibiliteController {
 	public Disponibilite creatPays(@RequestBody Disponibilite disponibilite) {
 		try
 		{
-			String idString=""+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)));
-            Integer id=java.lang.Integer.valueOf(idString);
+			//String idString=""+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)));
+           // Integer id=java.lang.Integer.valueOf(idString);
 		    Disponibilite newDisponibilite=new Disponibilite();
 		    System.out.println("Debut Insertion Disponibilite");
 		    Disponibilite  disponibilitert= disponibiliteRepository.save(disponibilite);
-		    newDisponibilite.setIddisponibilite(id);
+		    newDisponibilite.setIddisponibilite(disponibilitert.getIddisponibilite());
 		    newDisponibilite.setObservation(disponibilitert.getObservation());
 		    newDisponibilite.setHoraire(disponibilite.getHoraire());
 		    newDisponibilite.setMoment(disponibilite.getMoment());
