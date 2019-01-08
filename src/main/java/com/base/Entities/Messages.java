@@ -7,17 +7,19 @@ public class Messages {
 	private String email;
 	private String message;
 	private String numero;
+	private String nom;
 	
 	public Messages()
 	{
 		
 	}
 	@JsonCreator
-	public Messages(@JsonProperty("email")String email,@JsonProperty("message") String message,@JsonProperty("numero") String numero)
+	public Messages(@JsonProperty("email")String email,@JsonProperty("message") String message,@JsonProperty("numero") String numero,@JsonProperty("nom") String nom)
 	{
 		this.email=email;
 		this.message=message;
 		this.numero=numero;
+		this.nom=nom;
 	}
 	public String getEmail() {
 		return email;
@@ -36,6 +38,14 @@ public class Messages {
 	}
 	public void setNumero(String numero) {
 		this.numero = numero;
+	}
+	public void setNom(String nom)
+	{
+		this.nom=nom;
+	}
+	public String getNom()
+	{
+		return nom;
 	}
 
 }

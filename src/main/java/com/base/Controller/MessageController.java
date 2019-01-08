@@ -25,8 +25,8 @@ public class MessageController {
 		try
 		{
 			//Definition des Proprietes du Message
-			  String to = message.getEmail();
-		      String from = "adrienniokhorsene@gmail.com";
+			  String from = message.getEmail();
+		      String to = "adrienniokhorsene@gmail.com";
 		      String host = "localhost";
 		      Properties properties = System.getProperties();
 		      properties.setProperty("mail.smtp.host", host);
@@ -35,7 +35,7 @@ public class MessageController {
 		      MimeMessage msg = new MimeMessage(session);
 		      msg.setFrom(new InternetAddress(from));
 		      msg.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
-		      msg.setSubject("Numéro téléphone du Client : "+message.getNumero());
+		      msg.setSubject("Nom Client :"+message.getNom()+" Numéro téléphone du Client : "+message.getNumero());
 		      msg.setText(message.getMessage());
 		      // Envoi du  message
 		      Transport.send(msg);
