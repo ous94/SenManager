@@ -35,9 +35,11 @@ public class ClientController {
 		   clientRepository.findAll().forEach(listeclients::add);
 		   Iterator<Client> itClient=listeclients.iterator();
 		   List<Client> maListe=new ArrayList<>();
-		   Client newClient= new Client();
 		   while(itClient.hasNext())
+			   
 		   {
+			   Client newClient= new Client();
+
 			   Client client=itClient.next();
 			   newClient.setIdclient(client.getIdclient());
 			   newClient.setAdresse(client.getAdresse());
