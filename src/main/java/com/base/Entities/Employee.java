@@ -56,10 +56,10 @@ public class Employee implements Serializable {
 	private String situationMatrimoniale;
 
 	@Column(name="TELEPHONE_FIXE")
-	private BigDecimal telephoneFixe;
+	private String telephoneFixe;
 
 	@Column(name="TELEPHONE_MOBILE")
-	private BigDecimal telephoneMobile;
+	private String telephoneMobile;
 
 	//bi-directional many-to-many association to Competence
 	//@ManyToMany(mappedBy="employees")
@@ -90,7 +90,7 @@ public class Employee implements Serializable {
 	private Set<Demande> demandes;
 
 	//bi-directional many-to-one association to Disponibilite
-	@OneToMany(mappedBy="employee",cascade = {CascadeType.PERSIST})
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="employee",cascade = {CascadeType.PERSIST})
 	private Set<Disponibilite> disponibilites;
 
 	//bi-directional many-to-one association to Document
@@ -150,7 +150,7 @@ public class Employee implements Serializable {
 			@JsonProperty("email") String email,@JsonProperty("identification") String identification,@JsonProperty("nom") String nom,
 			@JsonProperty("observation") String observation,@JsonProperty("photo")String photo,@JsonProperty("prenom") String prenom,
 			@JsonProperty("religion") String religion,@JsonProperty("situationMatrimoniale") String situationMatrimoniale,
-			@JsonProperty("telephoneFixe") BigDecimal telephoneFixe,@JsonProperty("telephoneMobile") BigDecimal telephoneMobile,
+			@JsonProperty("telephoneFixe") String telephoneFixe,@JsonProperty("telephoneMobile") String telephoneMobile,
 			@JsonProperty("competences") Set<Competence> competences,@JsonProperty("demandes") Set<Demande> demandes,@JsonProperty("disponibilites") Set<Disponibilite> disponibilites,
 			@JsonProperty("documents") Set<Document> documents,@JsonProperty("pay") Pays pay,@JsonProperty("localite") Localite localite,
 			@JsonProperty("typeIdentification") TypeIdentification typeIdentification,@JsonProperty("niveauetude") Niveauetude niveauetude,@JsonProperty("ethnies") Ethnies ethnies,
@@ -271,19 +271,19 @@ public class Employee implements Serializable {
 		this.situationMatrimoniale = situationMatrimoniale;
 	}
 
-	public BigDecimal getTelephoneFixe() {
+	public String getTelephoneFixe() {
 		return this.telephoneFixe;
 	}
 
-	public void setTelephoneFixe(BigDecimal telephoneFixe) {
+	public void setTelephoneFixe(String telephoneFixe) {
 		this.telephoneFixe = telephoneFixe;
 	}
 
-	public BigDecimal getTelephoneMobile() {
+	public  String getTelephoneMobile() {
 		return this.telephoneMobile;
 	}
 
-	public void setTelephoneMobile(BigDecimal telephoneMobile) {
+	public void setTelephoneMobile(String telephoneMobile) {
 		this.telephoneMobile = telephoneMobile;
 	}
 	public Set<Competence> getCompetences() {
