@@ -3,21 +3,23 @@ package com.base.Entities;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Message {
+public class Messages {
 	private String email;
 	private String message;
 	private String numero;
+	private String nom;
 	
-	public Message()
+	public Messages()
 	{
 		
 	}
 	@JsonCreator
-	public Message(@JsonProperty("email")String email,@JsonProperty("message") String message,@JsonProperty("numero") String numero)
+	public Messages(@JsonProperty("email")String email,@JsonProperty("message") String message,@JsonProperty("numero") String numero,@JsonProperty("nom") String nom)
 	{
 		this.email=email;
 		this.message=message;
 		this.numero=numero;
+		this.nom=nom;
 	}
 	public String getEmail() {
 		return email;
@@ -36,6 +38,14 @@ public class Message {
 	}
 	public void setNumero(String numero) {
 		this.numero = numero;
+	}
+	public void setNom(String nom)
+	{
+		this.nom=nom;
+	}
+	public String getNom()
+	{
+		return nom;
 	}
 
 }
