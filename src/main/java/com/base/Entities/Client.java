@@ -5,8 +5,6 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -43,10 +41,16 @@ public class Client implements Serializable {
 	private String sexe;
 
 	@Column(name="TELEPHONE_FIXE")
-	private BigDecimal telephoneFixe;
+	private String telephoneFixe;
 
 	@Column(name="TELEPHONE_MOBILE")
-	private BigDecimal telephoneMobile;
+	private String telephoneMobile;
+	
+	@Column(name="login")
+	private String login;
+	
+	@Column(name="password")
+	private String password;
 
 	//bi-directional many-to-one association to Pay
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -80,10 +84,10 @@ public class Client implements Serializable {
     		@JsonProperty("email") String email,@JsonProperty("identification") String identification,
     		@JsonProperty("nom") String nom,@JsonProperty("observation")String observation,
     		@JsonProperty("prenom") String prenom,@JsonProperty("sexe") String sexe,
-    		@JsonProperty("telephoneFixe") BigDecimal telephoneFixe,@JsonProperty("telephoneMobile")BigDecimal telephoneMobile,
+    		@JsonProperty("telephoneFixe") String telephoneFixe,@JsonProperty("telephoneMobile")String telephoneMobile,
     		@JsonProperty("pay") Pays pay,@JsonProperty("localite") Localite localite,
     		@JsonProperty("typeIdentification") TypeIdentification typeIdentification,@JsonProperty("demandes") List<Demande> demandes,
-    		@JsonProperty("document") List<Document> documents)
+    		@JsonProperty("document") List<Document> documents,@JsonProperty("login")String login,@JsonProperty("password") String password)
     {
     	this.idclient=idclient;
     	this.adresse=adresse;
@@ -100,6 +104,8 @@ public class Client implements Serializable {
     	this.typeIdentification=typeIdentification;
     	this.demandes=demandes;
     	this.documents=documents;
+    	this.login=login;
+    	this.password=password;
     }
     
 	public int getIdclient() {
@@ -166,19 +172,19 @@ public class Client implements Serializable {
 		this.sexe = sexe;
 	}
 
-	public BigDecimal getTelephoneFixe() {
+	public String getTelephoneFixe() {
 		return this.telephoneFixe;
 	}
 
-	public void setTelephoneFixe(BigDecimal telephoneFixe) {
+	public void setTelephoneFixe(String telephoneFixe) {
 		this.telephoneFixe = telephoneFixe;
 	}
 
-	public BigDecimal getTelephoneMobile() {
+	public String getTelephoneMobile() {
 		return this.telephoneMobile;
 	}
 
-	public void setTelephoneMobile(BigDecimal telephoneMobile) {
+	public void setTelephoneMobile(String telephoneMobile) {
 		this.telephoneMobile = telephoneMobile;
 	}
 
