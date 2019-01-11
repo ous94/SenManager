@@ -30,7 +30,7 @@ public class MessageController {
 			//Definition des Proprietes du Message
 			System.out.println("le message....");
 			  String from = messages.getEmail();
-		      String to = "koumbidia01@gmail.com";
+		      String to = "ousmanebarry994@gmail.com";
 		      String host = "localhost";
 		    /*  Properties properties = System.getProperties();
 		      final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
@@ -45,8 +45,10 @@ public class MessageController {
 		      Properties props = new Properties();
 		      props.put("mail.smtp.auth", "false");
 		      props.put("mail.smtp.host", host);
-		      props.put("mail.smtp.socketFactory.port", "25");
+		      props.put("mail.smtp.socketFactory.port", "2500");
 		      props.put("mail.transport.protocol", "smtp");
+		      props.put("mail.smtp.starttls.enable", "true");
+
 
 		      Session session = Session.getInstance(props);
 		      //Definition du Message
