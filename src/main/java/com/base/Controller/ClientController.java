@@ -46,7 +46,7 @@ public class ClientController {
 			   newClient.setEmail(client.getEmail());
 			   newClient.setIdentification(client.getIdentification());
 			   newClient.setNom(client.getNom());
-			   newClient.setObservation(client.getObservation());
+			   newClient.setObservation(client.getObservation());  
 			   newClient.setPrenom(client.getPrenom());
 			   newClient.setSexe(client.getSexe());
 			   newClient.setTelephoneFixe(client.getTelephoneFixe());

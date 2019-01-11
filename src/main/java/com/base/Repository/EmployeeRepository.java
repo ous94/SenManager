@@ -35,7 +35,7 @@ public interface EmployeeRepository extends CrudRepository<Employee,Integer>{
 	
 	
 	//@Query("select u from Employee u where u.situationMatrimoniale = :situationMatrimoniale") 
-	  List<Employee> findBySituationMatrimoniale(String situationMatrimoniale);
+	//  List<Employee> findBySituationMatrimoniale(String situationMatrimoniale);
 	
 	
 	
