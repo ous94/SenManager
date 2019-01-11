@@ -1,25 +1,49 @@
 package com.base.Entities;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Messages {
+@Entity
+@Table(name="messages")
+public class Messages implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	@Id
+	private int numero;
+	@Column(name = "Email")
 	private String email;
+	@Column(name = "Message")
 	private String message;
-	private String numero;
-	private String nom;
+	@Column(name = "NomClient")
+	private String nomClient;
+	@Column(name = "TelClient")
+	private String telClient;
 	
 	public Messages()
 	{
 		
 	}
+	public String getTelClient() {
+		return telClient;
+	}
+	public void setTelClient(String telClient) {
+		this.telClient = telClient;
+	}
 	@JsonCreator
-	public Messages(@JsonProperty("email")String email,@JsonProperty("message") String message,@JsonProperty("numero") String numero,@JsonProperty("nom") String nom)
+	public Messages(@JsonProperty("email")String email,@JsonProperty("message") String message,@JsonProperty("numero") int numero,@JsonProperty("nomClient") String nomClient,@JsonProperty("nom") String telClient)
 	{
 		this.email=email;
 		this.message=message;
 		this.numero=numero;
-		this.nom=nom;
+		this.nomClient=nomClient;
+		this.telClient=telClient;
 	}
 	public String getEmail() {
 		return email;
@@ -33,19 +57,19 @@ public class Messages {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public String getNumero() {
+	public int getNumero() {
 		return numero;
 	}
-	public void setNumero(String numero) {
+	public void setNumero(int numero) {
 		this.numero = numero;
 	}
-	public void setNom(String nom)
+	public void setNomClient(String nomClient)
 	{
-		this.nom=nom;
+		this.nomClient=nomClient;
 	}
-	public String getNom()
+	public String getNomClient()
 	{
-		return nom;
+		return nomClient;
 	}
 
 }
