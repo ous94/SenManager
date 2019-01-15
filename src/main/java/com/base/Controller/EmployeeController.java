@@ -114,17 +114,36 @@ public class EmployeeController {
 		}
 	}
 	
-	@GetMapping(value = "employee/situation/{genre}")
-	public  List<Employee>  findByNameEndsWith(@PathVariable("genre") String genre) {
+/*	@GetMapping(value = "employee/situation/{genre}")
+	public  List<Employee>  findByNameEndsWith(@PathVariable("situation_matrimoniale") String situation_matrimoniale) {
 		try
 		{
-		 System.out.println("Get all mesEmploye...");
+		   System.out.println("Get all employye genre...");
 		   List<Employee> listeEmployes = new ArrayList<>();
+		   List<Employee> listeEmp=new ArrayList<>();
+		   employeeRepository.findBySituationMatrimoniale(situation_matrimoniale).forEach(listeEmployes::add);
+		   Iterator<Employee> it=listeEmployes.iterator();
+		   while(it.hasNext())
+		   {
+			   Employee employee=new Employee();
 
-		 //List<Employee>  cities =  (List<Employee>)
-				 employeeRepository.findByNameEndsWith(genre).forEach(listeEmployes::add);
-				 return listeEmployes;
-       // return cities;
+			   Employee emp=it.next();
+			   employee.setIdemploye(emp.getIdemploye());
+			   employee.setAdresse(emp.getAdresse());
+			   employee.setDateNaissance(emp.getDateNaissance());
+			   employee.setEmail(emp.getEmail());
+			   employee.setIdentification(emp.getIdentification());
+			   employee.setNom(emp.getNom());
+			   employee.setObservation(emp.getObservation());
+			   employee.setPhoto(emp.getPhoto());
+			   employee.setPrenom(emp.getPrenom());
+			   employee.setTelephoneFixe(emp.getTelephoneFixe());
+			   employee.setTelephoneMobile(emp.getTelephoneMobile());
+			   employee.setReligion(emp.getReligion());
+			   employee.setSituationMatrimoniale(emp.getSituationMatrimoniale());
+			   listeEmp.add(employee);
+		   }
+		   return listeEmp;
 		}
 		catch(Exception e)
 		{
@@ -132,8 +151,7 @@ public class EmployeeController {
 		}
 
     
-
-	}
+	}*/
 		
 		// retourner par 
 /*//		@GetMapping(value = "employee/prenom/{genre}")
@@ -142,7 +160,6 @@ public class EmployeeController {
 //			{
 //			 System.out.println("Get all prenom mesEmploye...");
 //			   
-//
 //			 //List<Employee>  cities =  (List<Employee>)
 //			 String[]  listeEmployes =   employeeRepository.findByAdresse(genre);
 //					 return listeEmployes;

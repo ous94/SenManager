@@ -35,16 +35,18 @@ public class ClientController {
 		   clientRepository.findAll().forEach(listeclients::add);
 		   Iterator<Client> itClient=listeclients.iterator();
 		   List<Client> maListe=new ArrayList<>();
-		   Client newClient= new Client();
 		   while(itClient.hasNext())
+			   
 		   {
+			   Client newClient= new Client();
+
 			   Client client=itClient.next();
 			   newClient.setIdclient(client.getIdclient());
 			   newClient.setAdresse(client.getAdresse());
 			   newClient.setEmail(client.getEmail());
 			   newClient.setIdentification(client.getIdentification());
 			   newClient.setNom(client.getNom());
-			   newClient.setObservation(client.getObservation());
+			   newClient.setObservation(client.getObservation());  
 			   newClient.setPrenom(client.getPrenom());
 			   newClient.setSexe(client.getSexe());
 			   newClient.setTelephoneFixe(client.getTelephoneFixe());

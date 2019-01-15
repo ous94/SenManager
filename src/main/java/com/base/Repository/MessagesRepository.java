@@ -7,4 +7,3 @@ import com.base.Entities.Messages;
 public interface MessagesRepository extends CrudRepository<Messages,Integer> {
 
 }
-
