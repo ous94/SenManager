@@ -99,4 +99,34 @@ public class ClientController {
 			return new ResponseEntity<>("", HttpStatus.EXPECTATION_FAILED);
 		}
 	}
+	
+	@PostMapping("/client/login")
+	public  Client connexion( @RequestBody Client client)
+	{
+		try {
+			System.out.println("login client");
+			List<Client> maliste = new ArrayList<>();
+			maliste = clientRepository.findByLoginAndPassword(client.getLogin(), client.getPassword());
+			Iterator<Client> itclient = maliste.iterator();
+			Client monClient = itclient.next();
+			    Client newClient=new Client();
+			    newClient.setIdclient(monClient.getIdclient());
+			    newClient.setAdresse(monClient.getAdresse());
+			    newClient.setEmail(monClient.getEmail());
+			    newClient.setIdentification(monClient.getIdentification());
+			    newClient.setNom(monClient.getNom());
+			    newClient.setObservation(monClient.getObservation());
+			    newClient.setPrenom(monClient.getPrenom());
+			    newClient.setSexe(monClient.getSexe());
+			    newClient.setTelephoneFixe(monClient.getTelephoneFixe());
+			    newClient.setTelephoneMobile(monClient.getTelephoneMobile());
+			
+			 return newClient;
+	    }
+	    catch (Exception e)
+		{
+			return null;
+		}
+		
+	}
 }

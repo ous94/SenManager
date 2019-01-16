@@ -2,9 +2,7 @@ package com.base.Repository;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 
 import com.base.Entities.Employee;
 
@@ -24,8 +22,8 @@ public interface EmployeeRepository extends CrudRepository<Employee,Integer>{
 	//@Query("SELECT p from Employee p where p.situation_Matrimoniale:situation_Matrimoniale")
 	//public Employee maRequêteAvecQueryDeRecher(@Param("situation_Matrimoniale") String situation_Matrimoniale);
 	
-	@Query(value= "select p.prenom from Employee p where p.SITUATION_MATRIMONIALE=?1",nativeQuery=true)
-    List<Employee> findByNameEndsWith(String chars);
+	//@Query(value= "select p.prenom from Employee p where p.SITUATION_MATRIMONIALE=?1",nativeQuery=true)
+    //List<Employee> findByNameEndsWith(String chars);
 	
 	//@Query("select u from Employee u where u.prenom = :prenom or u.nom = :nom") 
 	//Employee findByLastnameOrFirstname(@Param("prenom") String prenom, @Param("nom") String nom);
@@ -33,10 +31,15 @@ public interface EmployeeRepository extends CrudRepository<Employee,Integer>{
 	//@Query("select nom,prenom from Employee u where u.adresse = :adresse") 
 	//String[]  findByAdresse(@Param("adresse") String adresse);
 	
-	
-	//@Query("select u from Employee u where u.situationMatrimoniale = :situationMatrimoniale") 
-	//  List<Employee> findBySituationMatrimoniale(String situationMatrimoniale);
-	
+	//situationMatrimoniale
+	  List<Employee> findBySituationMatrimoniale(String situationMatrimoniale);
+   //religion
+	 List<Employee> findByReligion(String religion);
+	//adreese
+	List<Employee> findByAdresse(String adresse);
+	//Email
+	List<Employee> findByEmail(String email);
+
 	
 	
 	

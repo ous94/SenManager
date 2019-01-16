@@ -170,7 +170,156 @@ public class EmployeeController {
 //				return null;
 //			}
 //    }
+ * 
 //		
-*/		
+*/
+	//SituationMatrimoniale
+	@GetMapping("/employes/{situationMatrimoniale}")
+	public List<Employee> getEmployeBySituation(@PathVariable("situationMatrimoniale") String situationMatrimoniale) {
+		try
+		{
+		   System.out.println("Get all employeeby Situation...");
+		   List<Employee> listeEmployes = new ArrayList<>();
+		   List<Employee> listeEmp=new ArrayList<>();
+		   employeeRepository.findBySituationMatrimoniale(situationMatrimoniale).forEach(listeEmployes::add);
+		   Iterator<Employee> it=listeEmployes.iterator();
+		   while(it.hasNext())
+		   {
+			   Employee employee=new Employee();
+
+			   Employee emp=it.next();
+			   employee.setIdemploye(emp.getIdemploye());
+			   employee.setAdresse(emp.getAdresse());
+			   employee.setDateNaissance(emp.getDateNaissance());
+			   employee.setEmail(emp.getEmail());
+			   employee.setIdentification(emp.getIdentification());
+			   employee.setNom(emp.getNom());
+			   employee.setObservation(emp.getObservation());
+			   employee.setPhoto(emp.getPhoto());
+			   employee.setPrenom(emp.getPrenom());
+			   employee.setTelephoneFixe(emp.getTelephoneFixe());
+			   employee.setTelephoneMobile(emp.getTelephoneMobile());
+			   employee.setReligion(emp.getReligion());
+			   employee.setSituationMatrimoniale(emp.getSituationMatrimoniale());
+			   listeEmp.add(employee);
+		   }
+		   return listeEmp;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
 	
+	//Religion
+		@GetMapping("/employes/religion/{religion}")
+		public List<Employee> getEmployereligion(@PathVariable("religion") String religion) {
+			try
+			{
+			   System.out.println("Get all employe by Religion...");
+			   List<Employee> listeEmployes = new ArrayList<>();
+			   List<Employee> listeEmp=new ArrayList<>();
+			   employeeRepository.findByReligion(religion).forEach(listeEmployes::add);
+			   Iterator<Employee> it=listeEmployes.iterator();
+			   while(it.hasNext())
+			   {
+				   Employee employee=new Employee();
+
+				   Employee emp=it.next();
+				   employee.setIdemploye(emp.getIdemploye());
+				   employee.setAdresse(emp.getAdresse());
+				   employee.setDateNaissance(emp.getDateNaissance());
+				   employee.setEmail(emp.getEmail());
+				   employee.setIdentification(emp.getIdentification());
+				   employee.setNom(emp.getNom());
+				   employee.setObservation(emp.getObservation());
+				   employee.setPhoto(emp.getPhoto());
+				   employee.setPrenom(emp.getPrenom());
+				   employee.setTelephoneFixe(emp.getTelephoneFixe());
+				   employee.setTelephoneMobile(emp.getTelephoneMobile());
+				   employee.setReligion(emp.getReligion());
+				   employee.setSituationMatrimoniale(emp.getSituationMatrimoniale());
+				   listeEmp.add(employee);
+			   }
+			   return listeEmp;
+			}
+			catch(Exception e)
+			{
+				return null;
+			}
+		}
+		//Adresse
+				@GetMapping("/employes/adresse/{adresse}")
+				public List<Employee> getEmployeadresse(@PathVariable("adresse") String adresse) {
+					try
+					{
+					   System.out.println("Get all employe by adresse...");
+					   List<Employee> listeEmployes = new ArrayList<>();
+					   List<Employee> listeEmp=new ArrayList<>();
+					   employeeRepository.findByAdresse(adresse).forEach(listeEmployes::add);
+					   Iterator<Employee> it=listeEmployes.iterator();
+					   while(it.hasNext())
+					   {
+						   Employee employee=new Employee();
+
+						   Employee emp=it.next();
+						   employee.setIdemploye(emp.getIdemploye());
+						   employee.setAdresse(emp.getAdresse());
+						   employee.setDateNaissance(emp.getDateNaissance());
+						   employee.setEmail(emp.getEmail());
+						   employee.setIdentification(emp.getIdentification());
+						   employee.setNom(emp.getNom());
+						   employee.setObservation(emp.getObservation());
+						   employee.setPhoto(emp.getPhoto());
+						   employee.setPrenom(emp.getPrenom());
+						   employee.setTelephoneFixe(emp.getTelephoneFixe());
+						   employee.setTelephoneMobile(emp.getTelephoneMobile());
+						   employee.setReligion(emp.getReligion());
+						   employee.setSituationMatrimoniale(emp.getSituationMatrimoniale());
+						   listeEmp.add(employee);
+					   }
+					   return listeEmp;
+					}
+					catch(Exception e)
+					{
+						return null;
+					}
+				}
+				
+				//Email
+				@GetMapping("/employes/email/{email}")
+				public List<Employee> getEmployemail(@PathVariable("email") String email) {
+					try
+					{
+					   System.out.println("Get all employe by Email...");
+					   List<Employee> listeEmployes = new ArrayList<>();
+					   List<Employee> listeEmp=new ArrayList<>();
+					   employeeRepository.findByEmail(email).forEach(listeEmployes::add);
+					   Iterator<Employee> it=listeEmployes.iterator();
+					   while(it.hasNext())
+					   {
+						   Employee employee=new Employee();
+						   Employee emp=it.next();
+						   employee.setIdemploye(emp.getIdemploye());
+						   employee.setAdresse(emp.getAdresse());
+						   employee.setDateNaissance(emp.getDateNaissance());
+						   employee.setEmail(emp.getEmail());
+						   employee.setIdentification(emp.getIdentification());
+						   employee.setNom(emp.getNom());
+						   employee.setObservation(emp.getObservation());
+						   employee.setPhoto(emp.getPhoto());
+						   employee.setPrenom(emp.getPrenom());
+						   employee.setTelephoneFixe(emp.getTelephoneFixe());
+						   employee.setTelephoneMobile(emp.getTelephoneMobile());
+						   employee.setReligion(emp.getReligion());
+						   employee.setSituationMatrimoniale(emp.getSituationMatrimoniale());
+						   listeEmp.add(employee);
+					   }
+					   return listeEmp;
+					}
+					catch(Exception e)
+					{
+						return null;
+					}
+				}
 }

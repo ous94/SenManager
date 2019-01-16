@@ -46,6 +46,22 @@ public class Client implements Serializable {
 	@Column(name="TELEPHONE_MOBILE")
 	private String telephoneMobile;
 	
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Column(name="login")
 	private String login;
 	
