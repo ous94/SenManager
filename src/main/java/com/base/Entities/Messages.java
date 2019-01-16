@@ -17,13 +17,13 @@ public class Messages implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	private int numero;
-	@Column(name = "Email")
+	@Column(name = "EMAIL")
 	private String email;
-	@Column(name = "Message")
+	@Column(name = "MESSAGE")
 	private String message;
-	@Column(name = "NomClient")
+	@Column(name = "NOMCLIENT")
 	private String nomClient;
-	@Column(name = "TelClient")
+	@Column(name = "TELCLIENT")
 	private String telClient;
 	
 	public Messages()
@@ -37,7 +37,7 @@ public class Messages implements Serializable{
 		this.telClient = telClient;
 	}
 	@JsonCreator
-	public Messages(@JsonProperty("email")String email,@JsonProperty("message") String message,@JsonProperty("numero") int numero,@JsonProperty("nomClient") String nomClient,@JsonProperty("nom") String telClient)
+	public Messages(@JsonProperty("email")String email,@JsonProperty("message") String message,@JsonProperty("numero") int numero,@JsonProperty("nomClient") String nomClient,@JsonProperty("telClient") String telClient)
 	{
 		this.email=email;
 		this.message=message;

@@ -20,8 +20,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.base.Entities.Competence;
+import com.base.Entities.Disponibilite;
 import com.base.Entities.Employee;
-
+import com.base.Entities.Ethnies;
+import com.base.Entities.Langue;
+import com.base.Entities.Niveauetude;
+import com.base.Entities.Pays;
 import com.base.Repository.EmployeeRepository;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
@@ -58,6 +63,84 @@ public class EmployeeController {
 			   employee.setTelephoneMobile(emp.getTelephoneMobile());
 			   employee.setReligion(emp.getReligion());
 			   employee.setSituationMatrimoniale(emp.getSituationMatrimoniale());
+			   listeEmp.add(employee);
+		   }
+		   return listeEmp;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
+	@GetMapping("/allemployes")
+	public HashSet<Employee> getAllEmployess() {
+		try
+		{
+		   HashSet<Employee> listeEmployes = new HashSet<Employee>();
+		   HashSet<Employee> listeEmp=new HashSet<Employee>();
+		   employeeRepository.findAll().forEach(listeEmployes::add);
+		   Iterator<Employee> it=listeEmployes.iterator();
+		    while(it.hasNext())
+		   {
+			   Employee employee=new Employee();
+
+			   Employee emp=it.next();
+			   employee.setIdemploye(emp.getIdemploye());
+			   employee.setAdresse(emp.getAdresse());
+			   employee.setDateNaissance(emp.getDateNaissance());
+			   employee.setEmail(emp.getEmail());
+			   employee.setIdentification(emp.getIdentification());
+			   employee.setNom(emp.getNom());
+			   employee.setObservation(emp.getObservation());
+			   employee.setPhoto(emp.getPhoto());
+			   employee.setPrenom(emp.getPrenom());
+			   employee.setTelephoneFixe(emp.getTelephoneFixe());
+			   employee.setTelephoneMobile(emp.getTelephoneMobile());
+			   employee.setReligion(emp.getReligion());
+			   employee.setSituationMatrimoniale(emp.getSituationMatrimoniale());
+			   Iterator<Competence> itCompetence=emp.getCompetences().iterator();
+			   Iterator<Disponibilite> itDisponibilite=emp.getDisponibilites().iterator();
+			   Iterator<Langue> itLangue=emp.getLangues().iterator();
+			   HashSet<Competence>setCompetence=new HashSet<Competence>();
+			   HashSet<Langue> setLangue=new HashSet<Langue>();
+			   HashSet<Disponibilite> setDisponibilite=new HashSet<Disponibilite>();
+			   Ethnies ethnie=emp.getEthny();
+			   Niveauetude niveauEtude=emp.getNiveauetude();
+			   Pays pays=emp.getPay();
+			   while(itCompetence.hasNext())
+			   {
+				   Competence comp=itCompetence.next();
+				   comp.setDemandes(null);
+				   comp.setEmployees(null);
+				   setCompetence.add(comp);
+			   }
+			   while(itDisponibilite.hasNext())
+			   {
+				   Disponibilite dispo=itDisponibilite.next();
+				   dispo.setEmployee(null);
+				   setDisponibilite.add(dispo);
+			   }
+			   while(itLangue.hasNext())
+			   {
+				  Langue lang=itLangue.next();
+				  lang.setEmployees(null);
+				  setLangue.add(lang);
+			   }
+			   Ethnies ethnies=new Ethnies();
+			   Niveauetude niveau=new Niveauetude();
+			   Pays pys=new Pays();
+			   ethnies.setIdethnies(ethnie.getIdethnies());
+			   ethnies.setNom(ethnie.getNom());
+			   niveau.setIdniveau(niveauEtude.getIdniveau());
+			   niveau.setNiveau(niveauEtude.getNiveau());
+			   pys.setIdpays(pays.getIdpays());
+			   pys.setNom(pays.getNom());
+			   employee.setCompetences(setCompetence);
+			   employee.setDisponibilites(setDisponibilite);
+			   employee.setLangues(setLangue);
+			   employee.setPay(pys);
+			   employee.setEthny(ethnies);
+			   employee.setNiveauetude(niveau);
 			   listeEmp.add(employee);
 		   }
 		   return listeEmp;
