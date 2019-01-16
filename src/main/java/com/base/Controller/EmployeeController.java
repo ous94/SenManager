@@ -72,6 +72,7 @@ public class EmployeeController {
 			return null;
 		}
 	}
+	//Get All Employes avec plus de Details
 	@GetMapping("/allemployes")
 	public HashSet<Employee> getAllEmployess() {
 		try
