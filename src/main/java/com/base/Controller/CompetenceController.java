@@ -53,6 +53,27 @@ public class CompetenceController {
 	}
 	
 	*/
+	//Get All Competence avec plus de Details
+	@GetMapping("/competences")
+	public List<Competence> getAllCompetence() {
+		try
+		{
+		   System.out.println("...");
+		   List<Competence> listeCompetence = new ArrayList<>();
+		   competenceRepository.findAll().forEach(listeCompetence::add);
+		   for(int  i=0;i< listeCompetence.size();i++)
+		   {
+			   listeCompetence.get(i).setEmployees(null);
+			   listeCompetence.get(i).setDemandes(null);
+		   }
+		   return listeCompetence;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
+	//
 	@GetMapping("/competence/description")
 	public String[] getAlldescriptionCompetence() {
 		try
