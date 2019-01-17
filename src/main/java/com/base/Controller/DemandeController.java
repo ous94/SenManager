@@ -1,6 +1,7 @@
 package com.base.Controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -35,7 +36,7 @@ public class DemandeController {
 	DemandeRepository demandeRepository;
 	
 	@PostMapping(value = "/demande/create")
-	public Demande creatPays(@RequestBody Demande demande) {
+	public Demande creatDemande(@RequestBody Demande demande) {
 		try
 		{
 			String idString=""+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)));
@@ -43,6 +44,7 @@ public class DemandeController {
 		    Demande newDemande=new Demande();
 		    System.out.println("Debut Insertion Demande");
 		    demande.setIddemande(id);
+		    demande.setDate(new Date());
 		    Demande  demandert= demandeRepository.save(demande);
 		    newDemande.setIddemande(demandert.getIddemande());
 		    newDemande.setDate(demande.getDate());
