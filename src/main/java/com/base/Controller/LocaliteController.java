@@ -1,6 +1,7 @@
 package com.base.Controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,10 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.base.Repository.LocaliteRepository;
-import com.base.Entities.Langue;
+import com.base.Entities.Employee;
 import com.base.Entities.Localite;
+import com.base.Repository.LocaliteRepository;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
 @RestController
@@ -134,5 +134,57 @@ public class LocaliteController {
 		}
 	}
 	
+	 //recherhe  Employer par localite
+  	@GetMapping("/employes/localite/{description}")
+  	 public List<Employee> getComptenceByEmploeyee(@PathVariable("description") String description)
+  	 {
+  	    try
+  	    {
+  	       System.out.println("Get Comptence.description...");
+  	 	   List<Localite> listeCompetence = new ArrayList<>();
+  	 	   localiteRepository.findByNom(description).forEach(listeCompetence::add);
+  	 	   Iterator<Localite> it= listeCompetence.iterator();
+  	 	   HashSet<Employee> setEmployer= new HashSet <Employee>();
+  	 	   while(it.hasNext())
+  	 	   {
+  	 		   Localite competence= it.next();
+  	 		   setEmployer.addAll(competence.getEmployees());
+  	 	   }
+  	       Iterator<Employee> monit =setEmployer.iterator();
+  	       List<Employee> maliste =new ArrayList<>();
+  	       while(monit.hasNext())
+  	 	   {
+  	    	   
+  	 		  Employee employee = new Employee();
+  	 		 Employee emp=monit.next();
+  	 		   employee.setIdemploye(emp.getIdemploye());
+  			   employee.setAdresse(emp.getAdresse());
+  			   employee.setDateNaissance(emp.getDateNaissance());
+  			   employee.setEmail(emp.getEmail());
+  			   employee.setIdentification(emp.getIdentification());
+  			   employee.setNom(emp.getNom());
+  			   employee.setObservation(emp.getObservation());
+  			   employee.setPhoto(emp.getPhoto());
+  			   employee.setPrenom(emp.getPrenom());
+  			   employee.setTelephoneFixe(emp.getTelephoneFixe());
+  			   employee.setTelephoneMobile(emp.getTelephoneMobile());
+  			   employee.setReligion(emp.getReligion());
+  			   employee.setSituationMatrimoniale(emp.getSituationMatrimoniale());
+  			   maliste.add(employee);
+  	 	   }
+  	       return maliste;
+  	       
+  	       
+  	    }
+  	    	
+  	    catch(Exception e)
+  	    {
+  	       System.out.println("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+  	    	e.printStackTrace();
+  	    	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+  	    	return null;
+  	    }
+  	}
+
 
 }

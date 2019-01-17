@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -297,5 +299,62 @@ public class DemandeController {
 				return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("0");
 		}
 	}
+	
+	@GetMapping("/demandes")
+	public List<Demande> getAllClients() {
+		try
+		{
+		   System.out.println("Get all Demandes...");
+		   List<Demande> listeDemande = new ArrayList<>();
+		   demandeRepository.findAll().forEach(listeDemande::add);
+		   Iterator<Demande> itDemande=listeDemande.iterator();
+		   List<Demande> maListe=new ArrayList<>();
+		   while(itDemande.hasNext())
+			   
+		   {
+			   Demande newDemande= new Demande();
+			   Demande demande=itDemande.next();
+			   newDemande.setIddemande(demande.getIddemande());
+			   newDemande.setDate(demande.getDate());
+			   newDemande.setServices(demande.getServices());
+			   newDemande.setSalairePropose(demande.getSalairePropose());
+			   newDemande.setSalaireRetenue(demande.getSalaireRetenue());
+			   newDemande.setEmployees(demande.getEmployees());
+			   
+			   
+			   
+		       maListe.add(newDemande);
+		   }
+		   return maListe;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
+	
+	@PutMapping("/demande/{id}")
+	public ResponseEntity<Demande> updateCustomer(@PathVariable("id") int id, @RequestBody Demande demande) {
+		
+		try
+		{
+		System.out.println("Update Customer with ID = " + id + "...");
+		Optional<Demande> demandeData = demandeRepository.findById(id);
+		    Demande _demande = demandeData.get();
+		    _demande.setServices(demande.getServices());
+		    _demande.setSalairePropose(demande.getSalairePropose());
+		    _demande.setSalaireRetenue(demande.getSalaireRetenue());
+		    
+			return new ResponseEntity<>(demandeRepository.save(_demande), HttpStatus.OK);
+	}
+	catch(Exception e)
+	{
+		return null;
+	}
+		
+	}
+	
+	
+	
 
 }

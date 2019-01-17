@@ -3,6 +3,7 @@ package com.base.Controller;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,12 +13,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Repository.ClientRepository;
 import com.base.Entities.Client;
+import com.base.Entities.Demande;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
 @RestController
@@ -127,6 +130,26 @@ public class ClientController {
 		{
 			return null;
 		}
+	}
+	@PutMapping("/clients/edite/{id}")
+	public ResponseEntity<Client> updateCustomer(@PathVariable("id") int id, @RequestBody Client client) {
+		
+		try
+		{
+		System.out.println("Update Customer with ID = " + id + "...");
+		Optional<Client> clientData = clientRepository.findById(id);
+		    Client _client = clientData.get();
+		    _client.setNom(client.getNom());
+		    _client.setPrenom(client.getPrenom());
+		    _client.setLogin(client.getLogin());
+		    _client.setPassword(client.getPassword());
+		    
+			return new ResponseEntity<>(clientRepository.save(_client), HttpStatus.OK);
+	}
+	catch(Exception e)
+	{
+		return null;
+	}
 		
 	}
 }

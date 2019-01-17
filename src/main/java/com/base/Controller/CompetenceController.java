@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,6 +61,8 @@ public class CompetenceController {
 		   competenceRepository.findAll().forEach(listeCompetence::add);
 		   for(int  i=0;i< listeCompetence.size();i++)
 		   {
+			  // Employee employee = new Employee();
+			   
 			   listeCompetence.get(i).setEmployees(null);
 			   listeCompetence.get(i).setDemandes(null);
 		   }
