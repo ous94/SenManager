@@ -1,6 +1,7 @@
 package com.base.Repository;
 
 import java.util.List;
+import java.util.HashSet;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -39,6 +40,8 @@ public interface EmployeeRepository extends CrudRepository<Employee,Integer>{
 	List<Employee> findByAdresse(String adresse);
 	//Email
 	List<Employee> findByEmail(String email);
+	
+	HashSet<Employee> findByNomOrPrenomOrAdresseOrEmailOrSituationMatrimonialeOrReligionOrObservation(String recherche1,String recherche2,String recherche3,String recherche4,String recherche5,String recherche6,String recherche7);
 
 	
 	

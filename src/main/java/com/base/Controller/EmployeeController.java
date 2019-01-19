@@ -77,6 +77,7 @@ public class EmployeeController {
 	public HashSet<Employee> getAllEmployess() {
 		try
 		{
+			System.out.println("Get All Employe Detail");
 		   HashSet<Employee> listeEmployes = new HashSet<Employee>();
 		   HashSet<Employee> listeEmp=new HashSet<Employee>();
 		   employeeRepository.findAll().forEach(listeEmployes::add);
@@ -84,7 +85,6 @@ public class EmployeeController {
 		    while(it.hasNext())
 		   {
 			   Employee employee=new Employee();
-
 			   Employee emp=it.next();
 			   employee.setIdemploye(emp.getIdemploye());
 			   employee.setAdresse(emp.getAdresse());
