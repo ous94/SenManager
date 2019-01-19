@@ -77,10 +77,7 @@ public class EmployeeController {
 	public HashSet<Employee> getAllEmployess() {
 		try
 		{
-			
-			
-			   System.out.println("Get all allemplotyess...");
-
+			System.out.println("Get All Employe Detail");
 		   HashSet<Employee> listeEmployes = new HashSet<Employee>();
 		   HashSet<Employee> listeEmp=new HashSet<Employee>();
 		   employeeRepository.findAll().forEach(listeEmployes::add);
@@ -88,7 +85,6 @@ public class EmployeeController {
 		    while(it.hasNext())
 		   {
 			   Employee employee=new Employee();
-
 			   Employee emp=it.next();
 			   employee.setIdemploye(emp.getIdemploye());
 			   employee.setAdresse(emp.getAdresse());
@@ -134,12 +130,18 @@ public class EmployeeController {
 			   Ethnies ethnies=new Ethnies();
 			   Niveauetude niveau=new Niveauetude();
 			   Pays pys=new Pays();
+			   if(ethnie !=null) {
 			   ethnies.setIdethnies(ethnie.getIdethnies());
 			   ethnies.setNom(ethnie.getNom());
+			   }
+			   if(niveauEtude !=null) {
 			   niveau.setIdniveau(niveauEtude.getIdniveau());
 			   niveau.setNiveau(niveauEtude.getNiveau());
-			   pys.setIdpays(pays.getIdpays());
+			   }
+			   if(pays !=null) {
+			       pys.setIdpays(pays.getIdpays());
 			   pys.setNom(pays.getNom());
+			   }
 			   employee.setCompetences(setCompetence);
 			   employee.setDisponibilites(setDisponibilite);
 			   employee.setLangues(setLangue);
