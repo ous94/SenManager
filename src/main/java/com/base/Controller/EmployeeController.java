@@ -77,6 +77,10 @@ public class EmployeeController {
 	public HashSet<Employee> getAllEmployess() {
 		try
 		{
+			
+			
+			   System.out.println("Get all allemplotyess...");
+
 		   HashSet<Employee> listeEmployes = new HashSet<Employee>();
 		   HashSet<Employee> listeEmp=new HashSet<Employee>();
 		   employeeRepository.findAll().forEach(listeEmployes::add);
@@ -148,6 +152,7 @@ public class EmployeeController {
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			return null;
 		}
 	}

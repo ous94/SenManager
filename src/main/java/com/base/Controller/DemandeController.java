@@ -335,28 +335,32 @@ public class DemandeController {
 		}
 	}
 	
-	@PutMapping("/demande/{id}")
+	@PutMapping("/demande/editer/{id}")
 	public ResponseEntity<Demande> updateCustomer(@PathVariable("id") int id, @RequestBody Demande demande) {
 		
 		try
 		{
 		System.out.println("Update Customer with ID = " + id + "...");
 		Optional<Demande> demandeData = demandeRepository.findById(id);
-		    Demande _demande = demandeData.get();
-		    _demande.setServices(demande.getServices());
-		    _demande.setSalairePropose(demande.getSalairePropose());
-		    _demande.setSalaireRetenue(demande.getSalaireRetenue());
 		    
-			return new ResponseEntity<>(demandeRepository.save(_demande), HttpStatus.OK);
+		    
+		    if (demandeData.isPresent()) {
+				Demande _demande = demandeData.get();
+			    _demande.setServices(demande.getServices());
+			    _demande.setIddemande(demande.getIddemande());
+			    _demande.setSalairePropose(demande.getSalairePropose());
+			    _demande.setSalaireRetenue(demande.getSalaireRetenue());
+				demandeRepository.save(_demande);
+				
+				return new ResponseEntity<>(demandeRepository.save(_demande), HttpStatus.OK);
+			} else {
+				return null;
+			}
+		}catch(Exception e)
+		{
+			return null;
+		}
 	}
-	catch(Exception e)
-	{
-		return null;
-	}
-		
-	}
-	
-	
-	
+			
 
 }

@@ -138,18 +138,22 @@ public class ClientController {
 		{
 		System.out.println("Update Customer with ID = " + id + "...");
 		Optional<Client> clientData = clientRepository.findById(id);
+	    if (clientData.isPresent()) {
 		    Client _client = clientData.get();
 		    _client.setNom(client.getNom());
 		    _client.setPrenom(client.getPrenom());
 		    _client.setLogin(client.getLogin());
 		    _client.setPassword(client.getPassword());
+		    _client.setEmail(client.getEmail());
+		    _client.setLocalite(client.getLocalite());
 		    
 			return new ResponseEntity<>(clientRepository.save(_client), HttpStatus.OK);
-	}
-	catch(Exception e)
+	    } else {
+			return null;
+		}
+	}catch(Exception e)
 	{
 		return null;
 	}
-		
-	}
+  }
 }
