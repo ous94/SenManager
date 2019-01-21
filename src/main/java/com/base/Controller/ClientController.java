@@ -1,6 +1,7 @@
 package com.base.Controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +21,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Repository.ClientRepository;
 import com.base.Entities.Client;
+import com.base.Entities.Competence;
 import com.base.Entities.Demande;
+import com.base.Entities.Disponibilite;
+import com.base.Entities.Employee;
+import com.base.Entities.Ethnies;
+import com.base.Entities.Langue;
+import com.base.Entities.Localite;
+import com.base.Entities.Niveauetude;
+import com.base.Entities.Pays;
+import com.base.Entities.TypeIdentification;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
 @RestController
@@ -156,4 +166,84 @@ public class ClientController {
 		return null;
 	}
   }
+	
+	
+	//Get All Employes avec plus de Details
+		@GetMapping("/clientall")
+		public HashSet<Client> getAllClientss() {
+			try
+			{
+				System.out.println("Get All Employe Detail");
+			   HashSet<Client> listeClients = new HashSet<Client>();
+			   HashSet<Client> listeEmp=new HashSet<Client>();
+			   clientRepository.findAll().forEach(listeClients::add);
+			   Iterator<Client> it=listeClients.iterator();
+			    while(it.hasNext())
+			   {
+				   Client employee=new Client();
+				   Client emp=it.next();
+				   employee.setIdclient(emp.getIdclient());
+				   employee.setAdresse(emp.getAdresse());
+				   employee.setEmail(emp.getEmail());
+				   employee.setIdentification(emp.getIdentification());
+				   employee.setNom(emp.getNom());
+				   employee.setObservation(emp.getObservation());
+				   employee.setPrenom(emp.getPrenom());
+				   employee.setTelephoneFixe(emp.getTelephoneFixe());
+				   employee.setTelephoneMobile(emp.getTelephoneMobile());
+				   employee.setLogin(emp.getLogin());
+				   employee.setPassword(emp.getPassword());
+				   Pays pays=emp.getPay();
+				   Localite localites= emp.getLocalite();
+				   TypeIdentification typeIdentifications =emp.getTypeIdentification();
+				   
+				   
+				   /*while(itCompetence.hasNext())
+				   {
+					   Competence comp=itCompetence.next();
+					   comp.setDemandes(null);
+					   comp.setEmployees(null);
+					   setCompetence.add(comp);
+				   }
+				   while(itDisponibilite.hasNext())
+				   {
+					   Disponibilite dispo=itDisponibilite.next();
+					   dispo.setEmployee(null);
+					   setDisponibilite.add(dispo);
+				   }
+				   while(itLangue.hasNext())
+				   {
+					  Langue lang=itLangue.next();
+					  lang.setEmployees(null);
+					  setLangue.add(lang);
+				   }*/
+				   Pays pys=new Pays();
+				   if(pays !=null) {
+				   pys.setIdpays(pays.getIdpays());
+				   pys.setNom(pays.getNom());
+				   }
+				   TypeIdentification typ = new TypeIdentification();
+				   if(typeIdentifications !=null) {
+					   typ.setIdidentification(typeIdentifications.getIdidentification());
+					   typ.setNom(typeIdentifications.getNom());
+					   }
+				   Localite loc = new Localite();
+				   if(localites !=null)
+				   {
+					   loc.setIdlocalite(localites.getIdlocalite());
+					   loc.setNom(localites.getNom());
+				   }
+				   employee.setPay(pys);
+				   employee.setLocalite(loc);
+				   employee.setTypeIdentification(typ);
+				   listeEmp.add(employee);
+			   }
+			   return listeEmp;
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				return null;
+			}
+		}
 }
