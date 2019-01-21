@@ -123,6 +123,45 @@ public class ClientController {
 			Iterator<Client> itclient = maliste.iterator();
 			Client monClient = itclient.next();
 			    Client newClient=new Client();
+			    Localite localite=monClient.getLocalite();
+			    if(localite==null)
+			    {
+			    	Localite loc=new Localite();
+			    	newClient.setLocalite(loc);
+			    }
+			    else
+			    {
+			    	Localite loc=new Localite();
+				    loc.setIdlocalite(localite.getIdlocalite());
+				    loc.setNom(localite.getNom());
+				    newClient.setLocalite(loc);
+			    }
+			    Pays pays=monClient.getPay();
+			    if(pays==null)
+			    {
+			    	Pays pys=new Pays();
+			    	newClient.setPay(pys);
+			    }
+			    else
+			    {
+			    	Pays pys=new Pays();
+				    pys.setIdpays(pays.getIdpays());
+				    pys.setNom(pays.getNom());
+				    newClient.setPay(pys);
+			    }
+			    TypeIdentification typeIdentification=monClient.getTypeIdentification();
+			    if(typeIdentification==null)
+			    {
+			    	TypeIdentification typeId=new TypeIdentification();
+			    	newClient.setTypeIdentification(typeId);
+			    }
+			    else
+			    {
+			    	TypeIdentification typeId=new TypeIdentification();
+				    typeId.setIdidentification(typeIdentification.getIdidentification());
+				    typeId.setNom(typeIdentification.getNom());
+				    newClient.setTypeIdentification(typeId);
+			    }
 			    newClient.setIdclient(monClient.getIdclient());
 			    newClient.setAdresse(monClient.getAdresse());
 			    newClient.setEmail(monClient.getEmail());
@@ -133,6 +172,8 @@ public class ClientController {
 			    newClient.setSexe(monClient.getSexe());
 			    newClient.setTelephoneFixe(monClient.getTelephoneFixe());
 			    newClient.setTelephoneMobile(monClient.getTelephoneMobile());
+			    newClient.setLogin(monClient.getLogin());
+			    newClient.setPassword(monClient.getPassword());
 			
 			 return newClient;
 	    }
@@ -156,13 +197,76 @@ public class ClientController {
 		    _client.setPassword(client.getPassword());
 		    _client.setEmail(client.getEmail());
 		    _client.setLocalite(client.getLocalite());
+		    _client.setPay(client.getPay());
+		    _client.setTypeIdentification(client.getTypeIdentification());
+		    _client.setTelephoneMobile(client.getTelephoneMobile());
+		    _client.setTelephoneFixe(client.getTelephoneFixe());
+		    _client.setAdresse(client.getAdresse());
+		    _client.setEmail(client.getEmail());
+		    _client.setIdentification(client.getIdentification());
+		    _client.setSexe(client.getSexe());
+		    _client.setObservation(client.getObservation());
+		    Client monClient=clientRepository.save(_client);
+		    Client newClient=new Client();
+		    Localite localite=monClient.getLocalite();
+		    if(localite==null)
+		    {
+		    	Localite loc=new Localite();
+		    	newClient.setLocalite(loc);
+		    }
+		    else
+		    {
+		    	Localite loc=new Localite();
+			    loc.setIdlocalite(localite.getIdlocalite());
+			    loc.setNom(localite.getNom());
+			    newClient.setLocalite(loc);
+		    }
+		    Pays pays=monClient.getPay();
+		    if(pays==null)
+		    {
+		    	Pays pys=new Pays();
+		    	newClient.setPay(pys);
+		    }
+		    else
+		    {
+		    	Pays pys=new Pays();
+			    pys.setIdpays(pays.getIdpays());
+			    pys.setNom(pays.getNom());
+			    newClient.setPay(pys);
+		    }
+		    TypeIdentification typeIdentification=monClient.getTypeIdentification();
+		    if(typeIdentification==null)
+		    {
+		    	TypeIdentification typeId=new TypeIdentification();
+		    	newClient.setTypeIdentification(typeId);
+		    }
+		    else
+		    {
+		    	TypeIdentification typeId=new TypeIdentification();
+			    typeId.setIdidentification(typeIdentification.getIdidentification());
+			    typeId.setNom(typeIdentification.getNom());
+			    newClient.setTypeIdentification(typeId);
+		    }
+		    newClient.setIdclient(monClient.getIdclient());
+		    newClient.setAdresse(monClient.getAdresse());
+		    newClient.setEmail(monClient.getEmail());
+		    newClient.setIdentification(monClient.getIdentification());
+		    newClient.setNom(monClient.getNom());
+		    newClient.setObservation(monClient.getObservation());
+		    newClient.setPrenom(monClient.getPrenom());
+		    newClient.setSexe(monClient.getSexe());
+		    newClient.setTelephoneFixe(monClient.getTelephoneFixe());
+		    newClient.setTelephoneMobile(monClient.getTelephoneMobile());
+		    newClient.setLogin(monClient.getLogin());
+		    newClient.setPassword(monClient.getPassword());
 		    
-			return new ResponseEntity<>(clientRepository.save(_client), HttpStatus.OK);
+			return new ResponseEntity<>(newClient, HttpStatus.OK);
 	    } else {
 			return null;
 		}
 	}catch(Exception e)
 	{
+		e.printStackTrace();
 		return null;
 	}
   }
