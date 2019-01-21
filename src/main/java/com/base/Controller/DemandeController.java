@@ -321,8 +321,48 @@ public class DemandeController {
 			   newDemande.setServices(demande.getServices());
 			   newDemande.setSalairePropose(demande.getSalairePropose());
 			   newDemande.setSalaireRetenue(demande.getSalaireRetenue());
-			   newDemande.setEmployees(demande.getEmployees());
+			   HashSet<Employee> mesemployee= new HashSet<Employee>();
+			   Iterator<Employee> itemp= demande.getEmployees().iterator();
+			   while(itemp.hasNext())
+			   {
+				   Employee emp= itemp.next();
+				   emp.setCompetences(null);
+				   emp.setLangues(null);
+				   emp.setDisponibilites(null);
+				   emp.setObservation(null);
+				   emp.setDocuments(null);
+				   emp.setEthny(null);
+				   emp.setExperiences(null);
+				   emp.setFormations(null);
+				   emp.setPay(null);
+				   emp.setNiveauetude(null);
+				   emp.setLocalite(null);
+				   emp.setTypeIdentification(null);
+				   mesemployee.add(emp);
+				   
+			   }
+			   Client clients = demande.getClient();
+			   Client cli = new Client();
 			   
+
+			   if(clients != null)
+			   {
+				 /*  cli.setDemandes(null);
+				   cli.setPay(null);
+				   cli.setTypeIdentification(null);
+				   cli.setLocalite(null);
+				   cli.setDocuments(null);
+				   cli.setObservation(null);*/
+				   cli.setNom(clients.getPrenom());
+				   cli.setPrenom(clients.getPrenom());
+				   cli.setIdclient(clients.getIdclient());
+				   cli.setEmail(clients.getEmail());
+				   
+			   }
+			    newDemande.setClient(cli);
+			   
+			    newDemande.setEmployees(mesemployee);
+			   			   
 			   
 			   
 		       maListe.add(newDemande);
@@ -331,6 +371,7 @@ public class DemandeController {
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			return null;
 		}
 	}
