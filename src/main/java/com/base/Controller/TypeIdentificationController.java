@@ -98,15 +98,25 @@ public class TypeIdentificationController {
 			 List<TypeIdentification> listeTypeIdentification = new ArrayList<>();
 			 typeIdentificationRepository.findByNom(nom).forEach(listeTypeIdentification::add);
 			 Iterator<TypeIdentification> it= listeTypeIdentification.iterator();
-			 TypeIdentification typeIdentification=it.next();
-			 TypeIdentification monTypeIdentification=new TypeIdentification();
-			 monTypeIdentification.setIdidentification(typeIdentification.getIdidentification());
-			 monTypeIdentification.setNom(typeIdentification.getNom());
-			 return monTypeIdentification ;
-
+			 if(it.hasNext())
+			 {
+				 TypeIdentification typeIdentification=it.next();
+				 TypeIdentification monTypeIdentification=new TypeIdentification();
+				 monTypeIdentification.setIdidentification(typeIdentification.getIdidentification());
+				 monTypeIdentification.setNom(typeIdentification.getNom());
+				 System.out.println("TypeIdentificaton.nom");
+				 return monTypeIdentification ;
+			 }
+			 else
+			 {
+				 System.out.println("liste vite");
+				 return null;
+			 }
+			 
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -116,7 +126,7 @@ public class TypeIdentificationController {
  	public List<String> getAllIdentificationnom() {
  		try
  		{
- 		   System.out.println("Get all Localite.nom...");
+ 		   System.out.println("Get all type...");
  		   List<TypeIdentification> listeidentification = new ArrayList<>();
  		   typeIdentificationRepository.findAll().forEach(listeidentification::add);
  		   List<String> monidentification = new ArrayList<>();
