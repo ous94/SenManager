@@ -1,5 +1,6 @@
 package com.base.Controller;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +35,7 @@ public class MessageController {
 		
 		try
 		{
+			  messages.setDate(new Date());
 			  messagesRepository.save(messages);
 		      return new ResponseEntity<String>("1",HttpStatus.OK);
 		 }
@@ -57,6 +61,7 @@ public class MessageController {
 			Messages mes = it.next();
 			messages.setEmail(mes.getEmail());
 			messages.setNumero(mes.getNumero());
+			messages.setDate(mes.getDate());
 			messages.setTelClient(mes.getTelClient());
 			messages.setNomClient(mes.getNomClient());
 			messages.setMessage(mes.getMessage());
@@ -70,6 +75,19 @@ public class MessageController {
 			System.out.println("HAMMMMMMMM....");
 			e.printStackTrace();
 			return null;
+		}
+	}
+	@DeleteMapping("/message/delete/{id}")
+	public ResponseEntity<String> deleteEmploye(@PathVariable("id") int id) {
+		try
+		{
+		   System.out.println("Delete Message with ID = " + id + "...");
+		   messagesRepository.deleteById(id);
+		   return new ResponseEntity<>("Employe has been deleted!", HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+			return new ResponseEntity<>("", HttpStatus.EXPECTATION_FAILED);
 		}
 	}
 
