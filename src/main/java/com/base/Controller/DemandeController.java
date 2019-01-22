@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Repository.DemandeRepository;
 import com.base.Entities.Client;
+import com.base.Entities.Competence;
 import com.base.Entities.Demande;
 import com.base.Entities.Employee;
 
@@ -323,23 +324,34 @@ public class DemandeController {
 			   newDemande.setSalaireRetenue(demande.getSalaireRetenue());
 			   HashSet<Employee> mesemployee= new HashSet<Employee>();
 			   Iterator<Employee> itemp= demande.getEmployees().iterator();
+			   HashSet<Competence> mescompetence = new HashSet<>();
+			   Iterator<Competence> itcomp = demande.getCompetences().iterator();
 			   while(itemp.hasNext())
 			   {
-				   Employee emp= itemp.next();
-				   emp.setCompetences(null);
-				   emp.setLangues(null);
-				   emp.setDisponibilites(null);
-				   emp.setObservation(null);
-				   emp.setDocuments(null);
-				   emp.setEthny(null);
-				   emp.setExperiences(null);
-				   emp.setFormations(null);
-				   emp.setPay(null);
-				   emp.setNiveauetude(null);
-				   emp.setLocalite(null);
-				   emp.setTypeIdentification(null);
-				   mesemployee.add(emp);
-				   
+				   Employee employee=new Employee();
+				   Employee emp=itemp.next();
+				   employee.setIdemploye(emp.getIdemploye());
+				   employee.setAdresse(emp.getAdresse());
+				   employee.setDateNaissance(emp.getDateNaissance());
+				   employee.setEmail(emp.getEmail());
+				   employee.setIdentification(emp.getIdentification());
+				   employee.setNom(emp.getNom());
+				   employee.setObservation(emp.getObservation());
+				   employee.setPhoto(emp.getPhoto());
+				   employee.setPrenom(emp.getPrenom());
+				   employee.setTelephoneFixe(emp.getTelephoneFixe());
+				   employee.setTelephoneMobile(emp.getTelephoneMobile());
+				   employee.setReligion(emp.getReligion());
+				   employee.setSituationMatrimoniale(emp.getSituationMatrimoniale());
+				   mesemployee.add(employee);
+			   }
+			   while(itcomp.hasNext())
+			   {
+				   Competence comp= itcomp.next();
+				   comp.setDemandes(null);
+				   comp.setEmployees(null);
+				   mescompetence.add(comp);
+
 			   }
 			   Client clients = demande.getClient();
 			   Client cli = new Client();
@@ -347,18 +359,13 @@ public class DemandeController {
 
 			   if(clients != null)
 			   {
-				 /*  cli.setDemandes(null);
-				   cli.setPay(null);
-				   cli.setTypeIdentification(null);
-				   cli.setLocalite(null);
-				   cli.setDocuments(null);
-				   cli.setObservation(null);*/
 				   cli.setNom(clients.getPrenom());
 				   cli.setPrenom(clients.getPrenom());
 				   cli.setIdclient(clients.getIdclient());
 				   cli.setEmail(clients.getEmail());
 				   
 			   }
+			    newDemande.setCompetences(mescompetence);
 			    newDemande.setClient(cli);
 			   
 			    newDemande.setEmployees(mesemployee);
