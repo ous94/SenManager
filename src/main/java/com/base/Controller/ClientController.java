@@ -19,18 +19,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.base.Repository.ClientRepository;
 import com.base.Entities.Client;
-import com.base.Entities.Competence;
-import com.base.Entities.Demande;
-import com.base.Entities.Disponibilite;
 import com.base.Entities.Employee;
-import com.base.Entities.Ethnies;
-import com.base.Entities.Langue;
 import com.base.Entities.Localite;
-import com.base.Entities.Niveauetude;
 import com.base.Entities.Pays;
 import com.base.Entities.TypeIdentification;
+import com.base.Repository.ClientRepository;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
 @RestController
@@ -77,6 +71,8 @@ public class ClientController {
 	public Client creatClient(@RequestBody Client client) {
 		try
 		{
+			   System.out.println("creation  Client...");
+
 			String idString=""+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)));
             Integer id=java.lang.Integer.valueOf(idString);
             client.setIdclient(id);
@@ -96,6 +92,7 @@ public class ClientController {
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -350,4 +347,45 @@ public class ClientController {
 				return null;
 			}
 		}
+		
+		//Client email
+		@GetMapping("/client/email/{email}")
+		public Boolean getEmployeByEmail(@PathVariable("email") String email) {
+			try
+			{
+			   System.out.println("Get Client Email...");
+			   List<Client> client= clientRepository.findByEmail(email);
+			   if(client.size()==0)
+			   {
+				   return false;
+			   }
+			   
+			   return true;
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				return null;
+			}
+		}
+		//Client telephoneMobile
+		@GetMapping("/client/telephoneMobile/{telephone}")
+		public Boolean getEmployeByTelephone(@PathVariable("telephone") String telephone) {
+			try
+			{
+			       System.out.println("Get Client telephone...");
+				   List<Client> client = clientRepository.findByTelephoneMobile(telephone);
+				   if(client.size()==0)
+				   {
+						   return false;
+					   }
+					   
+					   return true;
+					}
+					catch(Exception e)
+					{
+						e.printStackTrace();
+						return null;
+					}
+				}
 }
