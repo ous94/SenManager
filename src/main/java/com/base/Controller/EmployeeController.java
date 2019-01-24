@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -205,65 +202,6 @@ public class EmployeeController {
 		}
 	}
 	
-/*	@GetMapping(value = "employee/situation/{genre}")
-	public  List<Employee>  findByNameEndsWith(@PathVariable("situation_matrimoniale") String situation_matrimoniale) {
-		try
-		{
-		   System.out.println("Get all employye genre...");
-		   List<Employee> listeEmployes = new ArrayList<>();
-		   List<Employee> listeEmp=new ArrayList<>();
-		   employeeRepository.findBySituationMatrimoniale(situation_matrimoniale).forEach(listeEmployes::add);
-		   Iterator<Employee> it=listeEmployes.iterator();
-		   while(it.hasNext())
-		   {
-			   Employee employee=new Employee();
-
-			   Employee emp=it.next();
-			   employee.setIdemploye(emp.getIdemploye());
-			   employee.setAdresse(emp.getAdresse());
-			   employee.setDateNaissance(emp.getDateNaissance());
-			   employee.setEmail(emp.getEmail());
-			   employee.setIdentification(emp.getIdentification());
-			   employee.setNom(emp.getNom());
-			   employee.setObservation(emp.getObservation());
-			   employee.setPhoto(emp.getPhoto());
-			   employee.setPrenom(emp.getPrenom());
-			   employee.setTelephoneFixe(emp.getTelephoneFixe());
-			   employee.setTelephoneMobile(emp.getTelephoneMobile());
-			   employee.setReligion(emp.getReligion());
-			   employee.setSituationMatrimoniale(emp.getSituationMatrimoniale());
-			   listeEmp.add(employee);
-		   }
-		   return listeEmp;
-		}
-		catch(Exception e)
-		{
-			return null;
-		}
-
-    
-	}*/
-		
-		// retourner par 
-/*//		@GetMapping(value = "employee/prenom/{genre}")
-//		public String[]  findByAdresse(@PathVariable("genre") String genre) {
-//			try
-//			{
-//			 System.out.println("Get all prenom mesEmploye...");
-//			   
-//			 //List<Employee>  cities =  (List<Employee>)
-//			 String[]  listeEmployes =   employeeRepository.findByAdresse(genre);
-//					 return listeEmployes;
-//	       // return cities;
-//			}
-//			catch(Exception e)
-//			{
-//				return null;
-//			}
-//    }
- * 
-//		
-*/
 	//SituationMatrimoniale
 	@GetMapping("/employes/{situationMatrimoniale}")
 	public List<Employee> getEmployeBySituation(@PathVariable("situationMatrimoniale") String situationMatrimoniale) {
@@ -412,5 +350,93 @@ public class EmployeeController {
 					{
 						return null;
 					}
+					
 				}
+				@SuppressWarnings("deprecation")
+				@GetMapping("/allEmploye/pagination/{offset}")
+				HashSet<Employee> listeEmployeLimite(@PathVariable("offset")int offset)
+				{
+					try
+					{
+					   HashSet<Employee> listeEmployee=new HashSet<Employee>();
+					   HashSet<Employee> listeEmp=new HashSet<Employee>();
+					   employeeRepository.listeEmployeLimiter(new PageRequest(offset,2)).forEach(listeEmployee::add);
+					   Iterator<Employee> it=listeEmployee.iterator();
+					    while(it.hasNext())
+					   {
+						   Employee employee=new Employee();
+						   Employee emp=it.next();
+						   employee.setIdemploye(emp.getIdemploye());
+						   employee.setAdresse(emp.getAdresse());
+						   employee.setDateNaissance(emp.getDateNaissance());
+						   employee.setEmail(emp.getEmail());
+						   employee.setIdentification(emp.getIdentification());
+						   employee.setNom(emp.getNom());
+						   employee.setObservation(emp.getObservation());
+						   employee.setPhoto(emp.getPhoto());
+						   employee.setPrenom(emp.getPrenom());
+						   employee.setTelephoneFixe(emp.getTelephoneFixe());
+						   employee.setTelephoneMobile(emp.getTelephoneMobile());
+						   employee.setReligion(emp.getReligion());
+						   employee.setSituationMatrimoniale(emp.getSituationMatrimoniale());
+						   Iterator<Competence> itCompetence=emp.getCompetences().iterator();
+						   Iterator<Disponibilite> itDisponibilite=emp.getDisponibilites().iterator();
+						   Iterator<Langue> itLangue=emp.getLangues().iterator();
+						   HashSet<Competence>setCompetence=new HashSet<Competence>();
+						   HashSet<Langue> setLangue=new HashSet<Langue>();
+						   HashSet<Disponibilite> setDisponibilite=new HashSet<Disponibilite>();
+						   Ethnies ethnie=emp.getEthny();
+						   Niveauetude niveauEtude=emp.getNiveauetude();
+						   Pays pays=emp.getPay();
+						   while(itCompetence.hasNext())
+						   {
+							   Competence comp=itCompetence.next();
+							   comp.setDemandes(null);
+							   comp.setEmployees(null);
+							   setCompetence.add(comp);
+						   }
+						   while(itDisponibilite.hasNext())
+						   {
+							   Disponibilite dispo=itDisponibilite.next();
+							   dispo.setEmployee(null);
+							   setDisponibilite.add(dispo);
+						   }
+						   while(itLangue.hasNext())
+						   {
+							  Langue lang=itLangue.next();
+							  lang.setEmployees(null);
+							  setLangue.add(lang);
+						   }
+						   Ethnies ethnies=new Ethnies();
+						   Niveauetude niveau=new Niveauetude();
+						   Pays pys=new Pays();
+						   if(ethnie !=null) {
+						   ethnies.setIdethnies(ethnie.getIdethnies());
+						   ethnies.setNom(ethnie.getNom());
+						   }
+						   if(niveauEtude !=null) {
+						   niveau.setIdniveau(niveauEtude.getIdniveau());
+						   niveau.setNiveau(niveauEtude.getNiveau());
+						   }
+						   if(pays !=null) {
+						       pys.setIdpays(pays.getIdpays());
+						   pys.setNom(pays.getNom());
+						   }
+						   employee.setCompetences(setCompetence);
+						   employee.setDisponibilites(setDisponibilite);
+						   employee.setLangues(setLangue);
+						   employee.setPay(pys);
+						   employee.setEthny(ethnies);
+						   employee.setNiveauetude(niveau);
+						   listeEmp.add(employee);
+					   }
+					   return listeEmp;
+					}
+					catch(Exception e)
+					{
+						e.printStackTrace();
+						return null;
+					}
+				}
+				
 }
