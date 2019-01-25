@@ -1,21 +1,14 @@
 package com.base.Controller;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -72,7 +65,7 @@ public class Recherche {
 			disponibiliteRepository.findByHoraireOrMomentPagition(recherche,recherche,new PageRequest(offset,5)).forEach(listeDisponibilite::add);
 			niveauEtudeRepository.findByNiveauPagination(recherche,new PageRequest(offset,5)).forEach(listeNiveauEtude::add);
 			typeIdentificationRepository.findByNomPagination(recherche,new PageRequest(offset,5)).forEach(listeTypeIdentification::add);
-			employeRepository.findByNomOrPrenomOrAdresseOrEmailOrSituationMatrimonialeOrReligionOrObservationPagination(recherche,recherche,recherche,recherche,recherche,recherche,recherche).forEach(listeEmploye::add);
+			employeRepository.findByNomOrPrenomOrAdresseOrEmailOrSituationMatrimonialeOrReligionOrObservationPagination(recherche,recherche,recherche,recherche,recherche,recherche,recherche,new PageRequest(offset,5)).forEach(listeEmploye::add);
 			Iterator<Competence> itCompetence=listeCompetence.iterator();
 			Iterator<Localite> itLocalite=listeLocalite.iterator();
 			Iterator<Pays> itPays=listePays.iterator();
@@ -232,6 +225,8 @@ public class Recherche {
 		{
 			int offset=rechercheTous.getOffset();
 			String recherche=rechercheTous.getRecherche();
+			System.out.println("##############"+offset);
+			System.out.println("**************"+recherche);
 			HashSet<Langue> listeLangue=new HashSet<Langue>();
 			HashSet<Localite> listeLocalite=new HashSet<Localite>();
 			HashSet<Pays> listePays =new HashSet<Pays>();
@@ -243,14 +238,14 @@ public class Recherche {
 			HashSet<Employee> listeEmploye=new HashSet<Employee>();
 			//
 			competenceRepository.findByDescriptionPagination(recherche,new PageRequest(offset,5)).forEach(listeCompetence::add);
-			localiteRepository.findByNomPagination(recherche,new PageRequest(offset,5)).forEach(listeLocalite::add);
-			paysRepository.findByNomPagination(recherche,new PageRequest(offset,5)).forEach(listePays::add);
+			localiteRepository.findByNomPagination(recherche,new PageRequest(offset,20)).forEach(listeLocalite::add);
+			paysRepository.findByNomPagination(recherche,new PageRequest(offset,100)).forEach(listePays::add);
 			langueRepository.findByNomPagination(recherche,new PageRequest(offset,5)).forEach(listeLangue ::add);
-			ethniesRepository.findByNomPagination(recherche,new PageRequest(offset,5)).forEach(listeEthnie::add);
+			ethniesRepository.findByNomPagination(recherche,new PageRequest(offset,8)).forEach(listeEthnie::add);
 			disponibiliteRepository.findByHoraireOrMomentPagition(recherche,recherche,new PageRequest(offset,5)).forEach(listeDisponibilite::add);
 			niveauEtudeRepository.findByNiveauPagination(recherche,new PageRequest(offset,5)).forEach(listeNiveauEtude::add);
 			typeIdentificationRepository.findByNomPagination(recherche,new PageRequest(offset,5)).forEach(listeTypeIdentification::add);
-			employeRepository.findByNomOrPrenomOrAdresseOrEmailOrSituationMatrimonialeOrReligionOrObservationPagination(recherche,recherche,recherche,recherche,recherche,recherche,recherche).forEach(listeEmploye::add);
+			employeRepository.findByNomOrPrenomOrAdresseOrEmailOrSituationMatrimonialeOrReligionOrObservationPagination(recherche,recherche,recherche,recherche,recherche,recherche,recherche,new PageRequest(offset,5)).forEach(listeEmploye::add);
 			Iterator<Competence> itCompetence=listeCompetence.iterator();
 			Iterator<Localite> itLocalite=listeLocalite.iterator();
 			Iterator<Pays> itPays=listePays.iterator();
