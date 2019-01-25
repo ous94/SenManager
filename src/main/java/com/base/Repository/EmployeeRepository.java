@@ -29,7 +29,7 @@ public interface EmployeeRepository extends CrudRepository<Employee,Integer>{
 			+ " or e.email like %:email% or e.situationMatrimoniale like %:situationMatrimoniale% "
 			+ " or e.religion like %:religion% or e.observation like %:observation% ORDER BY e.idemploye ASC")
 	List<Employee> findByNomOrPrenomOrAdresseOrEmailOrSituationMatrimonialeOrReligionOrObservationPagination(@Param("nom")String recherche1,@Param("prenom") String recherche2, @Param("adresse") 
-	String recherche3,@Param("email") String recherche4,@Param("situationMatrimoniale") String recherche5, @Param("religion") String recherche6, @Param("observation") String recherche7);
+	String recherche3,@Param("email") String recherche4,@Param("situationMatrimoniale") String recherche5, @Param("religion") String recherche6, @Param("observation") String recherche7,Pageable pageable);
 	//
 	
 	@Query("select employe from Employee employe where "

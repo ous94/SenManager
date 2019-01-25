@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,6 +28,7 @@ import com.base.Entities.Ethnies;
 import com.base.Entities.Langue;
 import com.base.Entities.Niveauetude;
 import com.base.Entities.Pays;
+import com.base.Entities.RechercheCompetence;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
 @RestController
@@ -247,7 +249,7 @@ public class CompetenceController {
 		
 		//recherhe  Employer
 				@GetMapping("/competence/employe/description/{description}")
-				 public List<Employee> getComptenceByEmploeyee(@PathVariable("description") String description)
+				 public List<Employee> getComptenceByEmployee(@PathVariable("description") String description)
 				 {
 				    try
 				    {
@@ -266,8 +268,8 @@ public class CompetenceController {
 				       while(monit.hasNext())
 				 	   {
 				    	   
-				 		  Employee employee = new Employee();
-				 		 Employee emp=monit.next();
+				 		   Employee employee = new Employee();
+				 		   Employee emp=monit.next();
 				 		   employee.setIdemploye(emp.getIdemploye());
 						   employee.setAdresse(emp.getAdresse());
 						   employee.setDateNaissance(emp.getDateNaissance());
@@ -315,6 +317,95 @@ public class CompetenceController {
 			{
 				listeEmploye1.addAll(((Competence)(itCompetence1.next())).getEmployees());
 			}
+			Iterator<Employee> itEmploye1=listeEmploye1.iterator();
+			while(itEmploye1.hasNext())
+			{
+				   Employee employee=new Employee();
+				   Employee emp=(Employee)itEmploye1.next();
+				   employee.setIdemploye(emp.getIdemploye());
+				   employee.setAdresse(emp.getAdresse());
+				   employee.setDateNaissance(emp.getDateNaissance());
+				   employee.setEmail(emp.getEmail());
+				   employee.setIdentification(emp.getIdentification());
+				   employee.setNom(emp.getNom());
+				   employee.setObservation(emp.getObservation());
+				   employee.setPhoto(emp.getPhoto());
+				   employee.setPrenom(emp.getPrenom());
+				   employee.setTelephoneFixe(emp.getTelephoneFixe());
+				   employee.setTelephoneMobile(emp.getTelephoneMobile());
+				   employee.setReligion(emp.getReligion());
+				   employee.setSituationMatrimoniale(emp.getSituationMatrimoniale());
+				   Iterator<Competence> itCompetences=emp.getCompetences().iterator();
+				   Iterator<Disponibilite> itDisponibilite=emp.getDisponibilites().iterator();
+				   Iterator<Langue> itLangue=emp.getLangues().iterator();
+				   HashSet<Competence>setCompetence=new HashSet<Competence>();
+				   HashSet<Langue> setLangue=new HashSet<Langue>();
+				   HashSet<Disponibilite> setDisponibilite=new HashSet<Disponibilite>();
+				   Ethnies ethnie=emp.getEthny();
+				   Niveauetude niveauEtude=emp.getNiveauetude();
+				   Pays pays=emp.getPay();
+				   while(itCompetences.hasNext())
+				   {
+					   Competence comp=itCompetences.next();
+					   comp.setDemandes(null);
+					   comp.setEmployees(null);
+					   setCompetence.add(comp);
+				   }
+				   while(itDisponibilite.hasNext())
+				   {
+					   Disponibilite dispo=itDisponibilite.next();
+					   dispo.setEmployee(null);
+					   setDisponibilite.add(dispo);
+				   }
+				   while(itLangue.hasNext())
+				   {
+					  Langue lang=itLangue.next();
+					  lang.setEmployees(null);
+					  setLangue.add(lang);
+				   }
+				   Ethnies ethnies=new Ethnies();
+				   Niveauetude niveau=new Niveauetude();
+				   Pays pys=new Pays();
+				   ethnies.setIdethnies(ethnie.getIdethnies());
+				   ethnies.setNom(ethnie.getNom());
+				   niveau.setIdniveau(niveauEtude.getIdniveau());
+				   niveau.setNiveau(niveauEtude.getNiveau());
+				   pys.setIdpays(pays.getIdpays());
+				   pys.setNom(pays.getNom());
+				   employee.setCompetences(setCompetence);
+				   employee.setDisponibilites(setDisponibilite);
+				   employee.setLangues(setLangue);
+				   employee.setPay(pys);
+				   employee.setEthny(ethnies);
+				   employee.setNiveauetude(niveau);
+				   listeEmploye2.add(employee);
+			}
+			return listeEmploye2;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+	@SuppressWarnings("deprecation")
+	@PostMapping("/competence/description/employes/pagination")
+	public HashSet<Employee> getAllEmployesFromListeCompetencePagination(@RequestBody RechercheCompetence rechercheCompetence)
+	{
+		try
+		{
+			HashSet<Employee> listeEmploye1=new HashSet<Employee>();
+			HashSet<Employee> listeEmploye2 =new HashSet<Employee>();
+			List<String>listeDescription=new ArrayList<String>();
+			System.out.println(rechercheCompetence.toString());
+			Iterator<Competence> itDescription=rechercheCompetence.getListeCompetences().iterator();
+			while(itDescription.hasNext())
+			{
+				Competence c=itDescription.next();
+				listeDescription.add(c.getDescription());
+			}
+			competenceRepository.rechercheEmployeeCompetenceDescription(listeDescription, new PageRequest(rechercheCompetence.getOffset(),2)).forEach(listeEmploye1::add);
+			System.out.println("########"+listeEmploye1.size());
 			Iterator<Employee> itEmploye1=listeEmploye1.iterator();
 			while(itEmploye1.hasNext())
 			{
