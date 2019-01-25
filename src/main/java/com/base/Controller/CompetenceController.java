@@ -37,29 +37,28 @@ public class CompetenceController {
 
 	@Autowired
 	ComptenceRepository competenceRepository;
-	/*
-	@GetMapping("/competence/description/{tabdescription}")
-	public List<Competence> getBydescriptionCompetence(@PathVariable("tabdescription")String[] tabdescription) {
+	
+	@PostMapping(value = "/competence/create")
+	public Competence createCompetence(@RequestBody Competence competence) {
 		try
 		{
-		   System.out.println("++++++");
-		   List<Competence> listeCompetence = new ArrayList<>();
-		  for(int i=0;i<tabdescription.length;i++)
-		  {
-			  competenceRepository.findByDescription(tabdescription[i]).forEach(listeCompetence::add);
-			  
-		  }
-		  return listeCompetence;
-		   
-		}
-		catch(Exception e)
-		{
+			   System.out.println("creation  competence...");
+			   if(findByCompetenceLocale(competence.getDescription()))
+			   {
+				   return null;
+			   }
+			   else {
+			   Competence competence2 = new Competence();
+			   
+			   competence2.setDescription(competence.getDescription());
+			   competenceRepository.save(competence2);
+			   }
+			   
+		}catch (Exception e) {
 			e.printStackTrace();
-			return null;
 		}
+		return competence;
 	}
-	
-	*/
 	//Get All Competence avec plus de Details
 	@GetMapping("/competences")
 	public List<Competence> getAllCompetence() {
@@ -128,33 +127,19 @@ public class CompetenceController {
 	    	}
 	    }*/
 		
-		@GetMapping(value = "competence/{description}")
-		public Competence findByCompetence(@PathVariable String description) {
-			try {
-			System.out.println("recherche Competence de la description "+description);
 
-	 
-			Competence customers = (Competence) competenceRepository.findByDescription(description);
-			return customers;
-			
-			}
-	    	catch(Exception e)
-	    	{
-	    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
-	    		e.printStackTrace();
-	    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
-
-	    		return null;
-	    	}
-		}
 		
-		public Competence findByCompetenceLocale( String description) {
+		public Boolean findByCompetenceLocale( String description) {
 			try {
 			System.out.println("recherche Customer de l'age"+description);
 
 	 
-			Competence customers = (Competence) competenceRepository.findByDescription(description);
-			return customers;
+			List<Competence> customers =  competenceRepository.findByDescription(description);
+			if(customers.size()==0)
+			{
+				return false;
+			}
+			return true;
 			}
 	    	catch(Exception e)
 	    	{
@@ -175,7 +160,11 @@ public class CompetenceController {
 		       System.out.println("Get Comptence.description...");
 		 	   List<Competence> listeCompetence = new ArrayList<>();
 		 	   competenceRepository.findByDescription(description).forEach(listeCompetence::add);
-		 	   Iterator<Competence> it= listeCompetence.iterator();
+		 	   if(listeCompetence.size()==0)
+		 	   {
+		 		   return null;
+		 	   }
+		 	  Iterator<Competence> it= listeCompetence.iterator();
 
 		 	   Competence competence=it.next();
 		       Competence maCompetence=new Competence();
@@ -183,6 +172,7 @@ public class CompetenceController {
 		       maCompetence.setDescription(competence.getDescription());
 		 	   return maCompetence; 		  
 
+		 	  
 		    }
 		    	
 		    catch(Exception e)
