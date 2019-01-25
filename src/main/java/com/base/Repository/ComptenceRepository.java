@@ -14,5 +14,8 @@ public interface ComptenceRepository extends CrudRepository<Competence ,Integer>
 	public List<Competence> findByDescription(String description);
 	@Query("SELECT c FROM Competence c where c.description like %:description% ORDER BY c.idcompetence ASC")
 	public List<Competence> findByDescriptionPagination(@Param("description")String description,Pageable pageable);
+	@Query("Select c from Competence c ")
+	List<Competence> mesCompetence(Pageable pageable);
+	
 
 }

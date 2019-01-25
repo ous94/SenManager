@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.base.Repository.NiveauEtudeRepository;
 import com.base.Entities.Competence;
 import com.base.Entities.Employee;
+import com.base.Entities.Ethnies;
 import com.base.Entities.Niveauetude;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
@@ -29,6 +33,109 @@ public class NiveauEtudeController {
 	
 	@Autowired
 	NiveauEtudeRepository niveauEtudeRepository;
+	
+	
+	@PostMapping(value = "/niveauEtudes/create")
+	public Niveauetude createEthnie(@RequestBody Niveauetude niveauEtude ) {
+		try
+		{
+			   System.out.println("creation  niveauEtude...");
+			   if(findByniveauEtudeLocale(niveauEtude.getNiveau()))
+			   {
+				   return null;
+			   }
+			   else {
+				   Niveauetude  niveauEtude2 = new Niveauetude();
+			   
+				   niveauEtude2.setNiveau(niveauEtude.getNiveau());
+			   niveauEtudeRepository.save(niveauEtude2);
+			   }
+			   
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return niveauEtude;
+	}
+	
+	//fonction locale
+	public Boolean findByniveauEtudeLocale( String nom) {
+		try {
+		System.out.println("recherche compentence "+nom);
+
+ 
+		List<Niveauetude> customers =  niveauEtudeRepository.findByNiveau(nom);
+		if(customers.size()==0)
+		{
+			return false;
+		}
+		return true;
+		}
+    	catch(Exception e)
+    	{
+    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+    		e.printStackTrace();
+    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+
+    		return null;
+    	}
+	}
+	// edition
+	
+	@PutMapping("/niveauEtudes/edite/{id}")
+	public ResponseEntity<Niveauetude> updateCustomer(@PathVariable("id") int id, @RequestBody Niveauetude niveauetude) {
+		try
+		{
+		    System.out.println("Update ethnies with ID = " + id + "...");
+		    Optional<Niveauetude> niveauetudeData = niveauEtudeRepository.findById(id);
+			    List<Niveauetude> cop = niveauEtudeRepository.findByNiveau(niveauetude.getNiveau());
+			    if(cop.size()>0)
+			    {
+			    	return null;
+			    }
+			    else if (niveauetudeData.isPresent()) {
+			    	Niveauetude _competence = niveauetudeData.get();
+			     _competence.setIdniveau(id);
+			     _competence.setNiveau(niveauetude.getNiveau());;
+			     _competence.setEmployees(null);
+			     return ResponseEntity.status(HttpStatus.OK).body(niveauEtudeRepository.save(_competence));
+		    }
+		    
+		    else {
+			    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		    }
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null);
+		}
+		
+}
+	@SuppressWarnings("deprecation")
+	@GetMapping("/niveauEtudes/pagination/{offset}")
+	public List<Niveauetude> getAllCompPagination(@PathVariable("offset")int offset) {
+		try
+		{
+		   System.out.println("...");
+		   List<Niveauetude> listeCompetence = new ArrayList<>();
+		   niveauEtudeRepository.mesNiveau(new PageRequest(offset,5)).forEach(listeCompetence::add);
+		   for(int  i=0;i< listeCompetence.size();i++)
+		   {
+			  // Employee employee = new Employee();
+			   
+			   listeCompetence.get(i).setEmployees(null);
+		   }
+		   return listeCompetence;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
+
+	
+	
+	
 	@GetMapping("/niveauEtude")
 	public List<Niveauetude> getAllNiveauEtude() {
 		try
@@ -43,7 +150,7 @@ public class NiveauEtudeController {
 			return null;
 		}
 	}
-	@PostMapping(value = "/niveauEtude/create")
+	@PostMapping(value = "/niveauEtude/new /create")
 	public Niveauetude creatClient(@RequestBody Niveauetude niveauEtude) {
 		try
 		{

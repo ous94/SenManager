@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,15 +15,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.base.Entities.Competence;
 import com.base.Entities.Employee;
-import com.base.Entities.Niveauetude;
 import com.base.Entities.Pays;
-import com.base.Entities.TypeIdentification;
 import com.base.Repository.PaysRepository;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
@@ -31,6 +31,109 @@ public class PaysController {
 	
 	@Autowired 
 	PaysRepository paysRepository;
+	
+	@PostMapping(value = "/pays/create")
+	public Pays createEthnie(@RequestBody Pays pays ) {
+		try
+		{
+			   System.out.println("creation  niveauEtude...");
+			   if(findByPaysLocale(pays.getNom()))
+			   {
+				   return null;
+			   }
+			   else {
+				   Pays  pays2 = new Pays();
+			   
+				   pays2.setNom(pays.getNom());
+			   paysRepository.save(pays2);
+			   }
+			   
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pays;
+	}
+	//fonction locale
+		public Boolean findByPaysLocale( String nom) {
+			try {
+			System.out.println("recherche pays "+nom);
+
+	 
+			List<Pays> customers =  paysRepository.findByNom(nom);
+			if(customers.size()==0)
+			{
+				return false;
+			}
+			return true;
+			}
+	    	catch(Exception e)
+	    	{
+	    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+	    		e.printStackTrace();
+	    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+
+	    		return null;
+	    	}
+		}
+	
+	@PutMapping("/pays/edite/{id}")
+	public ResponseEntity<Pays> updateCustomer(@PathVariable("id") int id, @RequestBody Pays pays) {
+		try
+		{
+		    System.out.println("Update pays with ID = " + id + "...");
+		    Optional<Pays> paysData = paysRepository.findById(id);
+			    List<Pays> cop = paysRepository.findByNom(pays.getNom());
+			    if(cop.size()>0)
+			    {
+			    	return null;
+			    }
+			    else if (paysData.isPresent()) {
+			    	Pays _competence = paysData.get();
+			     _competence.setIdpays(id);
+			     _competence.setNom(pays.getNom());;
+			     _competence.setEmployees(null);
+			     _competence.setClients(null);
+			     return ResponseEntity.status(HttpStatus.OK).body(paysRepository.save(_competence));
+		    }
+		    
+		    else {
+			    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		    }
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null);
+		}
+		
+}
+	@SuppressWarnings("deprecation")
+	@GetMapping("/pays/pagination/{offset}")
+	public List<Pays> getAllCompPagination(@PathVariable("offset")int offset) {
+		try
+		{
+		   System.out.println("...");
+		   List<Pays> listeCompetence = new ArrayList<>();
+		   paysRepository.mesPays(new PageRequest(offset,5)).forEach(listeCompetence::add);
+		   for(int  i=0;i< listeCompetence.size();i++)
+		   {
+			  // Employee employee = new Employee();
+			   
+			   listeCompetence.get(i).setEmployees(null);
+			   listeCompetence.get(i).setClients(null);
+			   
+			   
+		   }
+		   return listeCompetence;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
+
+	
+	
 	@GetMapping("/pays")
 	public List<Pays> getAllPays() {
 		try
@@ -45,7 +148,7 @@ public class PaysController {
 			return null;
 		}
 	}
-	@PostMapping(value = "/pays/create")
+	@PostMapping(value = "/pays/new/create")
 	public Pays creatPays(@RequestBody Pays pays) {
 		try
 		{
@@ -58,7 +161,7 @@ public class PaysController {
 			return null;
 		}
 	}
-	@DeleteMapping("/pays/{id}")
+	@DeleteMapping("/pays/delete/{id}")
 	public ResponseEntity<String> deletePays(@PathVariable("id") int id) {
 		try
 		{

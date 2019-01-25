@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Repository.ComptenceRepository;
 import com.base.Entities.Competence;
+import com.base.Entities.Demande;
 import com.base.Entities.Disponibilite;
 import com.base.Entities.Employee;
 import com.base.Entities.Ethnies;
@@ -79,6 +81,31 @@ public class CompetenceController {
 			return null;
 		}
 	}
+	
+	//Get All Competence avec plus de Details
+		@SuppressWarnings("deprecation")
+		@GetMapping("/competences/pagination/{offset}")
+		public List<Competence> getAllCompPagination(@PathVariable("offset")int offset) {
+			try
+			{
+			   System.out.println("...");
+			   List<Competence> listeCompetence = new ArrayList<>();
+			   competenceRepository.mesCompetence(new PageRequest(offset,5)).forEach(listeCompetence::add);
+			   for(int  i=0;i< listeCompetence.size();i++)
+			   {
+				  // Employee employee = new Employee();
+				   
+				   listeCompetence.get(i).setEmployees(null);
+				   listeCompetence.get(i).setDemandes(null);
+			   }
+			   return listeCompetence;
+			}
+			catch(Exception e)
+			{
+				return null;
+			}
+		}
+	
 	//
 	@GetMapping("/competence/description")
 	public String[] getAlldescriptionCompetence() {
@@ -99,37 +126,9 @@ public class CompetenceController {
 			return null;
 		}
 	}
-	
-	//recherher nom
-	//	@GetMapping("/competence/{description}")
-	
-	    /*    public Competence getComptenceByDescription(String description)
-
-		@GetMapping("/competence/description/{description}")
-	        public Competence getComptenceByDescription(@PathVariable("description") String description)
-	    {
-	    	try
-	    	{
-	    	   System.out.println("Get Comptence.description...");
-	 		   List<Competence> listeCompetence = new ArrayList<>();
-	 		   competenceRepository.findByDescription(description).forEach(listeCompetence::add);
-	 		   Iterator<Competence> it= listeCompetence.iterator();
-	 		   Competence competence=it.next();
-	           return competence; 		  
-	    	}
-	    	
-	    	catch(Exception e)
-	    	{
-	    		e.printStackTrace();
-	    		return null;
-	    	}
-	    }*/
-		
-
-		
 		public Boolean findByCompetenceLocale( String description) {
 			try {
-			System.out.println("recherche Customer de l'age"+description);
+			System.out.println("recherche compentence "+description);
 
 	 
 			List<Competence> customers =  competenceRepository.findByDescription(description);
@@ -210,20 +209,26 @@ public class CompetenceController {
 				return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("0");
 			}
 		}
-		@PutMapping("/competence/{id}")
+		@PutMapping("/competence/edite/{id}")
 		public ResponseEntity<Competence> updateCustomer(@PathVariable("id") int id, @RequestBody Competence competence) {
 			try
 			{
 			    System.out.println("Update Competence with ID = " + id + "...");
 			    Optional<Competence> competenceData = competenceRepository.findById(id);
-			    if (competenceData.isPresent()) {
+				    List<Competence> cop = competenceRepository.findByDescription(competence.getDescription());
+				    if(cop.size()>0)
+				    {
+				    	return null;
+				    }
+				    else if (competenceData.isPresent()) {
 				     Competence _competence = competenceData.get();
-				     _competence.setIdcompetence(competence.getIdcompetence());
+				     _competence.setIdcompetence(id);
 				     _competence.setDescription(competence.getDescription());
 				     _competence.setEmployees(competence.getEmployees());
 				     _competence.setDemandes(competence.getDemandes());
 				     return ResponseEntity.status(HttpStatus.OK).body(competenceRepository.save(_competence));
 			    }
+			    
 			    else {
 				    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			    }
@@ -376,4 +381,6 @@ public class CompetenceController {
 			return null;
 		}
 	}
+	
+	
 }

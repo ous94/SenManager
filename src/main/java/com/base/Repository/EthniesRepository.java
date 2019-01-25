@@ -15,4 +15,7 @@ public interface EthniesRepository  extends CrudRepository<Ethnies ,Integer>{
 	
 	@Query("SELECT e FROM Ethnies e where e.nom like %:nom% order by e.idethnies ASC")
 	List<Ethnies> findByNomPagination(@Param("nom")String nom,Pageable pageable);
+	
+	@Query("SELECT e FROM Ethnies e ")
+	List<Ethnies> mesEthnies(Pageable pageable);
 }

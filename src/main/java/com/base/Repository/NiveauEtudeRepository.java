@@ -2,6 +2,7 @@ package com.base.Repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -15,6 +16,9 @@ public interface NiveauEtudeRepository extends CrudRepository<Niveauetude,Intege
 	
 	@Query("SELECT n FROM Niveauetude n where n.niveau like %:niveau% order by n.idniveau ASC")
 	List<Niveauetude>findByNiveauPagination(@Param("niveau") String niveau,Pageable pageable);
+	
+	@Query("SELECT n FROM Niveauetude n")
+	List<Niveauetude> mesNiveau(Pageable pageable );
 
 
 }
