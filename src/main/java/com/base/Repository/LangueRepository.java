@@ -14,4 +14,7 @@ public interface LangueRepository extends CrudRepository<Langue ,Integer>{
 	List<Langue> findByNom(String nom);
 	@Query("SELECT l FROM Langue l where l.nom like %:nom% order by l.idlangue ASC")
 	List<Langue> findByNomPagination(@Param("nom") String nom,Pageable pageable);
+	
+	@Query("SELECT l FROM Langue l order by l.idlangue ASC")
+	List<Langue> mesLangue(Pageable pageable);
 }

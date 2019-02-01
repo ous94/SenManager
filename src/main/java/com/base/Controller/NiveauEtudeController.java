@@ -296,6 +296,23 @@ public class NiveauEtudeController {
 	    	return null;
 	    }
 	}
+	//conter
+	@GetMapping("/niveauEtude/nombre")				
+	public int conter()
+	{
+	try {
+			int nombre = (int) niveauEtudeRepository.count();
+			if(nombre<0)
+			{
+				return 0;
+			}else
+			   return nombre;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
 
 
 }

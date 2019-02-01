@@ -52,6 +52,7 @@ public interface EmployeeRepository extends CrudRepository<Employee,Integer>{
 	    ,@Param("localitenom")String localitenom ,@Param("typeIdentificationnom")String typeIdentificationnom
 	    ,@Param("niveauEtudeniveau")String niveauEtudeniveau ,@Param("ethniesnom")String ethniesnom
 	    ,@Param("disponibilitehoraire")String disponibilitehoraire ,@Param("disponibilitemoment")String disponibilitemoment,Pageable pageable);
+
 	
 	// Nombre d'employes Nouveaux 
 	@Query("SELECT count(distinct employe.idemploye) from Employee employe left join employe.demandes demande where demande.iddemande is null")

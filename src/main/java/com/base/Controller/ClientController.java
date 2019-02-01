@@ -388,4 +388,21 @@ public class ClientController {
 						return null;
 					}
 				}
+		//conter
+		@GetMapping("/client/nombre")				
+		public int conter()
+		{
+		try {
+				int nombre = (int) clientRepository.count();
+				if(nombre<0)
+				{
+					return 0;
+				}else
+				   return nombre;
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				return 0;
+			}
+		}
 }

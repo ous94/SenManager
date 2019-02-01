@@ -36,7 +36,7 @@ public class EthniesController {
 	public Ethnies createEthnie(@RequestBody Ethnies ethnies) {
 		try
 		{
-			   System.out.println("creation  competence...");
+			   System.out.println("creation  Ethnies...");
 			   if(findByEthniesLocale(ethnies.getNom()))
 			   {
 				   return null;
@@ -160,7 +160,7 @@ public class EthniesController {
 			return null;
 		}
 	}
-	@DeleteMapping("/ethnies/delete/{id}")
+	@DeleteMapping("/ethnie/delete/{id}")
 	public ResponseEntity<String> deleteEthnies(@PathVariable("id") int id) {
 		try
 		{
@@ -288,6 +288,23 @@ public class EthniesController {
   	    	return null;
   	    }
   	}
+  //conter
+  		@GetMapping("/ethnie/nombre")				
+  		public int conter()
+  		{
+  		try {
+  				int nombre = (int) ethniesRepository.count();
+  				if(nombre<0)
+  				{
+  					return 0;
+  				}else
+  				   return nombre;
+  				
+  			} catch (Exception e) {
+  				e.printStackTrace();
+  				return 0;
+  			}
+  		}
 
 
 }

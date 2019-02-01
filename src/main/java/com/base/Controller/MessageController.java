@@ -90,5 +90,22 @@ public class MessageController {
 			return new ResponseEntity<>("", HttpStatus.EXPECTATION_FAILED);
 		}
 	}
+	//conter
+			@GetMapping("/message/nombre")				
+			public int conter()
+			{
+			try {
+					int nombre = (int) messagesRepository.count();
+					if(nombre<0)
+					{
+						return 0;
+					}else
+					   return nombre;
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+					return 0;
+				}
+			}
 
 }
