@@ -472,7 +472,7 @@ public class EmployeeController {
 				}
 				//
 				@GetMapping("/employe/libre/count")
-				int employeLibreCount()
+				public int employeLibreCount()
 				{
 					try
 					{
@@ -482,6 +482,7 @@ public class EmployeeController {
 					catch(Exception e)
 					{
 						e.printStackTrace();
+						return 0;
 					}
 				}
 				//
