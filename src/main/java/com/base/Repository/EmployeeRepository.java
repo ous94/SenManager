@@ -1,6 +1,7 @@
 package com.base.Repository;
 
 import java.util.List;
+import java.util.Date;
 import java.util.HashSet;
 
 import org.springframework.data.domain.PageRequest;
@@ -51,5 +52,15 @@ public interface EmployeeRepository extends CrudRepository<Employee,Integer>{
 	    ,@Param("localitenom")String localitenom ,@Param("typeIdentificationnom")String typeIdentificationnom
 	    ,@Param("niveauEtudeniveau")String niveauEtudeniveau ,@Param("ethniesnom")String ethniesnom
 	    ,@Param("disponibilitehoraire")String disponibilitehoraire ,@Param("disponibilitemoment")String disponibilitemoment,Pageable pageable);
+	
+	// Nombre d'employes Nouveaux 
+	@Query("SELECT count(distinct employe.idemploye) from Employee employe left join employe.demandes demande where demande.iddemande is null")
+	 int countEmployeNouveau();
+	
+	//Nombre d'Employe libre
+	@Query("SELECT count(employe.idemploye) from Employee employe where not exists "
+			+ "(SELECT contrat from Contrat contrat where contrat.fin >=:date and contrat.employee = employe)")
+	int countEmployeLibre(@Param("date") Date date);
+
 	
  }

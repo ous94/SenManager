@@ -140,6 +140,10 @@ public class Employee implements Serializable {
     joinColumns = { @JoinColumn(name = "IDEMPLOYE") },
     inverseJoinColumns = { @JoinColumn(name = "IDLANGUE") })
 	private Set<Langue> langues;
+	
+	//bi-directional many-to-one association to Contrat
+	@OneToMany(mappedBy="employee")
+	private Set<Contrat> contrats;
 
 	public Employee() {
 	} 
@@ -154,7 +158,7 @@ public class Employee implements Serializable {
 			@JsonProperty("competences") Set<Competence> competences,@JsonProperty("demandes") Set<Demande> demandes,@JsonProperty("disponibilites") Set<Disponibilite> disponibilites,
 			@JsonProperty("documents") Set<Document> documents,@JsonProperty("pay") Pays pay,@JsonProperty("localite") Localite localite,
 			@JsonProperty("typeIdentification") TypeIdentification typeIdentification,@JsonProperty("niveauetude") Niveauetude niveauetude,@JsonProperty("ethnies") Ethnies ethnies,
-			@JsonProperty("experiences") Set<Experience> experiences,@JsonProperty("formations") Set<Formation> formations,@JsonProperty("langues") Set<Langue> langues)
+			@JsonProperty("experiences") Set<Experience> experiences,@JsonProperty("formations") Set<Formation> formations,@JsonProperty("langues") Set<Langue> langues,@JsonProperty("contrats") Set<Contrat> contrats )
 	{
 		this.idemploye = idemploye;
 		this.adresse = adresse;
@@ -181,6 +185,15 @@ public class Employee implements Serializable {
 		this.experiences = experiences;
 		this.formations = formations;
 		this.langues = langues;
+		this.contrats=contrats;
+	}
+
+	public Set<Contrat> getContrats() {
+		return contrats;
+	}
+
+	public void setContrats(Set<Contrat> contrats) {
+		this.contrats = contrats;
 	}
 
 	public int getIdemploye() {
@@ -322,6 +335,14 @@ public class Employee implements Serializable {
 		disponibilite.setEmployee(null);
 
 		return disponibilite;
+	}
+
+	public Ethnies getEthnies() {
+		return ethnies;
+	}
+
+	public void setEthnies(Ethnies ethnies) {
+		this.ethnies = ethnies;
 	}
 
 	public Set<Document> getDocuments() {

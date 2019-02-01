@@ -50,6 +50,7 @@ public class Demande implements Serializable {
 	)
 	private Set<Competence> competences;
 
+
 	//bi-directional many-to-one association to Client
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="IDCLIENT")
@@ -85,6 +86,10 @@ public class Demande implements Serializable {
 	//bi-directional many-to-one association to Document
 	@OneToMany(mappedBy="demande")
 	private Set<Document> documents;
+	
+	//bi-directional many-to-one association to Contrat
+	@OneToMany(mappedBy="demande")
+	private Set<Contrat> contrats;
 
 	public Demande() {
 	}
@@ -94,7 +99,7 @@ public class Demande implements Serializable {
 	public Demande(@JsonProperty("iddemande") int iddemande,@JsonProperty("date")Date date,@JsonProperty("salairePropose") int salairePropose,
 			@JsonProperty("salaireRetenue") int salaireRetenue,@JsonProperty("services") String services,@JsonProperty("competences") Set<Competence> competences,
 			@JsonProperty("client") Client client,@JsonProperty("employees") Set<Employee> employees,
-			@JsonProperty("documents") Set<Document> documents )
+			@JsonProperty("documents") Set<Document> documents,@JsonProperty("contrats") Set<Contrat> contrats )
 	{
 		this.iddemande=iddemande;
 		this.date=date;
@@ -105,6 +110,7 @@ public class Demande implements Serializable {
 		this.client=client;
 		this.employees=employees;
 		this.documents=documents;
+		this.contrats=contrats;
 	}
 	public int getIddemande() {
 		return this.iddemande;
@@ -176,6 +182,13 @@ public class Demande implements Serializable {
 
 	public void setDocuments(Set<Document> documents) {
 		this.documents = documents;
+	}
+	public Set<Contrat> getContrats() {
+		return contrats;
+	}
+
+	public void setContrats(Set<Contrat> contrats) {
+		this.contrats = contrats;
 	}
 
 	public Document addDocument(Document document) {

@@ -1,6 +1,7 @@
 package com.base.Controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.base.Entities.Competence;
+import com.base.Entities.Contrat;
 import com.base.Entities.Disponibilite;
 import com.base.Entities.Employee;
 import com.base.Entities.Ethnies;
@@ -102,6 +104,7 @@ public class EmployeeController {
 			   HashSet<Competence>setCompetence=new HashSet<Competence>();
 			   HashSet<Langue> setLangue=new HashSet<Langue>();
 			   HashSet<Disponibilite> setDisponibilite=new HashSet<Disponibilite>();
+			   HashSet<Contrat> newListeContrat =new HashSet<Contrat>();
 			   Ethnies ethnie=emp.getEthny();
 			   Niveauetude niveauEtude=emp.getNiveauetude();
 			   Pays pays=emp.getPay();
@@ -139,12 +142,24 @@ public class EmployeeController {
 			       pys.setIdpays(pays.getIdpays());
 			   pys.setNom(pays.getNom());
 			   }
+			   Iterator<Contrat> itContrat=emp.getContrats().iterator();
+			   while(itContrat.hasNext())
+			   {
+					Contrat contrat=itContrat.next();
+					Contrat newContrat=new Contrat();
+					newContrat.setDebut(contrat.getDebut());
+					newContrat.setFin(contrat.getFin());
+					newContrat.setSalaire(contrat.getSalaire());
+					newContrat.setIdContrat(contrat.getIdContrat());
+					newListeContrat.add(newContrat);
+			  }
 			   employee.setCompetences(setCompetence);
 			   employee.setDisponibilites(setDisponibilite);
 			   employee.setLangues(setLangue);
 			   employee.setPay(pys);
 			   employee.setEthny(ethnies);
 			   employee.setNiveauetude(niveau);
+			   employee.setContrats(newListeContrat);
 			   listeEmp.add(employee);
 		   }
 		   return listeEmp;
@@ -436,6 +451,33 @@ public class EmployeeController {
 					{
 						e.printStackTrace();
 						return null;
+					}
+				}
+				@GetMapping("/employe/nouveau/count")
+				int employeNouveauCount()
+				{
+					try
+					{
+						return employeeRepository.countEmployeNouveau();
+					}
+					catch(Exception e)
+					{
+						e.printStackTrace();
+						return 0;
+					}
+				}
+				@GetMapping("/employe/libre/count")
+				int employeLibreCount()
+				{
+					try
+					{
+						Date date=new Date();
+						return employeeRepository.countEmployeLibre(date);
+					}
+					catch(Exception e)
+					{
+						e.printStackTrace();
+						return 0;
 					}
 				}
 				
