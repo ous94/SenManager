@@ -19,17 +19,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.base.Repository.ComptenceRepository;
 import com.base.Entities.Competence;
-import com.base.Entities.Demande;
 import com.base.Entities.Disponibilite;
 import com.base.Entities.Employee;
 import com.base.Entities.Ethnies;
 import com.base.Entities.Langue;
 import com.base.Entities.Niveauetude;
 import com.base.Entities.Pays;
-import com.base.Entities.RechercheCompetence;
+import com.base.Repository.ComptenceRepository;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
 @RestController
@@ -383,7 +380,7 @@ public class CompetenceController {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
+	/*@SuppressWarnings("deprecation")
 	@PostMapping("/competence/description/employes/pagination")
 	public HashSet<Employee> getAllEmployesFromListeCompetencePagination(@RequestBody RechercheCompetence rechercheCompetence)
 	{
@@ -471,5 +468,25 @@ public class CompetenceController {
 			e.printStackTrace();
 			return null;
 		}
-	}
+	}*/
+	//conter
+			@GetMapping("/competence/nombre")				
+			public int conter()
+			{
+			try {
+					int nombre = (int) competenceRepository.count();
+					if(nombre<0)
+					{
+						return 0;
+					}else
+					   return nombre;
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+					return 0;
+				}
+			}
+	
+	
+	
 }

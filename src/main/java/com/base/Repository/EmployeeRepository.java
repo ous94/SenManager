@@ -51,5 +51,6 @@ public interface EmployeeRepository extends CrudRepository<Employee,Integer>{
 	    ,@Param("localitenom")String localitenom ,@Param("typeIdentificationnom")String typeIdentificationnom
 	    ,@Param("niveauEtudeniveau")String niveauEtudeniveau ,@Param("ethniesnom")String ethniesnom
 	    ,@Param("disponibilitehoraire")String disponibilitehoraire ,@Param("disponibilitemoment")String disponibilitemoment,Pageable pageable);
+
 	
  }

@@ -24,6 +24,7 @@ import com.base.Entities.Ethnies;
 import com.base.Entities.Langue;
 import com.base.Entities.Niveauetude;
 import com.base.Entities.Pays;
+import com.base.Repository.ClientRepository;
 import com.base.Repository.EmployeeRepository;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
@@ -160,6 +161,7 @@ public class EmployeeController {
 		
 		try
 		{
+			System.out.println("creation client");
 			String idString=""+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)));
             Integer id=java.lang.Integer.valueOf(idString);
             employe.setIdemploye(id);
@@ -436,6 +438,30 @@ public class EmployeeController {
 					{
 						e.printStackTrace();
 						return null;
+					}
+				}
+				@GetMapping("/employee/nombre")				
+				public int conter()
+				{
+				
+					
+					try {
+						
+						int nombre = (int) employeeRepository.count();
+						if(nombre<0)
+						{
+							return 0;
+						}else
+						
+							return nombre;
+					
+						
+
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+						// TODO: handle exception
+						return 0;
 					}
 				}
 				

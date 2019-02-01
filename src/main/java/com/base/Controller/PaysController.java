@@ -24,6 +24,8 @@ import com.base.Entities.Employee;
 import com.base.Entities.Pays;
 import com.base.Repository.PaysRepository;
 
+import javassist.expr.NewArray;
+
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
 @RestController
 @RequestMapping("/api")
@@ -36,22 +38,29 @@ public class PaysController {
 	public Pays createEthnie(@RequestBody Pays pays ) {
 		try
 		{
-			   System.out.println("creation  niveauEtude...");
-			   if(findByPaysLocale(pays.getNom()))
+			   System.out.println("creation  pays...");	
+			   Boolean veri = findByPaysLocale(pays.getNom());
+			   
+			   if(veri== true)
 			   {
 				   return null;
+
+				   
 			   }
 			   else {
-				   Pays  pays2 = new Pays();
+                  Pays  pays2 = new Pays();
+				  pays2.setNom(pays.getNom());
+			      paysRepository.save(pays2);
+				  return pays2;
 			   
-				   pays2.setNom(pays.getNom());
-			   paysRepository.save(pays2);
+				
 			   }
 			   
 		}catch (Exception e) {
 			e.printStackTrace();
+			return null;
+
 		}
-		return pays;
 	}
 	//fonction locale
 		public Boolean findByPaysLocale( String nom) {
@@ -64,7 +73,10 @@ public class PaysController {
 			{
 				return false;
 			}
+			else
+				
 			return true;
+			
 			}
 	    	catch(Exception e)
 	    	{
@@ -72,7 +84,7 @@ public class PaysController {
 	    		e.printStackTrace();
 	    		System.out.println("Hummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
 
-	    		return null;
+	    		return false;
 	    	}
 		}
 	
@@ -293,5 +305,22 @@ public class PaysController {
   	    	return null;
   	    }
   	}
+  //conter
+  		@GetMapping("/pays/nombre")				
+  		public int conter()
+  		{
+  		try {
+  				int nombre = (int) paysRepository.count();
+  				if(nombre<0)
+  				{
+  					return 0;
+  				}else
+  				   return nombre;
+  				
+  			} catch (Exception e) {
+  				e.printStackTrace();
+  				return 0;
+  			}
+  		}
 
  }

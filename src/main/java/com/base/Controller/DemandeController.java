@@ -409,6 +409,24 @@ public class DemandeController {
 			return null;
 		}
 	}
+	
+	//conter
+			@GetMapping("/demande/nombre")				
+			public int conter()
+			{
+			try {
+					int nombre = (int) demandeRepository.count();
+					if(nombre<0)
+					{
+						return 0;
+					}else
+					   return nombre;
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+					return 0;
+				}
+			}
 			
 
 }
