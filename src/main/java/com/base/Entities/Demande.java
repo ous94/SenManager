@@ -2,13 +2,10 @@ package com.base.Entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.Date;
 import java.util.Set;
-
 
 /**
  * The persistent class for the DEMANDE database table.
@@ -35,10 +32,8 @@ public class Demande implements Serializable {
 
 	//bi-directional many-to-many association to Competence
 	//@ManyToMany(mappedBy="demandes")
-	@ManyToMany(fetch = FetchType.LAZY,
-		    cascade = {
-		        CascadeType.MERGE
-		    })
+	
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name="COMPETENCE_DEMANDE"
 			, joinColumns={

@@ -61,6 +61,7 @@ public class DemandeController {
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			return null;
 		}
 	}

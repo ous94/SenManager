@@ -64,7 +64,7 @@ public class Competence implements Serializable {
 	*/
 	@ManyToMany(fetch = FetchType.EAGER,
 			cascade = {
-	                CascadeType.MERGE
+	                CascadeType.PERSIST
 	            })
 	@JoinTable(name = "COMPETENCE_EMPLOYEE",
     joinColumns = { @JoinColumn(name = "IDCOMPETENCE") },

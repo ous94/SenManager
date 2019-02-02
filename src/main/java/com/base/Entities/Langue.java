@@ -17,7 +17,6 @@ import java.util.Set;
 @Table(name="LANGUES")
 public class Langue implements Serializable {
 	private static final long serialVersionUID = 1L;
-
 	@Id
 	private int idlangue;
 
@@ -38,7 +37,7 @@ public class Langue implements Serializable {
 	*/
 	@ManyToMany(fetch = FetchType.LAZY,
 			cascade = {
-	                CascadeType.MERGE
+	                CascadeType.PERSIST
 	            })
 	@JoinTable(name = "LANGUE_EMPLOYEE",
     joinColumns = { @JoinColumn(name = "IDLANGUE") },

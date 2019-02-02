@@ -63,10 +63,7 @@ public class Employee implements Serializable {
 
 	//bi-directional many-to-many association to Competence
 	//@ManyToMany(mappedBy="employees")
-	@ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                CascadeType.MERGE
-            })
+	@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "COMPETENCE_EMPLOYEE",
             joinColumns = { @JoinColumn(name = "IDEMPLOYE") },
             inverseJoinColumns = { @JoinColumn(name = "IDCOMPETENCE") })
@@ -76,7 +73,7 @@ public class Employee implements Serializable {
 	//@ManyToMany(mappedBy="employees")
 	@ManyToMany(fetch = FetchType.LAZY,
 		    cascade = {
-		        CascadeType.MERGE
+		        CascadeType.PERSIST
 		    })
 	@JoinTable(
 			name="DEMANDE_EMPLOYEE"
@@ -121,7 +118,6 @@ public class Employee implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="IDETHNIES")
 	private Ethnies ethnies;
-
 	//bi-directional many-to-one association to Experience
 	@OneToMany(mappedBy="employee")
 	private Set<Experience> experiences;
@@ -134,7 +130,7 @@ public class Employee implements Serializable {
 	//@ManyToMany(mappedBy="employees")
 	@ManyToMany(fetch = FetchType.LAZY,
     cascade = {
-        CascadeType.MERGE
+        CascadeType.PERSIST
     })
     @JoinTable(name = "LANGUE_EMPLOYEE",
     joinColumns = { @JoinColumn(name = "IDEMPLOYE") },

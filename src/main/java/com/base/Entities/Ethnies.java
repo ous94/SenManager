@@ -22,7 +22,6 @@ public class Ethnies implements Serializable {
 	private int idethnies;
 	@Column(name = "NOM")
 	private String nom;
-
 	//bi-directional many-to-one association to Employee
 	@OneToMany(mappedBy="ethnies")
 	private List<Employee> employees;

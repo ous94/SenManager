@@ -194,7 +194,6 @@ public class EmployeeController {
 			employee.setTelephoneFixe(emp.getTelephoneFixe());
 			employee.setTelephoneMobile(emp.getTelephoneMobile());
 			employee.setReligion(emp.getReligion());
-			employee.setLangues(emp.getLangues());
 			employee.setSituationMatrimoniale(emp.getSituationMatrimoniale());
 			
 			return employee;
