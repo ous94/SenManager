@@ -380,7 +380,7 @@ public class CompetenceController {
 			return null;
 		}
 	}
-
+	
 	@SuppressWarnings("deprecation")
 	@PostMapping("/competence/description/employes/pagination")
 	public HashSet<Employee> getAllEmployesFromListeCompetencePagination(@RequestBody RechercheCompetence rechercheCompetence)
