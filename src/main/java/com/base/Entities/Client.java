@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -85,11 +85,13 @@ public class Client implements Serializable {
 
 	//bi-directional many-to-one association to Demande
 	@OneToMany(mappedBy="client")
-	private List<Demande> demandes;
+	private Set<Demande> demandes;
 
 	//bi-directional many-to-one association to Document
 	@OneToMany(mappedBy="client")
-	private List<Document> documents;
+	private Set<Document> documents;
+	
+
 
 	public Client() {
 	}
@@ -102,8 +104,8 @@ public class Client implements Serializable {
     		@JsonProperty("prenom") String prenom,@JsonProperty("sexe") String sexe,
     		@JsonProperty("telephoneFixe") String telephoneFixe,@JsonProperty("telephoneMobile")String telephoneMobile,
     		@JsonProperty("pay") Pays pay,@JsonProperty("localite") Localite localite,
-    		@JsonProperty("typeIdentification") TypeIdentification typeIdentification,@JsonProperty("demandes") List<Demande> demandes,
-    		@JsonProperty("document") List<Document> documents,@JsonProperty("login")String login,@JsonProperty("password") String password)
+    		@JsonProperty("typeIdentification") TypeIdentification typeIdentification,@JsonProperty("demandes") Set<Demande> demandes,
+    		@JsonProperty("document") Set<Document> documents,@JsonProperty("login")String login,@JsonProperty("password") String password)
     {
     	this.idclient=idclient;
     	this.adresse=adresse;
@@ -228,11 +230,11 @@ public class Client implements Serializable {
 		this.typeIdentification = typeIdentification;
 	}
 
-	public List<Demande> getDemandes() {
+	public Set<Demande> getDemandes() {
 		return this.demandes;
 	}
 
-	public void setDemandes(List<Demande> demandes) {
+	public void setDemandes(Set<Demande> demandes) {
 		this.demandes = demandes;
 	}
 
@@ -250,11 +252,11 @@ public class Client implements Serializable {
 		return demande;
 	}
 
-	public List<Document> getDocuments() {
+	public Set<Document> getDocuments() {
 		return this.documents;
 	}
 
-	public void setDocuments(List<Document> documents) {
+	public void setDocuments(Set<Document> documents) {
 		this.documents = documents;
 	}
 

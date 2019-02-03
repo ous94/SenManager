@@ -71,10 +71,18 @@ public class ClientController {
 	public Client creatClient(@RequestBody Client client) {
 		try
 		{
-			   System.out.println("creation  Client...");
-
-			String idString=""+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)));
-            Integer id=java.lang.Integer.valueOf(idString);
+			System.out.println("creation  Client...");
+			String idClient=""+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)));
+            Integer id=java.lang.Integer.valueOf(idClient);
             client.setIdclient(id);
 		    Client newClient=new Client();
 		    Client clientrt = clientRepository.save(client);

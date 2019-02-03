@@ -26,6 +26,7 @@ import com.base.Entities.Ethnies;
 import com.base.Entities.Langue;
 import com.base.Entities.Niveauetude;
 import com.base.Entities.Pays;
+import com.base.Entities.RechercheCompetence;
 import com.base.Repository.ComptenceRepository;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
@@ -380,7 +381,7 @@ public class CompetenceController {
 		}
 	}
 
-	/*@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	@PostMapping("/competence/description/employes/pagination")
 	public HashSet<Employee> getAllEmployesFromListeCompetencePagination(@RequestBody RechercheCompetence rechercheCompetence)
 	{
@@ -468,7 +469,7 @@ public class CompetenceController {
 			e.printStackTrace();
 			return null;
 		}
-	}*/
+	}
 	//conter
 			@GetMapping("/competence/nombre")				
 			public int conter()

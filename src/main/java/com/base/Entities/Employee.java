@@ -6,7 +6,6 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
 
@@ -63,10 +62,7 @@ public class Employee implements Serializable {
 
 	//bi-directional many-to-many association to Competence
 	//@ManyToMany(mappedBy="employees")
-	@ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                CascadeType.MERGE
-            })
+	@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "COMPETENCE_EMPLOYEE",
             joinColumns = { @JoinColumn(name = "IDEMPLOYE") },
             inverseJoinColumns = { @JoinColumn(name = "IDCOMPETENCE") })
@@ -74,27 +70,19 @@ public class Employee implements Serializable {
 
 	//bi-directional many-to-many association to Demande
 	//@ManyToMany(mappedBy="employees")
-	@ManyToMany(fetch = FetchType.LAZY,
-		    cascade = {
-		        CascadeType.MERGE
-		    })
-	@JoinTable(
-			name="DEMANDE_EMPLOYEE"
-			, joinColumns={
-				@JoinColumn(name="IDEMPLOYE")
-				}
-			, inverseJoinColumns={
-				@JoinColumn(name="IDDEMANDE")
-				}
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name="DEMANDE_EMPLOYEE"
+			, joinColumns={@JoinColumn(name="IDEMPLOYE")}
+			, inverseJoinColumns={@JoinColumn(name="IDDEMANDE")}
 	)
 	private Set<Demande> demandes;
 
 	//bi-directional many-to-one association to Disponibilite
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="employee",cascade = {CascadeType.PERSIST})
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="employee",cascade = {CascadeType.ALL})
 	private Set<Disponibilite> disponibilites;
 
 	//bi-directional many-to-one association to Document
-	@OneToMany(mappedBy="employee")
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="employee",cascade = {CascadeType.ALL})
 	private Set<Document> documents;
 
 	//bi-directional many-to-one association to Pay
@@ -123,22 +111,19 @@ public class Employee implements Serializable {
 	private Ethnies ethnies;
 
 	//bi-directional many-to-one association to Experience
-	@OneToMany(mappedBy="employee")
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="employee",cascade = {CascadeType.ALL})
 	private Set<Experience> experiences;
 
 	//bi-directional many-to-one association to Formation
-	@OneToMany(mappedBy="employee")
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="employee",cascade = {CascadeType.ALL})
 	private Set<Formation> formations;
 
 	//bi-directional many-to-many association to Langue
 	//@ManyToMany(mappedBy="employees")
-	@ManyToMany(fetch = FetchType.LAZY,
-    cascade = {
-        CascadeType.MERGE
-    })
+	@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "LANGUE_EMPLOYEE",
-    joinColumns = { @JoinColumn(name = "IDEMPLOYE") },
-    inverseJoinColumns = { @JoinColumn(name = "IDLANGUE") })
+         joinColumns = { @JoinColumn(name = "IDEMPLOYE") },
+         inverseJoinColumns = { @JoinColumn(name = "IDLANGUE") })
 	private Set<Langue> langues;
 	
 	//bi-directional many-to-one association to Contrat

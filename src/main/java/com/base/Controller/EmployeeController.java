@@ -176,9 +176,18 @@ public class EmployeeController {
 		
 		try
 		{
-			System.out.println("creation client");
-			String idString=""+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)));
-            Integer id=java.lang.Integer.valueOf(idString);
+			System.out.println("creation Employe");
+			String  idEmployee=""+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)))
+					+((int) (Math.random()*(9-0)));
+            Integer id=java.lang.Integer.valueOf(idEmployee);
             employe.setIdemploye(id);
 			Employee emp=employeeRepository.save(employe);
 			Employee employee=new Employee();

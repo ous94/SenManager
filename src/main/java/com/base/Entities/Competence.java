@@ -35,10 +35,7 @@ public class Competence implements Serializable {
 			}
 		)
 	*/
-	@ManyToMany(fetch = FetchType.EAGER,
-			cascade = {
-	                CascadeType.MERGE
-	            })
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name="COMPETENCE_DEMANDE"
 			, joinColumns={
@@ -62,10 +59,7 @@ public class Competence implements Serializable {
 			}
 		)
 	*/
-	@ManyToMany(fetch = FetchType.EAGER,
-			cascade = {
-	                CascadeType.MERGE
-	            })
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "COMPETENCE_EMPLOYEE",
     joinColumns = { @JoinColumn(name = "IDCOMPETENCE") },
     inverseJoinColumns = { @JoinColumn(name = "IDEMPLOYE") })

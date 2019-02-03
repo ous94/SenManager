@@ -36,10 +36,7 @@ public class Langue implements Serializable {
 			}
 		)
 	*/
-	@ManyToMany(fetch = FetchType.LAZY,
-			cascade = {
-	                CascadeType.MERGE
-	            })
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "LANGUE_EMPLOYEE",
     joinColumns = { @JoinColumn(name = "IDLANGUE") },
     inverseJoinColumns = { @JoinColumn(name = "IDEMPLOYE") })

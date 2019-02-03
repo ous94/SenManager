@@ -62,6 +62,10 @@ public interface EmployeeRepository extends CrudRepository<Employee,Integer>{
 	@Query("SELECT count(employe.idemploye) from Employee employe where not exists "
 			+ "(SELECT contrat from Contrat contrat where contrat.fin >=:date and contrat.employee = employe)")
 	int countEmployeLibre(@Param("date") Date date);
-
+    
+	
+	//Max Idemployee from Employee
+	@Query("SELECT MAX(employe.idemploye) from Employee employe")
+	int maxIdEmploye();
 	
  }

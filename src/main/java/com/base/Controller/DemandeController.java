@@ -44,8 +44,37 @@ public class DemandeController {
 	public Demande creatDemande(@RequestBody Demande demande) {
 		try
 		{
-			String idString=""+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)))+((int) (Math.random()*(9-0)));
-            Integer id=java.lang.Integer.valueOf(idString);
+			String idString=demandeRepository.maxIdDemande();
+			String idDemande;
+			if(idString==null)
+			{
+				idDemande="0000000000";
+				//
+		    }
+			else
+			{
+				int idMax=java.lang.Integer.valueOf(demandeRepository.maxIdDemande());
+				if(idMax<999999999)
+	            {
+	            	int id1=idMax+1;
+	            	String id2="0000000000"+id1;
+	            	idDemande=id2.substring(id2.length()-10,id2.length());
+	            }
+	            else
+	            {
+				        idDemande=""+((int) (Math.random()*(9-0)))
+						+((int) (Math.random()*(9-0)))
+						+((int) (Math.random()*(9-0)))
+						+((int) (Math.random()*(9-0)))
+						+((int) (Math.random()*(9-0)))
+						+((int) (Math.random()*(9-0)))
+						+((int) (Math.random()*(9-0)))
+						+((int) (Math.random()*(9-0)))
+						+((int) (Math.random()*(9-0)))
+						+((int) (Math.random()*(9-0)));
+	            }
+			}
+            Integer id=java.lang.Integer.valueOf(idDemande);
 		    Demande newDemande=new Demande();
 		    System.out.println("Debut Insertion Demande");
 		    demande.setIddemande(id);
@@ -61,6 +90,7 @@ public class DemandeController {
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			return null;
 		}
 	}

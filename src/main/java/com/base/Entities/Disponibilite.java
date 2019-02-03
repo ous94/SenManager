@@ -27,7 +27,7 @@ public class Disponibilite implements Serializable {
 	private String moment;
 
 	//bi-directional many-to-one association to Employee
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="IDEMPLOYE")
 	private Employee employee;
 	public Disponibilite() {
