@@ -26,8 +26,8 @@ import com.base.Entities.Ethnies;
 import com.base.Entities.Langue;
 import com.base.Entities.Niveauetude;
 import com.base.Entities.Pays;
-import com.base.Repository.ClientRepository;
 import com.base.Repository.EmployeeRepository;
+import com.base.Storage.StorageService;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders="*")
 @RestController
@@ -220,6 +220,8 @@ public class EmployeeController {
 		{
 		   System.out.println("Delete Employee with ID = " + id + "...");
 		   employeeRepository.deleteById(id);
+		   StorageService storageService=new StorageService();
+		   storageService.delelePhoto(employeeRepository.photoEmploye(id));
 		   return new ResponseEntity<>("Employe has been deleted!", HttpStatus.OK);
 		}
 		catch(Exception e)

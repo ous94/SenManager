@@ -55,6 +55,11 @@ public class StorageService {
 	public void deleteAll() {
 		FileSystemUtils.deleteRecursively(rootLocation.toFile());
 	}
+	public void delelePhoto(String filename)
+	{
+		Path file = rootLocation.resolve(filename);
+		FileSystemUtils.deleteRecursively(file.toFile());
+	}
  
 	public void init() {
 		try {

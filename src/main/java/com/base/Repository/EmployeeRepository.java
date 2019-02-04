@@ -68,4 +68,8 @@ public interface EmployeeRepository extends CrudRepository<Employee,Integer>{
 	@Query("SELECT MAX(employe.idemploye) from Employee employe")
 	int maxIdEmploye();
 	
+	//Photo Employee
+	@Query("SELECT employe.photo from Employee employe where employe.idemploye=:idemployee")
+	public String photoEmploye(@Param("idemploye") int idemploye);
+	
  }
