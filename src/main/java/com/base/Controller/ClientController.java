@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -282,54 +283,32 @@ public class ClientController {
 		public HashSet<Client> getAllClientss() {
 			try
 			{
-				System.out.println("Get All Employe Detail");
+				System.out.println("Get All Client Detail");
 			   HashSet<Client> listeClients = new HashSet<Client>();
-			   HashSet<Client> listeEmp=new HashSet<Client>();
+			   HashSet<Client> listeClt=new HashSet<Client>();
 			   clientRepository.findAll().forEach(listeClients::add);
 			   Iterator<Client> it=listeClients.iterator();
 			    while(it.hasNext())
 			   {
-				   Client employee=new Client();
-				   Client emp=it.next();
-				   employee.setIdclient(emp.getIdclient());
-				   employee.setAdresse(emp.getAdresse());
-				   employee.setEmail(emp.getEmail());
-				   employee.setIdentification(emp.getIdentification());
-				   employee.setNom(emp.getNom());
-				   employee.setObservation(emp.getObservation());
-				   employee.setPrenom(emp.getPrenom());
-				   employee.setTelephoneFixe(emp.getTelephoneFixe());
-				   employee.setTelephoneMobile(emp.getTelephoneMobile());
-				   employee.setLogin(emp.getLogin());
-				   employee.setPassword(emp.getPassword());
-				   Pays pays=emp.getPay();
-				   Localite localites= emp.getLocalite();
-				   TypeIdentification typeIdentifications =emp.getTypeIdentification();
-				   
-				   
-				   /*while(itCompetence.hasNext())
-				   {
-					   Competence comp=itCompetence.next();
-					   comp.setDemandes(null);
-					   comp.setEmployees(null);
-					   setCompetence.add(comp);
-				   }
-				   while(itDisponibilite.hasNext())
-				   {
-					   Disponibilite dispo=itDisponibilite.next();
-					   dispo.setEmployee(null);
-					   setDisponibilite.add(dispo);
-				   }
-				   while(itLangue.hasNext())
-				   {
-					  Langue lang=itLangue.next();
-					  lang.setEmployees(null);
-					  setLangue.add(lang);
-				   }*/
+				   Client client=new Client();
+				   Client clt=it.next();
+				   client.setIdclient(clt.getIdclient());
+				   client.setAdresse(clt.getAdresse());
+				   client.setEmail(clt.getEmail());
+				   client.setIdentification(clt.getIdentification());
+				   client.setNom(clt.getNom());
+				   client.setObservation(clt.getObservation());
+				   client.setPrenom(clt.getPrenom());
+				   client.setTelephoneFixe(clt.getTelephoneFixe());
+				   client.setTelephoneMobile(clt.getTelephoneMobile());
+				   client.setLogin(clt.getLogin());
+				   Pays pays=clt.getPay();
+				   Localite localites= clt.getLocalite();
+				   TypeIdentification typeIdentifications =clt.getTypeIdentification();
 				   Pays pys=new Pays();
 				   if(pays !=null) {
-				   pys.setIdpays(pays.getIdpays());
-				   pys.setNom(pays.getNom());
+				     pys.setIdpays(pays.getIdpays());
+				     pys.setNom(pays.getNom());
 				   }
 				   TypeIdentification typ = new TypeIdentification();
 				   if(typeIdentifications !=null) {
@@ -342,12 +321,70 @@ public class ClientController {
 					   loc.setIdlocalite(localites.getIdlocalite());
 					   loc.setNom(localites.getNom());
 				   }
-				   employee.setPay(pys);
-				   employee.setLocalite(loc);
-				   employee.setTypeIdentification(typ);
-				   listeEmp.add(employee);
+				   client.setPay(pys);
+				   client.setLocalite(loc);
+				   client.setTypeIdentification(typ);
+				   listeClt.add(clt);
 			   }
-			   return listeEmp;
+			   return listeClt;
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				return null;
+			}
+		}
+		
+		//All Clients Pagination
+		@SuppressWarnings("deprecation")
+		@GetMapping("/client/allClients/pagination/{offset}")
+		public HashSet<Client> getAllClientsPagination(@PathVariable("offset") int  offset) {
+			try
+			{
+				System.out.println("Get All Client Detail");
+			   HashSet<Client> listeClients = new HashSet<Client>();
+			   HashSet<Client> listeClt=new HashSet<Client>();
+			   clientRepository.findAllClientPagination(new PageRequest(offset,2)).forEach(listeClients::add);
+			   Iterator<Client> it=listeClients.iterator();
+			    while(it.hasNext())
+			   {
+				   Client client=new Client();
+				   Client clt=it.next();
+				   client.setIdclient(clt.getIdclient());
+				   client.setAdresse(clt.getAdresse());
+				   client.setEmail(clt.getEmail());
+				   client.setIdentification(clt.getIdentification());
+				   client.setNom(clt.getNom());
+				   client.setObservation(clt.getObservation());
+				   client.setPrenom(clt.getPrenom());
+				   client.setTelephoneFixe(clt.getTelephoneFixe());
+				   client.setTelephoneMobile(clt.getTelephoneMobile());
+				   client.setLogin(clt.getLogin());
+				   Pays pays=clt.getPay();
+				   Localite localites= clt.getLocalite();
+				   TypeIdentification typeIdentifications =clt.getTypeIdentification();
+				   Pays pys=new Pays();
+				   if(pays !=null) {
+				     pys.setIdpays(pays.getIdpays());
+				     pys.setNom(pays.getNom());
+				   }
+				   TypeIdentification typ = new TypeIdentification();
+				   if(typeIdentifications !=null) {
+					   typ.setIdidentification(typeIdentifications.getIdidentification());
+					   typ.setNom(typeIdentifications.getNom());
+					   }
+				   Localite loc = new Localite();
+				   if(localites !=null)
+				   {
+					   loc.setIdlocalite(localites.getIdlocalite());
+					   loc.setNom(localites.getNom());
+				   }
+				   client.setPay(pys);
+				   client.setLocalite(loc);
+				   client.setTypeIdentification(typ);
+				   listeClt.add(clt);
+			   }
+			   return listeClt;
 			}
 			catch(Exception e)
 			{
